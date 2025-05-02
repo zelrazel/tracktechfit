@@ -5573,6 +5573,69 @@ select.edit-info-input {
     }
 }
 
+/* Add these CSS styles at the end of the file */
+
+/* Improved loading indicators */
+.loading-spinner {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 255, 132, 0.2);
+  border-radius: 50%;
+  border-top-color: #00ff84;
+  animation: spin 1.5s linear infinite;
+  margin-bottom: 15px;
+}
+
+.loading-achievements, .loading-activities {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  padding: 30px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin: 15px 0;
+}
+
+.loading-message {
+  font-size: 0.9rem;
+  color: #bbbbbb;
+  margin-top: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Make tab switching more responsive */
+.profile-tab {
+  transition: all 0.2s ease;
+}
+
+.profile-tab.active {
+  position: relative;
+}
+
+.profile-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #00ff84;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 
 
 

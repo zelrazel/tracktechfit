@@ -566,30 +566,33 @@ const Profile = () => {
             const targetEmail = profileEmail && !isOwnProfile ? profileEmail : undefined;
             const queryParam = targetEmail ? `?email=${targetEmail}` : '';
             
-            // Use the same email parameter approach for profile request
-            const profileEndpoint = profileEmail && !isOwnProfile
-                ? `${API_URL}api/profile/${profileEmail}`
-                : `${API_URL}api/profile`;
+            // Make all API calls in parallel rather than sequentially
+            const [profileResponse, weightResponse, strengthResponse, workoutResponse] = await Promise.all([
+                // Profile API call
+                axios.get(
+                    profileEmail && !isOwnProfile
+                    ? `${API_URL}api/profile/${profileEmail}`
+                    : `${API_URL}api/profile`,
+                    { headers: { Authorization: `Bearer ${token}` } }
+                ),
                 
-            const profileResponse = await axios.get(profileEndpoint, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
+                // Weight history API call
+                axios.get(`${API_URL}api/weight/history${queryParam}`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                }),
+                
+                // Strength data API call
+                axios.get(`${API_URL}api/weight/total-lifted${queryParam}`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                }),
+                
+                // Workout data API call
+                axios.get(`${API_URL}api/workouts/completed${queryParam}`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
+            ]);
             
-            // Fetch weight loss achievements with the correct user's email
-            const weightResponse = await axios.get(`${API_URL}api/weight/history${queryParam}`, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            
-            // Get strength data with email parameter
-            const strengthResponse = await axios.get(`${API_URL}api/weight/total-lifted${queryParam}`, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            
-            // Get workout data with email parameter
-            const workoutResponse = await axios.get(`${API_URL}api/workouts/completed${queryParam}`, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            
+            // Continue with the rest of the function as before...
             // Calculate weight loss achievements
             const weightData = weightResponse.data;
             let startWeight = profileResponse.data.initialWeight;
@@ -2045,7 +2048,11 @@ const Profile = () => {
                 return (
                     <div className="achievements-section">
                         {achievementsLoading ? (
-                            <div className="loading-achievements">Loading achievements...</div>
+                            <div className="loading-achievements">
+                                <div className="loading-spinner"></div>
+                                <p>Loading achievements...</p>
+                                <p className="loading-message">This may take a moment as we calculate your progress</p>
+                            </div>
                         ) : (
                             <div className="achievement-categories">
                                 <div className="achievement-category">
@@ -2194,405 +2201,410 @@ const Profile = () => {
                     );
                 }
                 return (
-                    <ErrorBoundary>
-                        <div className="activity-feed-section">
-                            
-                            {activitiesLoading ? (
-                                <div className="activity-loading">
-                                    <div className="activity-loader"></div>
-                                    <p>Loading activities...</p>
-                                </div>
-                            ) : userActivities.length === 0 && !hasTopThreeRank() ? (
-                                <div className="no-activities">
-                                    <div className="activity-prompt">
-                                        <p>You haven't unlocked any achievements yet.</p>
-                                        <button 
-                                            className="refresh-activities-btn"
-                                            onClick={() => {
-                                                refreshAchievementActivities();
-                                                forceRefreshAllActivities();
-                                            }}
-                                        >
-                                            Refresh Activities
-                                        </button>
-                                    </div>
-                                </div>
-                            ) : (
-                                <>
-                                    <div className="refresh-container">
-                                        <button 
-                                            className="refresh-activities-btn"
-                                            onClick={() => {
-                                                refreshAchievementActivities();
-                                                forceRefreshAllActivities();
-                                            }}
-                                        >
-                                            Refresh Activities
-                                        </button>
-                                        
-                                        <div className="profile-activity-filters">
-                                            <button 
-                                                className="profile-filter-toggle" 
-                                                onClick={() => setShowActivityFilters(!showActivityFilters)}
-                                            >
-                                                <FaFilter /> Filter Activities
-                                            </button>
-                                            
-                                            {showActivityFilters && (
-                                                <div className="profile-filter-dropdown">
-                                                    <button 
-                                                        className={`profile-filter-option ${filteredActivities === null ? 'active' : ''}`}
-                                                        onClick={() => filterActivities('all')}
-                                                    >
-                                                        All Activities
-                                                    </button>
-                                                    <button 
-                                                        className={`profile-filter-option ${filteredActivities?.every(a => a.activityType === 'achievement') ? 'active' : ''}`}
-                                                        onClick={() => filterActivities('achievement')}
-                                                    >
-                                                        Achievements
-                                                    </button>
-                                                    <button 
-                                                        className={`profile-filter-option ${filteredActivities?.every(a => a.activityType === 'workout' || (a.activityType === 'achievement' && a.content.category === 'workout')) ? 'active' : ''}`}
-                                                        onClick={() => filterActivities('workout')}
-                                                    >
-                                                        Workouts
-                                                    </button>
-                                                    <button 
-                                                        className={`profile-filter-option ${filteredActivities?.every(a => a.activityType === 'scheduled-workout') ? 'active' : ''}`}
-                                                        onClick={() => filterActivities('scheduled-workout')}
-                                                    >
-                                                        Workout Schedules
-                                                    </button>
-                                                    <button 
-                                                        className={`profile-filter-option ${filteredActivities?.every(a => a.activityType === 'ranking') ? 'active' : ''}`}
-                                                        onClick={() => filterActivities('ranking')}
-                                                    >
-                                                        Rankings
-                                                    </button>
-                                                    <button 
-                                                        className={`profile-filter-option ${filteredActivities?.every(a => (a.activityType === 'achievement' && a.content.category === 'profile') || a.activityType === 'profile-update') ? 'active' : ''}`}
-                                                        onClick={() => filterActivities('profile')}
-                                                    >
-                                                        Profile Updates
-                                                    </button>
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
+                    <div className="activity-section">
+                        {activitiesLoading ? (
+                            <div className="loading-activities">
+                                <div className="loading-spinner"></div>
+                                <p>Loading activity feed...</p>
+                                <p className="loading-message">This may take a moment as we retrieve your activities</p>
+                            </div>
+                        ) : (
+                            <ErrorBoundary>
+                                <div className="activity-feed-section">
                                     
-                                    {(filteredActivities || userActivities).map(activity => {
-                                        // Extract rank number if it's a ranking activity
-                                        let rankNumber = 0;
-                                        if (activity.activityType === 'ranking' && activity.content.achievementId) {
-                                            const parts = activity.content.achievementId.split('-');
-                                            if (parts.length >= 2) {
-                                                rankNumber = parseInt(parts[1]);
-                                            }
-                                        }
-                                        
-                                        // Get rank name for display
-                                        let rankName = '';
-                                        if (rankNumber === 1) rankName = 'First Place';
-                                        else if (rankNumber === 2) rankName = 'Second Place';
-                                        else if (rankNumber === 3) rankName = 'Third Place';
-                                        
-                                        // Get course name
-                                        const courseName = activity.content.userCourse || '';
-                                        
-                                        return (
-                                            <div 
-                                                key={activity._id} 
-                                                className={`activity-item ${
-                                                    activity.activityType === 'ranking' 
-                                                        ? `rank-achievement rank-${rankNumber} ${activity.content.category}-rank` 
-                                                        : activity.activityType === 'workout' || 
-                                                          (activity.activityType === 'achievement' && activity.content.category === 'workout')
-                                                        ? `workout ${activity.content.category || ''}`
-                                                        : activity.activityType === 'scheduled-workout'
-                                                        ? `scheduled-workout ${activity.content.category || ''}`
-                                                        : activity.activityType === 'weight-change'
-                                                        ? `weight-tracker-entry ${activity.content.changeType === 'loss' ? 'weight-loss-entry' : 'weight-gain-entry'}`
-                                                        : ''
-                                                }`}
-                                                ref={el => activityRefs.current[activity._id] = el}
-                                            >
-                                                <div className="activity-header">
-                                                    {activity.userProfilePicture && activity.userProfilePicture.trim() !== "" ? (
-                                                        <div className="activity-user-image">
-                                                            <img 
-                                                                src={activity.userProfilePicture} 
-                                                                alt={activity.userName} 
-                                                            />
-                                                        </div>
-                                                    ) : (
-                                                        <div className="activity-user-placeholder">
-                                                            <div className="profile-icon">
-                                                                <FaUser />
-                                                            </div>
+                                    {userActivities.length === 0 && !hasTopThreeRank() ? (
+                                        <div className="no-activities">
+                                            <div className="activity-prompt">
+                                                <p>You haven't unlocked any achievements yet.</p>
+                                                <button 
+                                                    className="refresh-activities-btn"
+                                                    onClick={() => {
+                                                        refreshAchievementActivities();
+                                                        forceRefreshAllActivities();
+                                                    }}
+                                                >
+                                                    Refresh Activities
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <div className="refresh-container">
+                                                <button 
+                                                    className="refresh-activities-btn"
+                                                    onClick={() => {
+                                                        refreshAchievementActivities();
+                                                        forceRefreshAllActivities();
+                                                    }}
+                                                >
+                                                    Refresh Activities
+                                                </button>
+                                                
+                                                <div className="profile-activity-filters">
+                                                    <button 
+                                                        className="profile-filter-toggle" 
+                                                        onClick={() => setShowActivityFilters(!showActivityFilters)}
+                                                    >
+                                                        <FaFilter /> Filter Activities
+                                                    </button>
+                                                    
+                                                    {showActivityFilters && (
+                                                        <div className="profile-filter-dropdown">
+                                                            <button 
+                                                                className={`profile-filter-option ${filteredActivities === null ? 'active' : ''}`}
+                                                                onClick={() => filterActivities('all')}
+                                                            >
+                                                                All Activities
+                                                            </button>
+                                                            <button 
+                                                                className={`profile-filter-option ${filteredActivities?.every(a => a.activityType === 'achievement') ? 'active' : ''}`}
+                                                                onClick={() => filterActivities('achievement')}
+                                                            >
+                                                                Achievements
+                                                            </button>
+                                                            <button 
+                                                                className={`profile-filter-option ${filteredActivities?.every(a => a.activityType === 'workout' || (a.activityType === 'achievement' && a.content.category === 'workout')) ? 'active' : ''}`}
+                                                                onClick={() => filterActivities('workout')}
+                                                            >
+                                                                Workouts
+                                                            </button>
+                                                            <button 
+                                                                className={`profile-filter-option ${filteredActivities?.every(a => a.activityType === 'scheduled-workout') ? 'active' : ''}`}
+                                                                onClick={() => filterActivities('scheduled-workout')}
+                                                            >
+                                                                Workout Schedules
+                                                            </button>
+                                                            <button 
+                                                                className={`profile-filter-option ${filteredActivities?.every(a => a.activityType === 'ranking') ? 'active' : ''}`}
+                                                                onClick={() => filterActivities('ranking')}
+                                                            >
+                                                                Rankings
+                                                            </button>
+                                                            <button 
+                                                                className={`profile-filter-option ${filteredActivities?.every(a => (a.activityType === 'achievement' && a.content.category === 'profile') || a.activityType === 'profile-update') ? 'active' : ''}`}
+                                                                onClick={() => filterActivities('profile')}
+                                                            >
+                                                                Profile Updates
+                                                            </button>
                                                         </div>
                                                     )}
-                                                    <div className="activity-user-info">
-                                                        <span className="activity-user-name">{activity.userName}</span>
-                                                        <span className="activity-timestamp">
-                                                            {new Date(activity.createdAt).toLocaleDateString('en-US', {
-                                                                month: 'short',
-                                                                day: 'numeric',
-                                                                year: 'numeric'
-                                                            })} at {new Date(activity.createdAt).toLocaleTimeString('en-US', {
-                                                                hour: '2-digit',
-                                                                minute: '2-digit'
-                                                            })}
-                                                        </span>
-                                                    </div>
                                                 </div>
+                                            </div>
+                                            
+                                            {(filteredActivities || userActivities).map(activity => {
+                                                // Extract rank number if it's a ranking activity
+                                                let rankNumber = 0;
+                                                if (activity.activityType === 'ranking' && activity.content.achievementId) {
+                                                    const parts = activity.content.achievementId.split('-');
+                                                    if (parts.length >= 2) {
+                                                        rankNumber = parseInt(parts[1]);
+                                                    }
+                                                }
                                                 
-                                                <div className="activity-content">
-                                                    {activity.activityType === 'achievement' && (
-                                                        <div className="activity-achievement">
-                                                            {activity.content.category !== 'profile' && 
-                                                             activity.content.category !== 'workout' && 
-                                                             activity.content.imageUrl && (
-                                                                <div className="activity-achievement-icon">
+                                                // Get rank name for display
+                                                let rankName = '';
+                                                if (rankNumber === 1) rankName = 'First Place';
+                                                else if (rankNumber === 2) rankName = 'Second Place';
+                                                else if (rankNumber === 3) rankName = 'Third Place';
+                                                
+                                                // Get course name
+                                                const courseName = activity.content.userCourse || '';
+                                                
+                                                return (
+                                                    <div 
+                                                        key={activity._id} 
+                                                        className={`activity-item ${
+                                                            activity.activityType === 'ranking' 
+                                                                ? `rank-achievement rank-${rankNumber} ${activity.content.category}-rank` 
+                                                                : activity.activityType === 'workout' || 
+                                                                  (activity.activityType === 'achievement' && activity.content.category === 'workout')
+                                                                ? `workout ${activity.content.category || ''}`
+                                                                : activity.activityType === 'scheduled-workout'
+                                                                ? `scheduled-workout ${activity.content.category || ''}`
+                                                                : activity.activityType === 'weight-change'
+                                                                ? `weight-tracker-entry ${activity.content.changeType === 'loss' ? 'weight-loss-entry' : 'weight-gain-entry'}`
+                                                                : ''
+                                                        }`}
+                                                        ref={el => activityRefs.current[activity._id] = el}
+                                                    >
+                                                        <div className="activity-header">
+                                                            {activity.userProfilePicture && activity.userProfilePicture.trim() !== "" ? (
+                                                                <div className="activity-user-image">
                                                                     <img 
-                                                                        src={activity.content.imageUrl} 
-                                                                        alt={activity.content.title}
+                                                                        src={activity.userProfilePicture} 
+                                                                        alt={activity.userName} 
                                                                     />
                                                                 </div>
+                                                            ) : (
+                                                                <div className="activity-user-placeholder">
+                                                                    <div className="profile-icon">
+                                                                        <FaUser />
+                                                                    </div>
+                                                                </div>
                                                             )}
-                                                            <div className="activity-achievement-info">
-                                                                <h3 className="activity-achievement-title">
-                                                                    {activity.content.category === 'profile' || activity.content.category === 'workout' ? 
-                                                                        activity.content.title : 
-                                                                        `Unlocked achievement: ${activity.content.title}`}
-                                                                </h3>
-                                                                <p className="activity-achievement-description">
-                                                                    {activity.content.description}
-                                                                </p>
+                                                            <div className="activity-user-info">
+                                                                <span className="activity-user-name">{activity.userName}</span>
+                                                                <span className="activity-timestamp">
+                                                                    {new Date(activity.createdAt).toLocaleDateString('en-US', {
+                                                                        month: 'short',
+                                                                        day: 'numeric',
+                                                                        year: 'numeric'
+                                                                    })} at {new Date(activity.createdAt).toLocaleTimeString('en-US', {
+                                                                        hour: '2-digit',
+                                                                        minute: '2-digit'
+                                                                    })}
+                                                                </span>
                                                             </div>
                                                         </div>
-                                                    )}
-                                                    
-                                                    {activity.activityType === 'ranking' && (
-                                                        <div className="activity-achievement">
-                                                            <div className="rank-banner">
-                                                                <span className="rank-emoji">
-                                                                    {rankNumber === 1 ? '👑' : 
-                                                                     rankNumber === 2 ? '🥈' : 
-                                                                     rankNumber === 3 ? '🥉' : ''}
-                                                                </span>
-                                                                <h3 className="activity-achievement-title">
-                                                                    {activity.content.title}
-                                                                    {activity.content.userCourse && (
-                                                                        <span className="rank-course-indicator"> • {activity.content.userCourse}</span>
+                                                        
+                                                        <div className="activity-content">
+                                                            {activity.activityType === 'achievement' && (
+                                                                <div className="activity-achievement">
+                                                                    {activity.content.category !== 'profile' && 
+                                                                     activity.content.category !== 'workout' && 
+                                                                     activity.content.imageUrl && (
+                                                                        <div className="activity-achievement-icon">
+                                                                            <img 
+                                                                                src={activity.content.imageUrl} 
+                                                                                alt={activity.content.title}
+                                                                            />
+                                                                        </div>
                                                                     )}
-                                                                </h3>
+                                                                    <div className="activity-achievement-info">
+                                                                        <h3 className="activity-achievement-title">
+                                                                            {activity.content.category === 'profile' || activity.content.category === 'workout' ? 
+                                                                                activity.content.title : 
+                                                                                `Unlocked achievement: ${activity.content.title}`}
+                                                                        </h3>
+                                                                        <p className="activity-achievement-description">
+                                                                            {activity.content.description}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            )}
+                                                            
+                                                            {activity.activityType === 'ranking' && (
+                                                                <div className="activity-achievement">
+                                                                    <div className="rank-banner">
+                                                                        <span className="rank-emoji">
+                                                                            {rankNumber === 1 ? '👑' : 
+                                                                             rankNumber === 2 ? '🥈' : 
+                                                                             rankNumber === 3 ? '🥉' : ''}
+                                                                        </span>
+                                                                        <h3 className="activity-achievement-title">
+                                                                            {activity.content.title}
+                                                                            {activity.content.userCourse && (
+                                                                                <span className="rank-course-indicator"> • {activity.content.userCourse}</span>
+                                                                            )}
+                                                                        </h3>
+                                                                    </div>
+                                                                    <div className="activity-achievement-info">
+                                                                        <p className="activity-achievement-description">
+                                                                            {activity.content.description}
+                                                                        </p>
+                                                                        {activity.content.userCourse && (
+                                                                            <div className="activity-course-tag">
+                                                                                Course: {activity.content.userCourse}
+                                                                            </div>
+                                                                        )}
+                                                                    </div>
+                                                                </div>
+                                                            )}
+
+                                                            {/* Workout Activities */}
+                                                            {activity.activityType === 'workout' && (
+                                                                <div className="activity-achievement">
+                                                                    <div className="activity-achievement-info">
+                                                                        <h3 className="activity-achievement-title">
+                                                                            {activity.content.title}
+                                                                        </h3>
+                                                                        <p className="activity-achievement-description">
+                                                                            {activity.content.description}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            )}
+
+                                                            {/* Scheduled Workout Activities */}
+                                                            {activity.activityType === 'scheduled-workout' && (
+                                                                <div className="activity-achievement scheduled-workout">
+                                                                    <div className="activity-achievement-icon">
+                                                                        {activity.content.category === 'Bodyweight' && <FaUser className="workout-type-icon" />}
+                                                                        {activity.content.category === 'Dumbbell' && <FaDumbbell className="workout-type-icon" />}
+                                                                        {activity.content.category === 'Machine' && <FaCogs className="workout-type-icon" />}
+                                                                        {activity.content.category === 'Barbell' && <FaWeight className="workout-type-icon" />}
+                                                                    </div>
+                                                                    <div className="activity-achievement-info">
+                                                                        <h3 className="activity-achievement-title">
+                                                                            {activity.content.title}
+                                                                        </h3>
+                                                                        <p className="activity-achievement-description">
+                                                                            {activity.content.description}
+                                                                        </p>
+                                                                        <div className="scheduled-workout-details">
+                                                                            <div className="detail-item">
+                                                                                <FaCalendarCheck className="detail-icon" />
+                                                                                <span>{activity.content.date || activity.content.description.split(' scheduled for ')[1]?.split(' at ')[0]}</span>
+                                                                            </div>
+                                                                            <div className="detail-item">
+                                                                                <FaClock className="detail-icon" />
+                                                                                <span>{activity.content.time || activity.content.description.split(' at ')[1]}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            )}
+
+                                                            {/* Weight Change Activities */}
+                                                            {activity.activityType === 'weight-change' && (
+                                                                <div className="wt-change-display">
+                                                                    <div className="wt-change-content">
+                                                                        <h3 className="wt-change-heading">
+                                                                            {activity.content.title}
+                                                                        </h3>
+                                                                        <p className="wt-change-text">
+                                                                            {activity.content.description}
+                                                                        </p>
+                                                                        <div className="wt-change-details">
+                                                                            <div className="wt-detail-row">
+                                                                                <span className="wt-detail-name">Change:</span>
+                                                                                <span className="wt-detail-data">
+                                                                                    {activity.content.changeType === 'loss' ? '-' : '+'}{activity.content.changeAmount} kg
+                                                                                </span>
+                                                                            </div>
+                                                                            <div className="wt-detail-row">
+                                                                                <span className="wt-detail-name">Current Weight:</span>
+                                                                                <span className="wt-detail-data">{activity.content.newWeight} kg</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                        
+                                                        <div className="activity-interactions">
+                                                            <div className="activity-reactions">
+                                                                <div className="reaction-buttons">
+                                                                    <button 
+                                                                        className={`reaction-button ${activity.userReactions?.includes('❤️') ? 'active' : ''}`}
+                                                                        onClick={() => handleReaction(activity._id, '❤️')}
+                                                                    >
+                                                                        <span className="reaction-icon heart-icon">❤️</span>
+                                                                        <span className="reaction-count">{activity.reactionCounts?.['❤️'] || 0}</span>
+                                                                    </button>
+                                                                    <button 
+                                                                        className={`reaction-button ${activity.userReactions?.includes('🔥') ? 'active' : ''}`}
+                                                                        onClick={() => handleReaction(activity._id, '🔥')}
+                                                                    >
+                                                                        <span className="reaction-icon fire-icon">🔥</span>
+                                                                        <span className="reaction-count">{activity.reactionCounts?.['🔥'] || 0}</span>
+                                                                    </button>
+                                                                    <button 
+                                                                        className={`reaction-button ${activity.userReactions?.includes('💪') ? 'active' : ''}`}
+                                                                        onClick={() => handleReaction(activity._id, '💪')}
+                                                                    >
+                                                                        <span className="reaction-icon dumbbell-icon">💪</span>
+                                                                        <span className="reaction-count">{activity.reactionCounts?.['💪'] || 0}</span>
+                                                                    </button>
+                                                                    <button 
+                                                                        className={`reaction-button ${activity.userReactions?.includes('👏') ? 'active' : ''}`}
+                                                                        onClick={() => handleReaction(activity._id, '👏')}
+                                                                    >
+                                                                        <span className="reaction-icon clap-icon">👏</span>
+                                                                        <span className="reaction-count">{activity.reactionCounts?.['👏'] || 0}</span>
+                                                                    </button>
+                                                                </div>
                                                             </div>
-                                                            <div className="activity-achievement-info">
-                                                                <p className="activity-achievement-description">
-                                                                    {activity.content.description}
-                                                                </p>
-                                                                {activity.content.userCourse && (
-                                                                    <div className="activity-course-tag">
-                                                                        Course: {activity.content.userCourse}
+                                                            
+                                                            <div className="activity-comments-container">
+                                                                <button 
+                                                                    className="comments-toggle"
+                                                                    onClick={() => toggleComments(activity._id)}
+                                                                >
+                                                                    <FaComment /> {activity.comments?.length || 0} Comments
+                                                                    {expandedComments[activity._id] ? <FaChevronUp /> : <FaChevronDown />}
+                                                                </button>
+                                                                
+                                                                {expandedComments[activity._id] && (
+                                                                    <div className="activity-comments">
+                                                                        {activity.comments && activity.comments.map(comment => (
+                                                                            <div key={comment._id} className="comment-item" id={`comment-${comment._id}`}>
+                                                                                <div className="comment-user-image">
+                                                                                    {comment.userProfilePicture && comment.userProfilePicture.trim() !== "" ? (
+                                                                                        <img src={comment.userProfilePicture} alt={comment.userName} />
+                                                                                    ) : (
+                                                                                        <div className="comment-user-placeholder">
+                                                                                            <div className="profile-icon">
+                                                                                                <FaUser />
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    )}
+                                                                                </div>
+                                                                                <div className="comment-content">
+                                                                                    <div className="comment-header">
+                                                                                        <span className="comment-user-name">{comment.userName}</span>
+                                                                                        <span className="comment-timestamp">
+                                                                                            {new Date(comment.createdAt).toLocaleDateString('en-US', {
+                                                                                                month: 'short',
+                                                                                                day: 'numeric',
+                                                                                                year: 'numeric'
+                                                                                            })} at {new Date(comment.createdAt).toLocaleTimeString('en-US', {
+                                                                                                hour: '2-digit',
+                                                                                                minute: '2-digit'
+                                                                                            })}
+                                                                                        </span>
+                                                                                        {currentUser && comment.userId === currentUser.userId && (
+                                                                                            <button 
+                                                                                                className="delete-comment-button"
+                                                                                                onClick={() => handleDeleteComment(activity._id, comment._id)}
+                                                                                                title="Delete comment"
+                                                                                            >
+                                                                                                <FaTrash />
+                                                                                            </button>
+                                                                                        )}
+                                                                                    </div>
+                                                                                    <p className="comment-text">{comment.content}</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        ))}
+                                                                        
+                                                                        <form className="comment-form" onSubmit={(e) => {
+                                                                            e.preventDefault();
+                                                                            handleCommentSubmit(activity._id);
+                                                                        }}>
+                                                                            <input
+                                                                                type="text"
+                                                                                className="comment-input"
+                                                                                placeholder="Add a comment..."
+                                                                                value={commentText[activity._id] || ''}
+                                                                                onChange={(e) => setCommentText(prev => ({
+                                                                                    ...prev,
+                                                                                    [activity._id]: e.target.value
+                                                                                }))}
+                                                                            />
+                                                                            <button 
+                                                                                type="submit" 
+                                                                                className="comment-submit"
+                                                                                disabled={!commentText[activity._id] || commentSubmitting[activity._id]}
+                                                                            >
+                                                                                {commentSubmitting[activity._id] ? (
+                                                                                    <div className="comment-spinner"></div>
+                                                                                ) : 'Post'}
+                                                                            </button>
+                                                                        </form>
                                                                     </div>
                                                                 )}
                                                             </div>
                                                         </div>
-                                                    )}
-
-                                                    {/* Workout Activities */}
-                                                    {activity.activityType === 'workout' && (
-                                                        <div className="activity-achievement">
-                                                            <div className="activity-achievement-info">
-                                                                <h3 className="activity-achievement-title">
-                                                                    {activity.content.title}
-                                                                </h3>
-                                                                <p className="activity-achievement-description">
-                                                                    {activity.content.description}
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    )}
-
-                                                    {/* Scheduled Workout Activities */}
-                                                    {activity.activityType === 'scheduled-workout' && (
-                                                        <div className="activity-achievement scheduled-workout">
-                                                            <div className="activity-achievement-icon">
-                                                                {activity.content.category === 'Bodyweight' && <FaUser className="workout-type-icon" />}
-                                                                {activity.content.category === 'Dumbbell' && <FaDumbbell className="workout-type-icon" />}
-                                                                {activity.content.category === 'Machine' && <FaCogs className="workout-type-icon" />}
-                                                                {activity.content.category === 'Barbell' && <FaWeight className="workout-type-icon" />}
-                                                            </div>
-                                                            <div className="activity-achievement-info">
-                                                                <h3 className="activity-achievement-title">
-                                                                    {activity.content.title}
-                                                                </h3>
-                                                                <p className="activity-achievement-description">
-                                                                    {activity.content.description}
-                                                                </p>
-                                                                <div className="scheduled-workout-details">
-                                                                    <div className="detail-item">
-                                                                        <FaCalendarCheck className="detail-icon" />
-                                                                        <span>{activity.content.date || activity.content.description.split(' scheduled for ')[1]?.split(' at ')[0]}</span>
-                                                                    </div>
-                                                                    <div className="detail-item">
-                                                                        <FaClock className="detail-icon" />
-                                                                        <span>{activity.content.time || activity.content.description.split(' at ')[1]}</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    )}
-
-                                                    {/* Weight Change Activities */}
-                                                    {activity.activityType === 'weight-change' && (
-                                                        <div className="wt-change-display">
-                                                            <div className="wt-change-content">
-                                                                <h3 className="wt-change-heading">
-                                                                    {activity.content.title}
-                                                                </h3>
-                                                                <p className="wt-change-text">
-                                                                    {activity.content.description}
-                                                                </p>
-                                                                <div className="wt-change-details">
-                                                                    <div className="wt-detail-row">
-                                                                        <span className="wt-detail-name">Change:</span>
-                                                                        <span className="wt-detail-data">
-                                                                            {activity.content.changeType === 'loss' ? '-' : '+'}{activity.content.changeAmount} kg
-                                                                        </span>
-                                                                    </div>
-                                                                    <div className="wt-detail-row">
-                                                                        <span className="wt-detail-name">Current Weight:</span>
-                                                                        <span className="wt-detail-data">{activity.content.newWeight} kg</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    )}
-                                                </div>
-                                                
-                                                <div className="activity-interactions">
-                                                    <div className="activity-reactions">
-                                                        <div className="reaction-buttons">
-                                                            <button 
-                                                                className={`reaction-button ${activity.userReactions?.includes('❤️') ? 'active' : ''}`}
-                                                                onClick={() => handleReaction(activity._id, '❤️')}
-                                                            >
-                                                                <span className="reaction-icon heart-icon">❤️</span>
-                                                                <span className="reaction-count">{activity.reactionCounts?.['❤️'] || 0}</span>
-                                                            </button>
-                                                            <button 
-                                                                className={`reaction-button ${activity.userReactions?.includes('🔥') ? 'active' : ''}`}
-                                                                onClick={() => handleReaction(activity._id, '🔥')}
-                                                            >
-                                                                <span className="reaction-icon fire-icon">🔥</span>
-                                                                <span className="reaction-count">{activity.reactionCounts?.['🔥'] || 0}</span>
-                                                            </button>
-                                                            <button 
-                                                                className={`reaction-button ${activity.userReactions?.includes('💪') ? 'active' : ''}`}
-                                                                onClick={() => handleReaction(activity._id, '💪')}
-                                                            >
-                                                                <span className="reaction-icon dumbbell-icon">💪</span>
-                                                                <span className="reaction-count">{activity.reactionCounts?.['💪'] || 0}</span>
-                                                            </button>
-                                                            <button 
-                                                                className={`reaction-button ${activity.userReactions?.includes('👏') ? 'active' : ''}`}
-                                                                onClick={() => handleReaction(activity._id, '👏')}
-                                                            >
-                                                                <span className="reaction-icon clap-icon">👏</span>
-                                                                <span className="reaction-count">{activity.reactionCounts?.['👏'] || 0}</span>
-                                                            </button>
-                                                        </div>
                                                     </div>
-                                                    
-                                                    <div className="activity-comments-container">
-                                                        <button 
-                                                            className="comments-toggle"
-                                                            onClick={() => toggleComments(activity._id)}
-                                                        >
-                                                            <FaComment /> {activity.comments?.length || 0} Comments
-                                                            {expandedComments[activity._id] ? <FaChevronUp /> : <FaChevronDown />}
-                                                        </button>
-                                                        
-                                                        {expandedComments[activity._id] && (
-                                                            <div className="activity-comments">
-                                                                {activity.comments && activity.comments.map(comment => (
-                                                                    <div key={comment._id} className="comment-item" id={`comment-${comment._id}`}>
-                                                                        <div className="comment-user-image">
-                                                                            {comment.userProfilePicture && comment.userProfilePicture.trim() !== "" ? (
-                                                                                <img src={comment.userProfilePicture} alt={comment.userName} />
-                                                                            ) : (
-                                                                                <div className="comment-user-placeholder">
-                                                                                    <div className="profile-icon">
-                                                                                        <FaUser />
-                                                                                    </div>
-                                                                                </div>
-                                                                            )}
-                                                                        </div>
-                                                                        <div className="comment-content">
-                                                                            <div className="comment-header">
-                                                                                <span className="comment-user-name">{comment.userName}</span>
-                                                                                <span className="comment-timestamp">
-                                                                                    {new Date(comment.createdAt).toLocaleDateString('en-US', {
-                                                                                        month: 'short',
-                                                                                        day: 'numeric',
-                                                                                        year: 'numeric'
-                                                                                    })} at {new Date(comment.createdAt).toLocaleTimeString('en-US', {
-                                                                                        hour: '2-digit',
-                                                                                        minute: '2-digit'
-                                                                                    })}
-                                                                                </span>
-                                                                                {currentUser && comment.userId === currentUser.userId && (
-                                                                                    <button 
-                                                                                        className="delete-comment-button"
-                                                                                        onClick={() => handleDeleteComment(activity._id, comment._id)}
-                                                                                        title="Delete comment"
-                                                                                    >
-                                                                                        <FaTrash />
-                                                                                    </button>
-                                                                                )}
-                                                                            </div>
-                                                                            <p className="comment-text">{comment.content}</p>
-                                                                        </div>
-                                                                    </div>
-                                                                ))}
-                                                                
-                                                                <form className="comment-form" onSubmit={(e) => {
-                                                                    e.preventDefault();
-                                                                    handleCommentSubmit(activity._id);
-                                                                }}>
-                                                                    <input
-                                                                        type="text"
-                                                                        className="comment-input"
-                                                                        placeholder="Add a comment..."
-                                                                        value={commentText[activity._id] || ''}
-                                                                        onChange={(e) => setCommentText(prev => ({
-                                                                            ...prev,
-                                                                            [activity._id]: e.target.value
-                                                                        }))}
-                                                                    />
-                                                                    <button 
-                                                                        type="submit" 
-                                                                        className="comment-submit"
-                                                                        disabled={!commentText[activity._id] || commentSubmitting[activity._id]}
-                                                                    >
-                                                                        {commentSubmitting[activity._id] ? (
-                                                                            <div className="comment-spinner"></div>
-                                                                        ) : 'Post'}
-                                                                    </button>
-                                                                </form>
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
-                                </>
-                            )}
-                        </div>
-                    </ErrorBoundary>
+                                                );
+                                            })}
+                                        </>
+                                    )}
+                                </div>
+                            </ErrorBoundary>
+                        )}
+                    </div>
                 );
             default:
                 return null;
