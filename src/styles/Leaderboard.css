@@ -1,0 +1,5631 @@
+.leaderboard-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem;
+    background: rgba(27, 67, 50, 0.95);
+    border-radius: 20px;
+    border: 2px solid #00A951;
+    box-shadow: 0 0 20px rgba(0, 169, 81, 0.2);
+    position: relative;
+}
+
+.leaderboard-message {
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.leaderboard-content {
+    font-size: 16px;
+    color: #333;
+}
+
+.leaderboard-page {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #1B4332, #081C15 85%);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem 1rem;
+}
+
+.leaderboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.leaderboard-header h2 {
+    color: #ffffff;
+    font-size: 2.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.top-performers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 0 auto 3rem auto;
+    padding: 0;
+    justify-content: center;
+    max-width: 1000px;
+}
+
+.performer {
+    width: 300px;
+    padding: 1.8rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    background: linear-gradient(145deg, rgba(35, 75, 58, 0.9), rgba(28, 65, 48, 0.9));
+    transition: all 0.3s ease;
+    border: 2px solid rgba(0, 169, 81, 0.4);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.performer:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+}
+
+.performer.first,
+.performer.second,
+.performer.third {
+    height: auto;  /* Change from fixed height */
+    min-height: 280px;
+}
+
+.performer.first {
+    background: linear-gradient(145deg, rgba(46, 94, 69, 0.95), rgba(32, 75, 55, 0.95));
+    border: 3px solid #FFD700;
+    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.25);
+}
+
+.performer.second {
+    border: 3px solid #C0C0C0;
+    box-shadow: 0 0 20px rgba(192, 192, 192, 0.3);
+    background: linear-gradient(145deg, rgba(40, 85, 63, 0.95), rgba(30, 72, 55, 0.95));
+}
+
+.performer.third {
+    border: 3px solid #CD7F32;
+    box-shadow: 0 0 20px rgba(205, 127, 50, 0.3);
+    background: linear-gradient(145deg, rgba(35, 80, 60, 0.95), rgba(28, 68, 51, 0.95));
+}
+
+.crown, .medal {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.medal.silver {
+    font-size: 2.2rem;
+    color: #C0C0C0;
+}
+
+.medal.bronze {
+    font-size: 2.2rem;
+    color: #CD7F32;
+}
+
+.rank {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    color: #00ff84;
+    border: 2px solid rgba(0, 255, 132, 0.3);
+}
+
+.performer.first .rank {
+    color: #FFD700;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 215, 0, 0.6);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.performer.second .rank {
+    color: #E0E0E0;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(192, 192, 192, 0.6);
+    box-shadow: 0 0 10px rgba(192, 192, 192, 0.3);
+}
+
+.performer.third .rank {
+    color: #DDA15E;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(205, 127, 50, 0.6);
+    box-shadow: 0 0 10px rgba(205, 127, 50, 0.3);
+}
+
+.name {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
+.score {
+    color: #00ff84;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.auth-message {
+    text-align: center;
+    color: #ffffff;
+    background: rgba(27, 67, 50, 0.6);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+}
+
+.signin-btn {
+    margin-top: 1rem;
+    padding: 0.8rem 2rem;
+    background: #00A951;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.signin-btn:hover {
+    background: #00ff84;
+    transform: translateY(-2px);
+}
+
+@keyframes borderGlow {
+    from {
+        box-shadow: 0 0 10px rgba(0, 255, 132, 0.2);
+    }
+    to {
+        box-shadow: 0 0 20px rgba(0, 255, 132, 0.4);
+    }
+}
+
+.category-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.category-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background: rgba(27, 67, 50, 0.6);
+    border: 1px solid #00A951;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-tab:hover {
+    background: rgba(0, 169, 81, 0.4);
+    transform: translateY(-2px);
+}
+
+.category-tab.active {
+    background: #00A951;
+    box-shadow: 0 0 15px rgba(0, 169, 81, 0.3);
+}
+
+.category-tab svg {
+    font-size: 1.2rem;
+}
+
+.loading {
+    color: #ffffff;
+    text-align: center;
+    padding: 2rem;
+}
+
+.error-message {
+    color: #ff4444;
+    text-align: center;
+    padding: 2rem;
+}
+
+.no-data {
+    color: #ffffff;
+    text-align: center;
+    padding: 2rem;
+}
+
+.other-ranks {
+    margin-top: 2rem;
+}
+
+.rank-item {
+    display: grid;
+    grid-template-columns: 60px 80px 1fr auto;
+    gap: 1.5rem;
+    align-items: center;
+    padding: 1.2rem 2rem;
+    background: linear-gradient(145deg, rgba(30, 70, 53, 0.8), rgba(25, 60, 45, 0.8));
+    border: 1px solid #00A951;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    transition: all 0.25s ease;
+}
+
+.rank-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 169, 81, 0.3);
+    background: linear-gradient(145deg, rgba(35, 75, 58, 0.85), rgba(28, 65, 48, 0.85));
+}
+
+/* Alternating row colors with improved contrast */
+.rank-item:nth-child(odd) {
+    background: linear-gradient(145deg, rgba(28, 65, 48, 0.8), rgba(22, 55, 40, 0.8));
+}
+
+.rank-item:nth-child(odd):hover {
+    background: linear-gradient(145deg, rgba(32, 70, 53, 0.85), rgba(25, 60, 45, 0.85));
+}
+
+/* Enhanced rank numbers for other ranks */
+.rank-number {
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #00ff84;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(0, 255, 132, 0.3);
+    margin: 0 auto;
+}
+
+.rank-name {
+    flex: 1;
+}
+
+.rank-score {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.bonus-tag {
+    background: #00A951;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.leaderboard-rankings {
+    padding: 1rem;
+}
+
+.coming-soon {
+    text-align: center;
+    padding: 2rem;
+    color: #ffffff;
+}
+
+.coming-soon h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #00ff84;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+    text-align: center;
+    margin: 1rem 0;
+    width: 100%;
+}
+
+.email {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #00ff84;
+    justify-content: center;
+}
+
+.email-icon {
+    font-size: 0.8rem;
+}
+
+.weight-info {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 10px;
+    width: 100%;
+    margin-top: auto;
+}
+
+.weight-details {
+    font-size: 1.1rem;
+    color: #ffffff;
+    line-height: 1.6;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.rank-weight-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.3rem;
+    min-width: 200px;
+}
+
+.weight-change {
+    font-size: 0.9rem;
+    color: #ffffff;
+}
+
+.rank-email {
+    font-size: 0.8rem;
+    color: #00ff84;
+}
+
+.performer {
+    padding: 2rem 1.5rem;
+    width: 250px;
+}
+
+.rank-item {
+    display: grid;
+    grid-template-columns: 60px 80px 1fr auto;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem 1.5rem;
+}
+
+.leaderboard-profile-picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00A951;
+    font-size: 3rem;
+}
+
+.leaderboard-profile-container {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    position: relative;
+    margin: 1rem auto;
+    overflow: hidden;
+    border: 2px solid #00A951;
+    background: rgba(27, 67, 50, 0.8);
+    box-shadow: 0 0 10px rgba(0, 169, 81, 0.3);
+    flex-shrink: 0;  /* Prevent container from shrinking */
+}
+
+.profile-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-placeholder svg {
+    font-size: 1.5rem;
+    color: #00A951;
+}
+
+.rank-profile-container {
+    width: 80px;  /* Increased from 60px */
+    height: 80px; /* Increased from 60px */
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #00A951;
+    background: rgba(27, 67, 50, 0.8);
+}
+
+.rank-profile-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Other ranks styling */
+.other-ranks {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.rank-item {
+    display: grid;
+    grid-template-columns: 60px 80px 1fr auto;  /* Increased second column from 80px to 100px */
+    gap: 1.5rem;
+    align-items: center;
+    padding: 1.2rem 2rem;
+    background: linear-gradient(145deg, rgba(27, 67, 50, 0.9), rgba(20, 55, 40, 0.9));
+    border: 1px solid #00A951;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.rank-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 169, 81, 0.2);
+    background: linear-gradient(145deg, rgba(30, 70, 53, 0.85), rgba(23, 60, 43, 0.85));
+}
+
+.rank-number {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #00ff84;
+    text-align: center;
+}
+
+.rank-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.rank-weight-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    min-width: 200px;
+}
+
+.rank-weight-info .weight-details {
+    text-align: right;
+    line-height: 1.4;
+    color: #ffffff;
+}
+
+.weight-details {
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+.rank-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.strength-info {
+    text-align: center;
+    margin-top: 1rem;
+    color: #ffffff;
+}
+
+.total-volume {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #00ff84;
+    margin-bottom: 0.5rem;
+}
+
+.workout-count {
+    font-size: 1rem;
+    color: #a0a0a0;
+}
+
+.strength-score {
+    font-size: 1.4rem;
+    color: #00ff84;
+    margin-top: 0.5rem;
+}
+
+.leaderboard-profile-container {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 10px;
+    border: 2px solid #00A951;
+    background: rgba(0, 169, 81, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.leaderboard-profile-picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00A951;
+    font-size: 24px;
+}
+
+.rank-item .leaderboard-profile-container {
+    width: 80px;  /* Increased from 40px */
+    height: 80px; /* Increased from 40px */
+    margin: 0;
+    border: 2px solid #00A951;
+}
+
+.performer .leaderboard-profile-container {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 15px;
+}
+
+.performer.first .leaderboard-profile-container {
+    width: 90px;
+    height: 90px;
+    border: 3px solid gold;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.7); /* Gold glow */
+}
+
+.performer.second .leaderboard-profile-container {
+    width: 90px;
+    height: 90px;
+    border: 3px solid silver;
+    box-shadow: 0 0 15px rgba(192, 192, 192, 0.7); /* Silver glow */
+}
+
+.performer.third .leaderboard-profile-container {
+    width: 90px;
+    height: 90px;
+    border: 3px solid #cd7f32;
+    box-shadow: 0 0 15px rgba(205, 127, 50, 0.7); /* Bronze glow */
+}
+
+.performer .rank-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.performer.first .rank-badge {
+    color: #FFD700; /* Gold */
+}
+
+.performer.second .rank-badge {
+    color: #C0C0C0; /* Silver */
+}
+
+.performer.third .rank-badge {
+    color: #CD7F32; /* Bronze */
+}
+
+/* Add these new styles */
+.consistency-info {
+    text-align: center;
+    margin-top: 1rem;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.consistency-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.total-workouts {
+    font-size: 1.1rem;
+    color: #00ff84;
+}
+
+.active-days {
+    font-size: 1.1rem;
+    color: #00ff84;
+}
+
+.consistency-score {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #00ff84;
+    margin-top: 0.5rem;
+}
+
+/* Update performer classes to accommodate new category */
+.performer .consistency-info {
+    margin-top: auto;
+}
+
+.rank-item .consistency-stats {
+    text-align: right;
+}
+
+/* Hybrid Leaderboard Styles */
+.hybrid-info {
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.2rem;
+    width: 100%;
+    margin-top: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.hybrid-stats {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.volume-stats,
+.consistency-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.total-volume,
+.total-workouts,
+.active-days {
+    font-size: 0.9rem;
+    color: #b8b8b8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.total-volume span,
+.total-workouts span,
+.active-days span {
+    font-weight: 600;
+    color: #00ff84;
+}
+
+.hybrid-score {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffd700;
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+/* Adjustments for top performers */
+.performer .hybrid-info {
+    margin-top: auto;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5));
+}
+
+.performer.first .hybrid-info {
+    background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(0, 0, 0, 0.5));
+}
+
+.performer.second .hybrid-info {
+    background: linear-gradient(45deg, rgba(192, 192, 192, 0.1), rgba(0, 0, 0, 0.5));
+}
+
+.performer.third .hybrid-info {
+    background: linear-gradient(45deg, rgba(205, 127, 50, 0.1), rgba(0, 0, 0, 0.5));
+}
+
+/* Adjustments for other ranks */
+.rank-item .hybrid-info {
+    padding: 0.8rem;
+    margin-top: 0;
+    margin-left: 1rem;
+}
+
+.rank-item .hybrid-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+.rank-item .hybrid-score {
+    grid-column: span 2;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+}
+
+/* Common styles for all leaderboard categories */
+.strength-info,
+.consistency-info,
+.hybrid-info {
+    background: rgba(15, 45, 33, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 1.2rem;
+    width: 100%;
+    margin: 0.5rem 0;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.common-styles {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.strength-stats,
+.consistency-stats,
+.hybrid-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.total-volume,
+.total-workouts,
+.active-days {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    margin: 0.2rem 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.total-volume,
+.total-workouts,
+.active-days {
+    font-size: 0.9rem;
+    color: #b8b8b8;
+}
+
+.total-volume span,
+.total-workouts span,
+.active-days span {
+    color: #00ff84;
+    font-weight: 600;
+}
+
+.strength-score,
+.consistency-score,
+.hybrid-score {
+    text-align: center;
+    background: rgba(0, 255, 132, 0.1);
+    border: 1px solid rgba(0, 255, 132, 0.2);
+    color: #00ff84;
+    padding: 0.8rem;
+    margin-top: 0.5rem;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.rank-item .strength-info,
+.rank-item .consistency-info,
+.rank-item .hybrid-info {
+    margin-left: 1rem;
+    padding: 0.8rem;
+}
+
+.performer .strength-info,
+.performer .consistency-info,
+.performer .hybrid-info {
+    margin-top: auto;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.performer.first .strength-info,
+.performer.first .consistency-info,
+.performer.first .hybrid-info,
+.performer.second .strength-info,
+.performer.second .consistency-info,
+.performer.second .hybrid-info,
+.performer.third .strength-info,
+.performer.third .consistency-info,
+.performer.third .hybrid-info {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.rank-item .strength-info,
+.rank-item .consistency-info,
+.rank-item .hybrid-info {
+    padding: 0.8rem;
+    margin-top: 0;
+    margin-left: 1rem;
+}
+
+.rank-item .strength-stats,
+.rank-item .consistency-stats,
+.rank-item .hybrid-stats {
+    text-align: right;
+}
+
+.consistency-info .total-workouts,
+.consistency-info .active-days {
+    font-size: 1.1rem;
+    color: #b8b8b8;
+}
+
+.consistency-info .total-workouts span,
+.consistency-info .active-days span {
+    color: #00ff84;
+    font-weight: 600;
+}
+
+.weight-details {
+    color: #b8b8b8;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.weight-details span {
+    color: #00ff84;
+    font-weight: 600;
+}
+
+.weigh-ins {
+    color: #00ff84;
+    margin-left: 0.5rem;
+}
+
+.performer.first .crown,
+.performer.second .medal,
+.performer.third .medal {
+    animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Add/update email styling for top performers */
+.performer .email {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    color: #00ff84;
+    font-size: 0.8rem;
+    margin-bottom: 0.7rem;
+    padding: 0.3rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    width: 100%;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+}
+
+.performer .email-icon {
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+/* Ensure profile images maintain aspect ratio and cover their container */
+.rank-item .leaderboard-profile-picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Update profile placeholder size for consistency */
+.rank-item .profile-placeholder {
+    width: 100%;
+    height: 100%;
+    font-size: 2rem;  /* Increased from 1.5rem */
+}
+
+/* Enhanced email styling for rank 4+ */
+.rank-item .rank-email {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #b3ffd9;
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+    background: linear-gradient(145deg, rgba(20, 55, 40, 0.8), rgba(15, 45, 33, 0.8));
+    border-radius: 8px;
+    width: fit-content;
+    word-break: break-all;
+    margin-top: 0.5rem;
+    border-left: 3px solid rgba(0, 169, 81, 0.5);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+}
+
+.rank-item .rank-email:hover {
+    background: linear-gradient(145deg, rgba(25, 60, 45, 0.85), rgba(20, 50, 38, 0.85));
+    transform: translateY(-2px);
+}
+
+.rank-item .email-icon {
+    font-size: 0.9rem;
+    color: #00ff84;
+}
+
+/* Enhanced stat info containers for rank 4+ */
+.rank-item .strength-info,
+.rank-item .consistency-info,
+.rank-item .hybrid-info,
+.rank-item .weight-info {
+    background: linear-gradient(145deg, rgba(25, 65, 48, 0.7), rgba(20, 55, 40, 0.7));
+    border-radius: 10px;
+    padding: 1rem;
+    margin-left: 0;
+    width: 100%;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+}
+
+.rank-item .strength-info {
+    border-left: 3px solid rgba(0, 210, 180, 0.6);
+}
+
+.rank-item .consistency-info {
+    border-left: 3px solid rgba(100, 210, 255, 0.6);
+}
+
+.rank-item .hybrid-info {
+    border-left: 3px solid rgba(170, 150, 255, 0.6);
+}
+
+.rank-item .weight-info {
+    border-left: 3px solid rgba(255, 165, 240, 0.6);
+}
+
+.rank-item .strength-info:hover,
+.rank-item .consistency-info:hover,
+.rank-item .hybrid-info:hover,
+.rank-item .weight-info:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Enhanced stat rows for rank 4+ */
+.rank-item .total-volume,
+.rank-item .total-workouts,
+.rank-item .active-days,
+.rank-item .weight-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.07);
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    margin: 0.3rem 0;
+    transition: background 0.2s ease;
+    font-size: 0.95rem;
+    color: #e6e6e6;
+}
+
+.rank-item .strength-info .total-volume,
+.rank-item .strength-info .total-workouts {
+    border-left: 2px solid rgba(0, 210, 180, 0.3);
+}
+
+.rank-item .consistency-info .total-workouts,
+.rank-item .consistency-info .active-days {
+    border-left: 2px solid rgba(100, 210, 255, 0.3);
+}
+
+.rank-item .hybrid-info .total-volume,
+.rank-item .hybrid-info .total-workouts,
+.rank-item .hybrid-info .active-days {
+    border-left: 2px solid rgba(170, 150, 255, 0.3);
+}
+
+.rank-item .weight-info .weight-stat {
+    border-left: 2px solid rgba(255, 165, 240, 0.3);
+}
+
+.rank-item .total-volume:hover,
+.rank-item .total-workouts:hover,
+.rank-item .active-days:hover,
+.rank-item .weight-stat:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* Enhanced stat values for rank 4+ */
+.rank-item .strength-info .total-volume span,
+.rank-item .strength-info .total-workouts span {
+    color: #00e6c3;
+    font-weight: 600;
+}
+
+.rank-item .consistency-info .total-workouts span,
+.rank-item .consistency-info .active-days span {
+    color: #66d9ff;
+    font-weight: 600;
+}
+
+.rank-item .hybrid-info .total-volume span,
+.rank-item .hybrid-info .total-workouts span,
+.rank-item .hybrid-info .active-days span {
+    color: #c3b3ff;
+    font-weight: 600;
+}
+
+.rank-item .weight-info .weight-stat span:last-child {
+    color: #ffb3e6;
+    font-weight: 600;
+}
+
+/* Enhanced score displays for rank 4+ */
+.rank-item .strength-score {
+    background: rgba(0, 210, 180, 0.15);
+    border: 1px solid rgba(0, 210, 180, 0.3);
+    color: #00e6c3;
+}
+
+.rank-item .consistency-score {
+    background: rgba(100, 210, 255, 0.15);
+    border: 1px solid rgba(100, 210, 255, 0.3);
+    color: #66d9ff;
+}
+
+.rank-item .hybrid-score {
+    background: rgba(230, 208, 92, 0.15);
+    border: 1px solid rgba(230, 208, 92, 0.3);
+    color: #e6d05c;
+}
+
+/* Highlight current user's rank */
+.rank-item.current-user {
+    border: 2px solid #00ff84;
+    background: linear-gradient(145deg, rgba(35, 80, 60, 0.9), rgba(25, 65, 48, 0.9));
+    box-shadow: 0 0 15px rgba(0, 255, 132, 0.3);
+}
+
+/* Alternating row colors with improved contrast */
+.rank-item:nth-child(odd) {
+    background: linear-gradient(145deg, rgba(23, 60, 45, 0.8), rgba(18, 50, 38, 0.8));
+}
+
+.rank-item:nth-child(even) {
+    background: linear-gradient(145deg, rgba(28, 65, 48, 0.8), rgba(22, 55, 40, 0.8));
+}
+
+.rank-item:nth-child(odd):hover {
+    background: linear-gradient(145deg, rgba(27, 65, 50, 0.85), rgba(22, 55, 43, 0.85));
+}
+
+.rank-item:nth-child(even):hover {
+    background: linear-gradient(145deg, rgba(32, 70, 53, 0.85), rgba(26, 60, 45, 0.85));
+}
+
+/* Mobile responsive adjustments */
+@media screen and (max-width: 768px) {
+    .rank-item .rank-email {
+        width: 100%;
+        font-size: 0.85rem;
+        padding: 0.5rem 0.8rem;
+    }
+    
+    .rank-item .strength-info,
+    .rank-item .consistency-info,
+    .rank-item .hybrid-info,
+    .rank-item .weight-info {
+        padding: 0.8rem;
+        margin: 0.3rem 0;
+    }
+    
+    .rank-item .total-volume,
+    .rank-item .total-workouts,
+    .rank-item .active-days,
+    .rank-item .weight-stat {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .rank-item .strength-score,
+    .rank-item .consistency-score,
+    .rank-item .hybrid-score {
+        font-size: 1.1rem;
+        padding: 0.6rem;
+    }
+    
+    .rank-item .rank-number {
+        position: absolute !important;
+        top: 5px !important;
+        left: 5px !important;
+        width: 24px !important;
+        height: 24px !important;
+        border-radius: 50% !important;
+        background-color: #3a3a3a !important;
+        color: white !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-weight: bold !important;
+        font-size: 12px !important;
+    }
+    
+    .performer.first .rank {
+        background: linear-gradient(135deg, #ffd700, #f9a602) !important; /* Gold */
+        color: #000 !important;
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5) !important;
+        border: 2px solid #ffd700 !important;
+    }
+    
+    .performer.second .rank {
+        background: linear-gradient(135deg, #C0C0C0, #E8E8E8) !important; /* Silver */
+        color: #000 !important;
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5) !important;
+        border: 2px solid #C0C0C0 !important;
+    }
+    
+    .performer.third .rank {
+        background: linear-gradient(135deg, #CD7F32, #FFA770) !important; /* Bronze */
+        color: #000 !important;
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5) !important;
+        border: 2px solid #CD7F32 !important;
+    }
+    
+    .rank-item .rank-number {
+        color: #2ecc71 !important; /* Green for ranks 4+ */
+        font-weight: bold !important;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .rank-item .rank-email {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.6rem;
+    }
+    
+    .rank-item .total-volume,
+    .rank-item .total-workouts,
+    .rank-item .active-days,
+    .rank-item .weight-stat {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.85rem;
+    }
+    
+    .performer.first .rank {
+        background: linear-gradient(135deg, #ffd700, #f9a602) !important; /* Gold */
+        color: #000 !important;
+    }
+    
+    .performer.second .rank {
+        background: linear-gradient(135deg, #C0C0C0, #E8E8E8) !important; /* Silver */
+        color: #000 !important;
+    }
+    
+    .performer.third .rank {
+        background: linear-gradient(135deg, #CD7F32, #FFA770) !important; /* Bronze */
+        color: #000 !important;
+    }
+    
+    .rank-item .rank-number {
+        color: #2ecc71 !important; /* Green for ranks 4+ */
+        font-weight: bold !important;
+    }
+}
+
+/* Enhanced stat containers for top 3 performers */
+.performer.first .strength-info,
+.performer.first .consistency-info,
+.performer.first .hybrid-info,
+.performer.first .weight-info {
+    background: linear-gradient(145deg, rgba(40, 75, 55, 0.7), rgba(32, 62, 47, 0.7));
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.15);
+}
+
+.performer.second .strength-info,
+.performer.second .consistency-info,
+.performer.second .hybrid-info,
+.performer.second .weight-info {
+    background: linear-gradient(145deg, rgba(36, 70, 52, 0.7), rgba(30, 58, 45, 0.7));
+    border: 1px solid rgba(192, 192, 192, 0.3);
+    box-shadow: 0 4px 12px rgba(192, 192, 192, 0.15);
+}
+
+.performer.third .strength-info,
+.performer.third .consistency-info,
+.performer.third .hybrid-info,
+.performer.third .weight-info {
+    background: linear-gradient(145deg, rgba(34, 65, 50, 0.7), rgba(28, 55, 43, 0.7));
+    border: 1px solid rgba(205, 127, 50, 0.3);
+    box-shadow: 0 4px 12px rgba(205, 127, 50, 0.15);
+}
+
+/* Enhanced stat rows for top 3 performers */
+.performer.first .total-volume,
+.performer.first .total-workouts,
+.performer.first .active-days,
+.performer.first .weight-stat {
+    background: rgba(255, 255, 255, 0.12);
+    border-left: 3px solid rgba(255, 215, 0, 0.5);
+}
+
+.performer.second .total-volume,
+.performer.second .total-workouts,
+.performer.second .active-days,
+.performer.second .weight-stat {
+    background: rgba(255, 255, 255, 0.1);
+    border-left: 3px solid rgba(192, 192, 192, 0.5);
+}
+
+.performer.third .total-volume,
+.performer.third .total-workouts,
+.performer.third .active-days,
+.performer.third .weight-stat {
+    background: rgba(255, 255, 255, 0.08);
+    border-left: 3px solid rgba(205, 127, 50, 0.5);
+}
+
+/* Enhanced stat values for top 3 performers */
+.performer.first .total-volume span,
+.performer.first .total-workouts span,
+.performer.first .active-days span,
+.performer.first .weight-stat span:last-child {
+    color: #ffe066;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.performer.second .total-volume span,
+.performer.second .total-workouts span,
+.performer.second .active-days span,
+.performer.second .weight-stat span:last-child {
+    color: #e6e6e6;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.performer.third .total-volume span,
+.performer.third .total-workouts span,
+.performer.third .active-days span,
+.performer.third .weight-stat span:last-child {
+    color: #e6b980;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Enhanced score displays for top 3 performers */
+.performer.first .strength-score,
+.performer.first .consistency-score,
+.performer.first .hybrid-score {
+    background: rgba(255, 215, 0, 0.15);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    color: #ffe066;
+    font-size: 1.4rem;
+    font-weight: 800;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.performer.second .strength-score,
+.performer.second .consistency-score,
+.performer.second .hybrid-score {
+    background: rgba(192, 192, 192, 0.15);
+    border: 1px solid rgba(192, 192, 192, 0.3);
+    color: #e6e6e6;
+    font-size: 1.35rem;
+    font-weight: 800;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.performer.third .strength-score,
+.performer.third .consistency-score,
+.performer.third .hybrid-score {
+    background: rgba(205, 127, 50, 0.15);
+    border: 1px solid rgba(205, 127, 50, 0.3);
+    color: #e6b980;
+    font-size: 1.3rem;
+    font-weight: 800;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Weight info enhancements for top 3 */
+.performer.first .weight-details,
+.performer.second .weight-details,
+.performer.third .weight-details {
+    padding: 0.5rem;
+}
+
+/* Bonus tag enhancements for top 3 */
+.performer.first .bonus-tag {
+    background: linear-gradient(135deg, #ffd700, #ffaa00);
+    box-shadow: 0 2px 5px rgba(255, 215, 0, 0.4);
+}
+
+.performer.second .bonus-tag {
+    background: linear-gradient(135deg, #e0e0e0, #b0b0b0);
+    box-shadow: 0 2px 5px rgba(192, 192, 192, 0.4);
+}
+
+.performer.third .bonus-tag {
+    background: linear-gradient(135deg, #dda15e, #bc8a5f);
+    box-shadow: 0 2px 5px rgba(205, 127, 50, 0.4);
+}
+
+/* Mobile responsive adjustments */
+@media screen and (max-width: 768px) {
+    .performer.first .strength-score,
+    .performer.first .consistency-score,
+    .performer.first .hybrid-score,
+    .performer.second .strength-score,
+    .performer.second .consistency-score,
+    .performer.second .hybrid-score,
+    .performer.third .strength-score,
+    .performer.third .consistency-score,
+    .performer.third .hybrid-score {
+        font-size: 1.2rem;
+        padding: 0.7rem;
+    }
+    
+    .performer.first .total-volume,
+    .performer.first .total-workouts,
+    .performer.first .active-days,
+    .performer.first .weight-stat,
+    .performer.second .total-volume,
+    .performer.second .total-workouts,
+    .performer.second .active-days,
+    .performer.second .weight-stat,
+    .performer.third .total-volume,
+    .performer.third .total-workouts,
+    .performer.third .active-days,
+    .performer.third .weight-stat {
+        padding: 0.6rem 0.8rem;
+    }
+}
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 768px) {
+    .leaderboard-container {
+        padding: 0.8rem;
+        margin: 0 auto;
+        width: calc(100% - 1rem);
+        max-width: 100%;
+    }
+
+    .leaderboard-header h2 {
+        font-size: 1.8rem;
+        padding: 0 1rem;
+    }
+
+    .category-tabs {
+        gap: 0.5rem;
+        padding: 0 0.5rem;
+    }
+
+    .category-tab {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .mobile-performers {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin: 1rem 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    .performer,
+    .performer.first,
+    .performer.second,
+    .performer.third {
+        width: 100%;
+        max-width: 250px; /* Reduced from 280px */
+        margin: 0 auto;
+        padding: 0.8rem;
+    }
+
+    .performer .leaderboard-profile-container {
+        width: 60px;
+        height: 60px;
+    }
+
+    .performer.first .leaderboard-profile-container {
+        width: 80px;
+        height: 80px;
+        border: 3px solid gold;
+    }
+
+    .performer.second .leaderboard-profile-container {
+        width: 80px;
+        height: 80px;
+        border: 3px solid silver;
+    }
+
+    .performer.third .leaderboard-profile-container {
+        width: 80px;
+        height: 80px;
+        border: 3px solid #cd7f32;
+    }
+
+    .rank-item {
+        grid-template-columns: 40px 60px 1fr;
+        padding: 0.8rem;
+        gap: 0.8rem;
+        margin-bottom: 0.8rem;
+        width: 100%;
+        max-width: 250px; /* Reduced from 280px */
+        margin: 0.5rem auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .rank-item .rank-profile-container {
+        width: 60px;
+        height: 60px;
+    }
+
+    .rank-info {
+        padding-right: 0.5rem;
+        width: 100%;
+        text-align: center;
+        padding: 0;
+    }
+
+    .rank-weight-info {
+        min-width: unset;
+        width: 100%;
+        margin-top: 0.5rem;
+        padding: 0;
+        text-align: center;
+    }
+
+    .weight-details,
+    .strength-info,
+    .consistency-info,
+    .hybrid-info {
+        font-size: 0.9rem;
+        padding: 0.8rem;
+        width: calc(100% - 1rem);
+        margin: 0.5rem auto;
+    }
+
+    .rank-email,
+    .performer .email {
+        font-size: 0.8rem;
+        word-break: break-all;
+        width: calc(100% - 1rem);
+        margin: 0.5rem auto;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .rank-item {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        align-items: center;
+        text-align: center;
+    }
+
+    .rank-number {
+        width: auto;
+        margin-bottom: 0.5rem;
+    }
+
+    .rank-profile-container {
+        margin: 0.5rem 0;
+    }
+
+    .rank-info {
+        width: 100%;
+        align-items: center;
+    }
+
+    .rank-weight-info {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+    }
+
+    .total-volume,
+    .total-workouts,
+    .active-days {
+        flex-direction: column;
+        gap: 0.3rem;
+        align-items: center;
+    }
+
+    .hybrid-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .hybrid-score,
+    .strength-score,
+    .consistency-score {
+        font-size: 1.1rem;
+    }
+
+    .email {
+        font-size: 0.8rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .performer .email {
+        padding: 0.5rem;
+        word-break: break-all;
+    }
+
+    .other-ranks {
+        padding: 0 0.5rem;
+        margin: 1rem auto;
+        width: 100%;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .category-tab svg {
+        font-size: 1rem;
+    }
+
+    .category-tab span {
+        display: none;
+    }
+
+    .category-tab {
+        padding: 0.8rem;
+        border-radius: 50%;
+    }
+
+    .weight-info,
+    .strength-info,
+    .consistency-info,
+    .hybrid-info {
+        margin: 0.5rem 0;
+    }
+
+    .crown,
+    .medal {
+        font-size: 1.8rem;
+        top: 5px;
+        right: 5px;
+    }
+
+    .rank {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        font-size: 1.2rem;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .bonus-tag {
+        font-size: 0.8rem;
+        padding: 0.2rem 0.5rem;
+        margin-top: 0.3rem;
+        display: inline-block;
+    }
+
+    .leaderboard-container {
+        padding: 0.8rem;
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    .leaderboard-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .mobile-performers {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Make all items exact same width */
+    .performer,
+    .performer.first,
+    .performer.second,
+    .performer.third,
+    .rank-item {
+        width: 280px;
+        max-width: 280px;
+        margin: 0.5rem auto;
+        padding: 1rem;
+    }
+
+    .other-ranks {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Center profile containers */
+    .leaderboard-profile-container,
+    .rank-profile-container {
+        width: 60px;
+        height: 60px;
+        margin: 0.5rem auto;
+    }
+
+    /* Center info sections */
+    .weight-info,
+    .strength-info,
+    .consistency-info,
+    .hybrid-info {
+        width: calc(100% - 1rem);
+        margin: 0.5rem auto;
+    }
+
+    /* Ensure content is centered within items */
+    .rank-info,
+    .rank-weight-info,
+    .email,
+    .rank-email {
+        width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .leaderboard-page {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .leaderboard-wrapper {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .leaderboard-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0.8rem;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .mobile-performers {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+    }
+
+    .performer,
+    .performer.first,
+    .performer.second,
+    .performer.third,
+    .rank-item {
+        width: 250px;
+        max-width: 250px;
+        margin: 0.5rem auto;
+        transform: translateX(-50%);
+        left: 50%;
+        position: relative;
+    }
+
+    .other-ranks {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Force center alignment for all content */
+    .leaderboard-content {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Reset any margins that might affect centering */
+    .weight-info,
+    .strength-info,
+    .consistency-info,
+    .hybrid-info {
+        width: calc(100% - 1rem);
+        margin: 0.5rem auto;
+        transform: translateX(0);
+        left: 0;
+    }
+
+    /* Reset positioning and transform */
+    .performer,
+    .performer.first,
+    .performer.second,
+    .performer.third,
+    .rank-item {
+        width: 250px;
+        max-width: 250px;
+        margin: 0.5rem auto;
+        position: static;
+        transform: none;
+        left: auto;
+    }
+
+    .mobile-performers {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+    }
+
+    .other-ranks {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+    }
+
+    /* Force container alignment */
+    .leaderboard-content {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Ensure info sections are centered */
+    .weight-info,
+    .strength-info,
+    .consistency-info,
+    .hybrid-info {
+        width: 100%;
+        max-width: 230px;
+        margin: 0.5rem auto;
+    }
+
+    /* Center the rank items content */
+    .rank-info,
+    .rank-weight-info {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+    }
+
+    .crown, 
+    .medal {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-size: 1.5rem;
+    }
+
+    .rank {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        font-size: 1.2rem;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .bonus-tag {
+        font-size: 0.8rem;
+        padding: 0.2rem 0.5rem;
+        margin-top: 0.3rem;
+        display: inline-block;
+    }
+
+    .leaderboard-container {
+        padding: 0.8rem;
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    .leaderboard-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .mobile-performers {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Make all items exact same width */
+    .performer,
+    .performer.first,
+    .performer.second,
+    .performer.third,
+    .rank-item {
+        width: 280px;
+        max-width: 280px;
+        margin: 0.5rem auto;
+        padding: 1rem;
+    }
+
+    .other-ranks {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Center profile containers */
+    .leaderboard-profile-container,
+    .rank-profile-container {
+        width: 60px;
+        height: 60px;
+        margin: 0.5rem auto;
+    }
+
+    /* Center info sections */
+    .weight-info,
+    .strength-info,
+    .consistency-info,
+    .hybrid-info {
+        width: calc(100% - 1rem);
+        margin: 0.5rem auto;
+    }
+
+    /* Ensure content is centered within items */
+    .rank-info,
+    .rank-weight-info,
+    .email,
+    .rank-email {
+        width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .leaderboard-page {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .leaderboard-wrapper {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .leaderboard-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0.8rem;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .mobile-performers {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+    }
+
+    .performer,
+    .performer.first,
+    .performer.second,
+    .performer.third,
+    .rank-item {
+        width: 250px;
+        max-width: 250px;
+        margin: 0.5rem auto;
+        transform: translateX(-50%);
+        left: 50%;
+        position: relative;
+    }
+
+    .other-ranks {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Force center alignment for all content */
+    .leaderboard-content {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Reset any margins that might affect centering */
+    .weight-info,
+    .strength-info,
+    .consistency-info,
+    .hybrid-info {
+        width: calc(100% - 1rem);
+        margin: 0.5rem auto;
+        transform: translateX(0);
+        left: 0;
+    }
+
+    /* Reset positioning and transform */
+    .performer,
+    .performer.first,
+    .performer.second,
+    .performer.third,
+    .rank-item {
+        width: 250px;
+        max-width: 250px;
+        margin: 0.5rem auto;
+        position: static;
+        transform: none;
+        left: auto;
+    }
+
+    .mobile-performers {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+        align-items: center;
+    padding: 0;
+    margin: 0;
+    }
+
+    .other-ranks {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+        align-items: center;
+    padding: 0;
+}
+
+    /* Force container alignment */
+    .leaderboard-content {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+        flex-direction: column;
+    align-items: center;
+}
+
+    /* Ensure info sections are centered */
+    .weight-info,
+    .strength-info,
+    .consistency-info,
+    .hybrid-info {
+    width: 100%;
+        max-width: 230px;
+        margin: 0.5rem auto;
+    }
+
+    /* Center the rank items content */
+    .rank-info, 
+    .rank-weight-info {
+        width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+}
+
+    .crown, 
+    .medal {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-size: 1.5rem;
+    }
+
+    .rank {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        font-size: 1.2rem;
+        background: rgba(0, 0, 0, 0.6);
+    color: white;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+    display: flex;
+    align-items: center;
+        justify-content: center;
+    }
+
+    /* Fix email layout to be horizontal */
+    .email,
+    .rank-email {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        margin: 0.5rem 0;
+    }
+
+    .email-icon {
+        margin: 0;
+        font-size: 1rem;
+    }
+
+    /* Position relative for rank containers to support absolute positioning of badges */
+    .performer,
+    .performer.first,
+    .performer.second,
+    .performer.third,
+    .rank-item {
+        position: relative;
+        width: 250px;
+        max-width: 250px;
+        margin: 0.5rem auto;
+    }
+
+    /* Ensure content stays centered */
+    .rank-info,
+    .rank-weight-info {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* Rank number styling */
+    .rank {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        font-size: 1.4rem;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    /* Color specific rank numbers */
+    .performer.first .rank {
+        color: #FFD700; /* Gold */
+        font-size: 1.8rem;
+    }
+
+    .performer.second .rank {
+        color: #C0C0C0; /* Silver */
+        font-size: 1.7rem;
+    }
+
+    .performer.third .rank {
+        color: #CD7F32; /* Bronze */
+        font-size: 1.7rem;
+    }
+
+    /* Weight loss details centering */
+    .weight-details {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 0.8rem;
+    }
+
+    .weight-info,
+    .performer .weight-info,
+    .rank-item .weight-info {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .weight-change,
+    .start-weight,
+    .current-weight,
+    .weight-loss,
+    .bonus-points {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin: 0.3rem 0;
+    }
+
+    /* Weight details container adjustments */
+    .weight-details {
+        width: 90%;
+        margin: 0 auto;
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+
+    /* Individual weight info rows */
+    .weight-change,
+    .start-weight,
+    .current-weight,
+    .weight-loss,
+    .bonus-points {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.2rem 0;
+    }
+
+    /* Labels alignment */
+    .weight-change span:first-child,
+    .start-weight span:first-child,
+    .current-weight span:first-child,
+    .weight-loss span:first-child,
+    .bonus-points span:first-child {
+        text-align: right;
+        padding-right: 0.5rem;
+    }
+
+    /* Values alignment */
+    .weight-change span:last-child,
+    .start-weight span:last-child,
+    .current-weight span:last-child,
+    .weight-loss span:last-child,
+    .bonus-points span:last-child {
+        text-align: left;
+        padding-left: 0.5rem;
+    }
+
+    /* Container adjustments for all rank types */
+    .performer .weight-info,
+    .rank-item .weight-info {
+        width: 90%;
+        margin: 0.5rem auto;
+        padding: 0.5rem;
+    }
+
+    /* Adjust container heights and spacing */
+    .performer,
+    .performer.first,
+    .performer.second,
+    .performer.third,
+    .rank-item {
+        width: 250px;
+        max-width: 250px;
+        margin: 0.3rem auto;
+        padding: 0.8rem;
+        min-height: auto;
+    }
+
+    /* Weight details horizontal layout and spacing */
+    .weight-details {
+        width: 100%;
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .weight-change,
+    .start-weight,
+    .current-weight,
+    .weight-loss,
+    .bonus-points {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.3rem;
+        margin: 0.2rem 0;
+    }
+
+    /* Adjust info sections spacing */
+    .weight-info,
+    .strength-info,
+    .consistency-info,
+    .hybrid-info {
+        padding: 0.5rem;
+        margin: 0.3rem auto;
+        width: 95%;
+    }
+
+    /* Adjust stats display */
+    .total-volume,
+    .total-workouts,
+    .active-days {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.3rem 0.5rem;
+        margin: 0.2rem 0;
+        font-size: 0.9rem;
+    }
+
+    /* Reduce spacing between elements */
+    .rank-info {
+        gap: 0.2rem;
+        margin: 0.3rem 0;
+    }
+
+    .email,
+    .rank-email {
+        margin: 0.3rem 0;
+        font-size: 0.8rem;
+    }
+
+    /* Adjust hybrid stats layout */
+    .hybrid-stats {
+        gap: 0.3rem;
+    }
+
+    .hybrid-score,
+    .strength-score,
+    .consistency-score {
+        padding: 0.5rem;
+        margin-top: 0.3rem;
+    }
+
+    /* Profile picture adjustments */
+    .leaderboard-profile-container,
+    .rank-profile-container {
+        width: 50px;
+        height: 50px;
+        margin: 0.3rem auto;
+    }
+
+    .performer.first .leaderboard-profile-container {
+        width: 60px;
+        height: 60px;
+    }
+
+    /* Reduce margins and padding for bonus tags */
+    .bonus-details {
+        margin-top: 0.2rem;
+    }
+
+    .bonus-tag {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.8rem;
+    }
+
+    .weigh-ins {
+        font-size: 0.8rem;
+    }
+
+    /* Adjust weight details text alignment */
+    .weight-details span {
+        margin-left: 0.3rem;
+    }
+
+    /* Crown and medal size adjustments */
+    .crown, 
+    .medal {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-size: 2rem; /* Increased from 1.5rem */
+    }
+
+    /* Rank number styling for top 3 */
+    .performer.first .rank,
+    .performer.second .rank,
+    .performer.third .rank {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        font-size: 1.6rem;
+        width: auto;
+        height: auto;
+        background: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    }
+
+    /* Color specific rank numbers */
+    .performer.first .rank {
+        color: #FFD700; /* Gold */
+        font-size: 1.8rem;
+    }
+
+    .performer.second .rank {
+        color: #C0C0C0; /* Silver */
+        font-size: 1.7rem;
+    }
+
+    .performer.third .rank {
+        color: #CD7F32; /* Bronze */
+        font-size: 1.7rem;
+    }
+
+    /* Keep the circle background only for ranks 4+ */
+    .rank-item .rank-number {
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+    }
+
+    /* Common rank number styling for all ranks */
+    .rank,
+    .rank-number,
+    .rank-item .rank-number {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        width: auto;
+        height: auto;
+        background: none;
+        border-radius: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.4rem;
+        color: #4CAF50; /* Restore green color */
+        text-shadow: none;
+    }
+
+    /* Top 3 rank styling */
+    .performer.first .rank {
+        color: #FFD700; /* Gold */
+        font-size: 1.8rem;
+    }
+
+    .performer.third .rank {
+        color: #CD7F32; /* Bronze */
+        font-size: 1.7rem;
+    }
+
+    /* Crown and medal size */
+    .crown, 
+    .medal {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-size: 2rem;
+    }
+
+    /* Ensure rank items have relative positioning */
+    .performer,
+    .performer.first,
+    .performer.second,
+    .performer.third,
+    .rank-item {
+        position: relative;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .leaderboard-container {
+        padding: 0.5rem;
+    }
+
+    .leaderboard-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .performer,
+    .performer.first,
+    .performer.second,
+    .performer.third,
+    .rank-item {
+        max-width: 220px; /* Even smaller for very small screens */
+        padding: 0.8rem;
+    }
+
+    .category-tab {
+        padding: 0.6rem;
+    }
+
+    .rank-item {
+        padding: 0.8rem;
+        max-width: 250px;
+    }
+
+    .weight-details,
+    .strength-info,
+    .consistency-info,
+    .hybrid-info {
+        padding: 0.6rem;
+    }
+
+    .performer,
+    .performer.first,
+    .performer.second,
+    .performer.third,
+    .rank-item {
+        width: 250px;
+        max-width: 250px;
+        padding: 0.8rem;
+    }
+
+    .performer,
+    .performer.first,
+    .performer.second,
+    .performer.third,
+    .rank-item {
+        width: 220px;
+        max-width: 220px;
+    }
+
+    .performer,
+    .performer.first,
+    .performer.second,
+    .performer.third,
+    .rank-item {
+        width: 220px;
+        max-width: 220px;
+    }
+
+    .weight-info,
+    .strength-info,
+    .consistency-info,
+    .hybrid-info {
+        max-width: 200px;
+    }
+
+    .crown, 
+    .medal {
+        font-size: 1.2rem;
+    }
+
+    .rank {
+        font-size: 1rem;
+        width: 22px;
+        height: 22px;
+    }
+
+    .rank {
+        font-size: 1.3rem;
+        width: 28px;
+        height: 28px;
+    }
+
+    .performer.first .rank {
+        font-size: 1.4rem;
+    }
+
+    .performer.second .rank,
+    .performer.third .rank {
+        font-size: 1.3rem;
+    }
+
+    .weight-details {
+        width: 95%;
+        padding: 0.3rem;
+    }
+
+    .weight-change,
+    .start-weight,
+    .current-weight,
+    .weight-loss,
+    .bonus-points {
+        font-size: 0.9rem;
+    }
+
+    .crown, 
+    .medal {
+        font-size: 1.8rem;
+    }
+
+    .performer.first .rank {
+        font-size: 1.6rem;
+    }
+
+    .performer.second .rank,
+    .performer.third .rank {
+        font-size: 1.5rem;
+    }
+
+    .rank,
+    .rank-number {
+        font-size: 1.3rem;
+    }
+
+    .performer.first .rank {
+        font-size: 1.6rem;
+    }
+
+    .performer.second .rank,
+    .performer.third .rank {
+        font-size: 1.5rem;
+    }
+
+    .crown, 
+    .medal {
+        font-size: 1.8rem;
+    }
+
+    .rank,
+    .rank-number {
+        font-size: 1.3rem;
+    }
+
+    .performer.first .rank {
+        font-size: 1.6rem;
+    }
+
+    .performer.second .rank,
+    .performer.third .rank {
+        font-size: 1.5rem;
+    }
+}
+
+/* Default styles for all screen sizes */
+.performer.first .rank {
+    color: #FFD700; /* Gold */
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.performer.second .rank {
+    color: #C0C0C0; /* Silver */
+    font-size: 1.7rem;
+    font-weight: bold;
+}
+
+.performer.third .rank {
+    color: #CD7F32; /* Bronze */
+    font-size: 1.7rem;
+    font-weight: bold;
+}
+
+/* Regular rank numbers */
+.rank-number {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+/* Mobile specific adjustments */
+@media screen and (max-width: 768px) {
+    .rank,
+    .rank-number,
+    .rank-item .rank-number {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        width: auto;
+        height: auto;
+        background: none;
+        border-radius: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .rank,
+    .rank-number,
+    .rank-item .rank-number {
+        font-size: 1.3rem;
+    }
+
+    .performer.first .rank {
+        font-size: 1.6rem;
+    }
+
+    .performer.second .rank,
+    .performer.third .rank {
+        font-size: 1.5rem;
+    }
+}
+
+/* Enhanced stat containers for top 3 performers */
+.performer.first .strength-info,
+.performer.first .consistency-info,
+.performer.first .hybrid-info,
+.performer.first .weight-info {
+    background: linear-gradient(145deg, rgba(40, 75, 55, 0.7), rgba(32, 62, 47, 0.7));
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.15);
+}
+
+.performer.second .strength-info,
+.performer.second .consistency-info,
+.performer.second .hybrid-info,
+.performer.second .weight-info {
+    background: linear-gradient(145deg, rgba(36, 70, 52, 0.7), rgba(30, 58, 45, 0.7));
+    border: 1px solid rgba(192, 192, 192, 0.3);
+    box-shadow: 0 4px 12px rgba(192, 192, 192, 0.15);
+}
+
+.performer.third .strength-info,
+.performer.third .consistency-info,
+.performer.third .hybrid-info,
+.performer.third .weight-info {
+    background: linear-gradient(145deg, rgba(34, 65, 50, 0.7), rgba(28, 55, 43, 0.7));
+    border: 1px solid rgba(205, 127, 50, 0.3);
+    box-shadow: 0 4px 12px rgba(205, 127, 50, 0.15);
+}
+
+/* Enhanced stat rows for top 3 performers */
+.performer.first .total-volume,
+.performer.first .total-workouts,
+.performer.first .active-days,
+.performer.first .weight-stat {
+    background: rgba(255, 255, 255, 0.12);
+    border-left: 3px solid rgba(255, 215, 0, 0.5);
+}
+
+.performer.second .total-volume,
+.performer.second .total-workouts,
+.performer.second .active-days,
+.performer.second .weight-stat {
+    background: rgba(255, 255, 255, 0.1);
+    border-left: 3px solid rgba(192, 192, 192, 0.5);
+}
+
+.performer.third .total-volume,
+.performer.third .total-workouts,
+.performer.third .active-days,
+.performer.third .weight-stat {
+    background: rgba(255, 255, 255, 0.08);
+    border-left: 3px solid rgba(205, 127, 50, 0.5);
+}
+
+/* Enhanced stat values for top 3 performers */
+.performer.first .total-volume span,
+.performer.first .total-workouts span,
+.performer.first .active-days span,
+.performer.first .weight-stat span:last-child {
+    color: #ffe066;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.performer.second .total-volume span,
+.performer.second .total-workouts span,
+.performer.second .active-days span,
+.performer.second .weight-stat span:last-child {
+    color: #e6e6e6;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.performer.third .total-volume span,
+.performer.third .total-workouts span,
+.performer.third .active-days span,
+.performer.third .weight-stat span:last-child {
+    color: #e6b980;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Enhanced score displays for top 3 performers */
+.performer.first .strength-score,
+.performer.first .consistency-score,
+.performer.first .hybrid-score {
+    background: rgba(255, 215, 0, 0.15);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    color: #ffe066;
+    font-size: 1.4rem;
+    font-weight: 800;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.performer.second .strength-score,
+.performer.second .consistency-score,
+.performer.second .hybrid-score {
+    background: rgba(192, 192, 192, 0.15);
+    border: 1px solid rgba(192, 192, 192, 0.3);
+    color: #e6e6e6;
+    font-size: 1.35rem;
+    font-weight: 800;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.performer.third .strength-score,
+.performer.third .consistency-score,
+.performer.third .hybrid-score {
+    background: rgba(205, 127, 50, 0.15);
+    border: 1px solid rgba(205, 127, 50, 0.3);
+    color: #e6b980;
+    font-size: 1.3rem;
+    font-weight: 800;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Weight info enhancements for top 3 */
+.performer.first .weight-details,
+.performer.second .weight-details,
+.performer.third .weight-details {
+    padding: 0.5rem;
+}
+
+/* Bonus tag enhancements for top 3 */
+.performer.first .bonus-tag {
+    background: linear-gradient(135deg, #ffd700, #ffaa00);
+    box-shadow: 0 2px 5px rgba(255, 215, 0, 0.4);
+}
+
+.performer.second .bonus-tag {
+    background: linear-gradient(135deg, #e0e0e0, #b0b0b0);
+    box-shadow: 0 2px 5px rgba(192, 192, 192, 0.4);
+}
+
+.performer.third .bonus-tag {
+    background: linear-gradient(135deg, #dda15e, #bc8a5f);
+    box-shadow: 0 2px 5px rgba(205, 127, 50, 0.4);
+}
+
+/* Mobile responsive adjustments */
+@media screen and (max-width: 768px) {
+    .performer.first .strength-score,
+    .performer.first .consistency-score,
+    .performer.first .hybrid-score,
+    .performer.second .strength-score,
+    .performer.second .consistency-score,
+    .performer.second .hybrid-score,
+    .performer.third .strength-score,
+    .performer.third .consistency-score,
+    .performer.third .hybrid-score {
+        font-size: 1.2rem;
+        padding: 0.7rem;
+    }
+    
+    .performer.first .total-volume,
+    .performer.first .total-workouts,
+    .performer.first .active-days,
+    .performer.first .weight-stat,
+    .performer.second .total-volume,
+    .performer.second .total-workouts,
+    .performer.second .active-days,
+    .performer.second .weight-stat,
+    .performer.third .total-volume,
+    .performer.third .total-workouts,
+    .performer.third .active-days,
+    .performer.third .weight-stat {
+        padding: 0.6rem 0.8rem;
+    }
+}
+
+/* Unified container styles */
+.weight-info, 
+.strength-info, 
+.consistency-info, 
+.hybrid-info {
+    background: rgba(15, 40, 30, 0.8);
+    border: 1px solid rgba(0, 169, 81, 0.4);
+    border-radius: 10px;
+    padding: 0.8rem;
+    width: 100%;
+    margin: 0.5rem 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Smaller, more compact stat rows with consistent styling */
+.total-volume, 
+.total-workouts, 
+.active-days, 
+.weight-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    margin: 0.3rem 0;
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Highlight stat values for better readability */
+.total-volume span, 
+.total-workouts span, 
+.active-days span, 
+.weight-stat span:last-child {
+    color: #00ff84;
+    font-weight: 600;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+/* Compact score displays */
+.strength-score, 
+.consistency-score, 
+.hybrid-score {
+    text-align: center;
+    margin-top: 0.6rem;
+    padding: 0.6rem;
+    background: rgba(0, 169, 81, 0.15);
+    border: 1px solid rgba(0, 169, 81, 0.3);
+    border-radius: 6px;
+    color: #00ff84;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Top 3 performers styling - simplified but distinct */
+.performer.first .weight-info,
+.performer.first .strength-info,
+.performer.first .consistency-info,
+.performer.first .hybrid-info {
+    background: linear-gradient(to bottom, rgba(25, 55, 40, 0.9), rgba(20, 45, 32, 0.9));
+    border-color: rgba(255, 215, 0, 0.5);
+}
+
+.performer.second .weight-info,
+.performer.second .strength-info,
+.performer.second .consistency-info,
+.performer.second .hybrid-info {
+    background: linear-gradient(to bottom, rgba(22, 50, 38, 0.9), rgba(18, 42, 30, 0.9));
+    border-color: rgba(192, 192, 192, 0.5);
+}
+
+.performer.third .weight-info,
+.performer.third .strength-info,
+.performer.third .consistency-info,
+.performer.third .hybrid-info {
+    background: linear-gradient(to bottom, rgba(20, 48, 35, 0.9), rgba(16, 40, 28, 0.9));
+    border-color: rgba(205, 127, 50, 0.5);
+}
+
+/* Compact containers for rank 4+ */
+.rank-item .weight-info,
+.rank-item .strength-info,
+.rank-item .consistency-info,
+.rank-item .hybrid-info {
+    padding: 0.6rem;
+    margin: 0;
+    min-height: unset;
+    max-height: unset;
+    height: auto;
+}
+
+/* Even more compact stat rows for rank 4+ */
+.rank-item .total-volume,
+.rank-item .total-workouts,
+.rank-item .active-days,
+.rank-item .weight-stat {
+    padding: 0.4rem 0.6rem;
+    margin: 0.2rem 0;
+    font-size: 0.85rem;
+}
+
+/* More compact score displays for rank 4+ */
+.rank-item .strength-score,
+.rank-item .consistency-score,
+.rank-item .hybrid-score {
+    padding: 0.4rem;
+    margin-top: 0.4rem;
+    font-size: 1rem;
+}
+
+/* Hybrid stats layout improvement */
+.hybrid-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+/* Weight info specific layouts */
+.weight-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+/* Overall rank item styling */
+.rank-item {
+    padding: 0.8rem;
+    margin-bottom: 0.6rem;
+    gap: 0.8rem;
+}
+
+/* Bonus tag styling */
+.bonus-tag {
+    background: rgba(0, 169, 81, 0.8);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    margin-top: 0.3rem;
+    display: inline-block;
+}
+
+/* Mobile specific adjustments */
+@media screen and (max-width: 768px) {
+    .weight-info, 
+    .strength-info, 
+    .consistency-info, 
+    .hybrid-info {
+        padding: 0.6rem;
+    }
+    
+    .total-volume, 
+    .total-workouts, 
+    .active-days, 
+    .weight-stat {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.85rem;
+        margin: 0.2rem 0;
+    }
+    
+    .strength-score, 
+    .consistency-score, 
+    .hybrid-score {
+        padding: 0.4rem;
+        font-size: 1rem;
+        margin-top: 0.4rem;
+    }
+    
+    .rank-item .weight-info,
+    .rank-item .strength-info,
+    .rank-item .consistency-info,
+    .rank-item .hybrid-info {
+        padding: 0.5rem;
+    }
+    
+    .rank-item .total-volume,
+    .rank-item .total-workouts,
+    .rank-item .active-days,
+    .rank-item .weight-stat {
+        padding: 0.3rem 0.5rem;
+        font-size: 0.8rem;
+    }
+    
+    .rank-item .rank-number {
+        position: absolute !important;
+        top: 5px !important;
+        left: 5px !important;
+        width: 24px !important;
+        height: 24px !important;
+        border-radius: 50% !important;
+        background-color: #3a3a3a !important;
+        color: white !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-weight: bold !important;
+        font-size: 12px !important;
+    }
+    
+    .performer.first .rank {
+        background: linear-gradient(135deg, #ffd700, #f9a602) !important; /* Gold */
+        color: #000 !important;
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5) !important;
+        border: 2px solid #ffd700 !important;
+    }
+    
+    .performer.second .rank {
+        background: linear-gradient(135deg, #C0C0C0, #E8E8E8) !important; /* Silver */
+        color: #000 !important;
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5) !important;
+        border: 2px solid #C0C0C0 !important;
+    }
+    
+    .performer.third .rank {
+        background: linear-gradient(135deg, #CD7F32, #FFA770) !important; /* Bronze */
+        color: #000 !important;
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5) !important;
+        border: 2px solid #CD7F32 !important;
+    }
+    
+    .rank-item .rank-number {
+        color: #2ecc71 !important; /* Green for ranks 4+ */
+        font-weight: bold !important;
+    }
+}
+
+/* Small screen specific adjustments */
+@media screen and (max-width: 375px) {
+    .weight-info, 
+    .strength-info, 
+    .consistency-info, 
+    .hybrid-info {
+        padding: 0.5rem;
+    }
+    
+    .total-volume, 
+    .total-workouts, 
+    .active-days, 
+    .weight-stat {
+        padding: 0.3rem 0.5rem;
+        font-size: 0.8rem;
+    }
+    
+    .total-volume span, 
+    .total-workouts span, 
+    .active-days span, 
+    .weight-stat span:last-child {
+        padding: 0.1rem 0.3rem;
+    }
+    
+    .rank-item .weight-info,
+    .rank-item .strength-info,
+    .rank-item .consistency-info,
+    .rank-item .hybrid-info {
+        padding: 0.4rem;
+    }
+    
+    .performer.first .rank {
+        background: linear-gradient(135deg, #ffd700, #f9a602) !important; /* Gold */
+        color: #000 !important;
+    }
+    
+    .performer.second .rank {
+        background: linear-gradient(135deg, #C0C0C0, #E8E8E8) !important; /* Silver */
+        color: #000 !important;
+    }
+    
+    .performer.third .rank {
+        background: linear-gradient(135deg, #CD7F32, #FFA770) !important; /* Bronze */
+        color: #000 !important;
+    }
+    
+    .rank-item .rank-number {
+        color: #2ecc71 !important; /* Green for ranks 4+ */
+        font-weight: bold !important;
+    }
+}
+
+/* Fix weight-info container alignment for ranks 4+ */
+.rank-item .weight-info {
+    padding: 0.6rem;
+    margin: 0;
+    min-height: unset;
+    max-height: unset;
+    height: auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Adjust weight details layout for ranks 4+ to align left like strength containers */
+.rank-item .weight-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Make weight stat rows more compact and aligned */
+.rank-item .weight-stat {
+    padding: 0.4rem 0.6rem;
+    margin: 0.2rem 0;
+    font-size: 0.85rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 2px solid rgba(255, 107, 107, 0.5);
+}
+
+/* Fix positioning of weight info container within rank items */
+.rank-item .rank-weight-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: unset;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Adjust bonus information to align with other elements */
+.rank-item .bonus-details {
+    width: 100%;
+    margin-top: 0.3rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    align-items: center;
+}
+
+/* Ensure weight change display is properly aligned */
+.rank-item .weight-change {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.4rem 0.6rem;
+    margin: 0.2rem 0;
+    font-size: 0.85rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    border-left: 2px solid rgba(255, 107, 107, 0.5);
+}
+
+/* Ensure proper grid layout for rank items to prevent overlapping */
+.rank-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Adjust rank info container to prevent overlapping */
+.rank-info {
+    flex: 1;
+    min-width: 150px;
+}
+
+/* Specifically target weight info to ensure it has proper width */
+.rank-item .weight-info {
+    flex: 0 0 auto;
+    width: 220px;
+    max-width: 220px;
+}
+
+/* Mobile adjustments to prevent overlapping */
+@media screen and (max-width: 768px) {
+    .rank-item {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .rank-info, 
+    .rank-item .weight-info,
+    .rank-item .strength-info,
+    .rank-item .consistency-info,
+    .rank-item .hybrid-info {
+        width: 100%;
+        max-width: 100%;
+        margin: 0.3rem 0;
+    }
+}
+
+/* Improved weight-stat container alignment and styling */
+.weight-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    margin: 0.3rem 0;
+    font-size: 0.9rem;
+    color: #d4d4d4;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Fix weight-details container to properly contain and align stats */
+.weight-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Adjust weight info containers for all performers */
+.weight-info {
+    padding: 0.8rem;
+    border-radius: 10px;
+    width: 100%;
+    margin: 0.5rem 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+}
+
+/* Specific alignment fixes for top 3 performers */
+.performer .weight-details {
+    align-items: stretch;
+    width: 100%;
+}
+
+.performer .weight-stat {
+    width: 100%;
+    margin: 0.2rem 0;
+}
+
+/* Ensure consistent left alignment of text in weight stat rows */
+.weight-stat span:first-child {
+    text-align: left;
+}
+
+/* Ensure consistent right alignment of values in weight stat rows */
+.weight-stat span:last-child {
+    text-align: right;
+    min-width: 80px; /* Ensure enough space for values */
+}
+
+/* Fix bonus details alignment */
+.bonus-details {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0.3rem;
+    width: 100%;
+}
+
+/* Ensure all weight stats have consistent border styling */
+.weight-stat {
+    border-left: 2px solid rgba(255, 107, 107, 0.5);
+}
+
+/* Additional fixes for rank 4+ weight info */
+.rank-item .weight-info {
+    padding: 0.6rem;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.rank-item .weight-details {
+    width: 100%;
+    padding: 0;
+}
+
+.rank-item .weight-stat {
+    width: 100%;
+    padding: 0.4rem 0.6rem;
+    margin: 0.2rem 0;
+    font-size: 0.85rem;
+}
+
+/* Ensure weight-info has proper width in different contexts */
+.performer .weight-info,
+.performer.first .weight-info,
+.performer.second .weight-info,
+.performer.third .weight-info {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Mobile adjustments to ensure proper alignment on small screens */
+@media screen and (max-width: 768px) {
+    .weight-details {
+        width: 100%;
+    }
+    
+    .weight-stat {
+        width: 100%;
+        padding: 0.4rem 0.6rem;
+    }
+    
+    .performer .weight-info,
+    .rank-item .weight-info {
+        width: 100%;
+        padding: 0.6rem;
+    }
+}
+
+/* Very small screen adjustments */
+@media screen and (max-width: 375px) {
+    .weight-stat {
+        padding: 0.3rem 0.5rem;
+        font-size: 0.8rem;
+    }
+    
+    .weight-stat span:last-child {
+        min-width: 60px;
+    }
+}
+
+/* RESET ALL STAT CONTAINERS FOR CONSISTENCY */
+.rank-item .weight-info,
+.rank-item .strength-info,
+.rank-item .consistency-info,
+.rank-item .hybrid-info {
+    background: rgba(15, 40, 30, 0.9) !important;
+    border: 1px solid #00A951 !important;
+    border-radius: 8px !important;
+    padding: 8px !important;
+    margin: 4px 0 !important;
+    width: 220px !important;
+    max-width: 220px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+    box-sizing: border-box !important;
+    height: auto !important;
+    min-height: unset !important;
+    position: relative !important;
+}
+
+/* MAKE ALL STAT ROWS IDENTICAL */
+.rank-item .weight-stat,
+.rank-item .total-volume,
+.rank-item .total-workouts,
+.rank-item .active-days {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    background: rgba(0, 0, 0, 0.2) !important;
+    padding: 6px 8px !important;
+    border-radius: 4px !important;
+    margin: 4px 0 !important;
+    font-size: 0.85rem !important;
+    color: #d4d4d4 !important;
+    width: 100% !important;
+    border-left: 2px solid #00A951 !important;
+}
+
+/* MAKE ALL STAT VALUES IDENTICAL */
+.rank-item .weight-stat span:last-child,
+.rank-item .total-volume span,
+.rank-item .total-workouts span,
+.rank-item .active-days span {
+    color: #00ff84 !important;
+    font-weight: 600 !important;
+    background: rgba(0, 0, 0, 0.3) !important;
+    padding: 3px 6px !important;
+    border-radius: 4px !important;
+    min-width: 65px !important;
+    text-align: right !important;
+}
+
+/* RESET ANY CONTAINER STRUCTURES */
+.rank-item .weight-details,
+.rank-item .strength-stats,
+.rank-item .consistency-stats,
+.rank-item .hybrid-stats {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* ALL SCORES IDENTICAL */
+.rank-item .strength-score,
+.rank-item .consistency-score,
+.rank-item .hybrid-score {
+    text-align: center !important;
+    margin-top: 6px !important;
+    padding: 6px !important;
+    background: rgba(0, 169, 81, 0.15) !important;
+    border: 1px solid rgba(0, 169, 81, 0.3) !important;
+    border-radius: 6px !important;
+    color: #00ff84 !important;
+    font-size: 1.1rem !important;
+    font-weight: bold !important;
+}
+
+/* FIX LAYOUT FOR RANK ITEMS */
+.rank-item {
+    display: grid !important;
+    grid-template-columns: 60px 80px 1fr auto !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 16px !important;
+}
+
+/* FIX ALIGNMENT OF EMAIL AND USER INFO */
+.rank-info {
+    flex: 1 !important;
+    min-width: 150px !important;
+}
+
+/* MOBILE ADJUSTMENTS */
+@media screen and (max-width: 768px) {
+    .rank-item {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    .rank-item .weight-info,
+    .rank-item .strength-info,
+    .rank-item .consistency-info,
+    .rank-item .hybrid-info {
+        width: 90% !important;
+        max-width: 280px !important;
+    }
+    
+    .rank-info {
+        width: 100% !important;
+        text-align: center !important;
+    }
+}
+
+/* Mobile centering fixes */
+@media screen and (max-width: 768px) {
+    /* Center the entire rank item and its contents */
+    .rank-item {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        padding: 16px 8px !important;
+        margin: 0 auto !important;
+    }
+    
+    /* Center the rank number */
+    .rank-item .rank-number {
+        margin: 5px auto !important;
+    }
+    
+    /* Center the profile container */
+    .rank-item .leaderboard-profile-container,
+    .rank-item .rank-profile-container {
+        margin: 8px auto !important;
+    }
+    
+    /* Center the user info section */
+    .rank-info, 
+    .rank-name,
+    .rank-email {
+        width: 100% !important;
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 5px auto !important;
+        padding: 0 !important;
+    }
+    
+    /* Ensure all stat containers are centered */
+    .rank-item .weight-info,
+    .rank-item .strength-info,
+    .rank-item .consistency-info,
+    .rank-item .hybrid-info {
+        width: 90% !important;
+        max-width: 280px !important;
+        margin: 10px auto !important;
+        left: 0 !important;
+        right: 0 !important;
+        transform: none !important;
+        position: relative !important;
+    }
+    
+    /* Center all details inside containers */
+    .rank-item .weight-details,
+    .rank-item .strength-stats,
+    .rank-item .consistency-stats,
+    .rank-item .hybrid-stats {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+    }
+    
+    /* Fix stat rows to maintain horizontal layout but be centered within container */
+    .rank-item .weight-stat,
+    .rank-item .total-volume,
+    .rank-item .total-workouts,
+    .rank-item .active-days {
+        display: flex !important;
+        justify-content: space-between !important;
+        width: 95% !important;
+        margin: 4px auto !important;
+    }
+    
+    /* Fix score display centering */
+    .rank-item .strength-score,
+    .rank-item .consistency-score,
+    .rank-item .hybrid-score {
+        margin: 8px auto !important;
+        width: 95% !important;
+    }
+    
+    /* Center the bonus/weigh-in details */
+    .rank-item .bonus-details {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        gap: 5px !important;
+        margin: 5px auto !important;
+    }
+    
+    /* Center the entire leaderboard content */
+    .leaderboard-content {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100% !important;
+    }
+    
+    /* Center the other ranks container */
+    .other-ranks {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        padding: 0 !important;
+    }
+}
+
+/* Extra fixes for very small screens */
+@media screen and (max-width: 375px) {
+    .rank-item .weight-info,
+    .rank-item .strength-info,
+    .rank-item .consistency-info,
+    .rank-item .hybrid-info {
+        width: 95% !important;
+        max-width: 250px !important;
+        padding: 8px !important;
+    }
+    
+    .rank-item {
+        padding: 12px 5px !important;
+    }
+}
+
+/* Fix for off-center mobile alignment */
+@media screen and (max-width: 768px) {
+    /* Reset the grid layout and any absolute positioning */
+    .rank-item {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        padding: 16px 0 !important; /* Remove horizontal padding */
+        margin: 8px auto !important;
+        width: 100% !important;
+        max-width: 300px !important; /* Limit maximum width */
+        position: static !important; /* Remove any absolute positioning */
+        left: auto !important;
+        transform: none !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Fix container width and centering */
+    .rank-item .weight-info,
+    .rank-item .strength-info,
+    .rank-item .consistency-info,
+    .rank-item .hybrid-info {
+        width: 250px !important; /* Fixed width instead of percentage */
+        max-width: 250px !important;
+        margin: 8px auto !important;
+        position: static !important;
+        left: auto !important;
+        right: auto !important;
+        transform: none !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Ensure rank-info has proper centering */
+    .rank-info {
+        margin: 0 auto !important;
+        width: 250px !important; /* Match container width */
+        max-width: 250px !important;
+        text-align: center !important;
+        padding: 0 !important;
+    }
+    
+    /* Fix rank number positioning */
+    .rank-item .rank-number {
+        position: static !important;
+        margin: 5px auto !important;
+    }
+    
+    /* Center profile images */
+    .rank-item .leaderboard-profile-container {
+        margin: 8px auto !important;
+        position: static !important;
+    }
+    
+    /* Reset any possible transforms/positions on the other-ranks container */
+    .other-ranks {
+        position: static !important;
+        transform: none !important;
+        padding: 0 !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    /* Override any positioning that might push items off-center */
+    .leaderboard-content {
+        padding: 0 !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        position: static !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    /* Force alignment of detail rows */
+    .rank-item .weight-stat,
+    .rank-item .total-volume,
+    .rank-item .total-workouts,
+    .rank-item .active-days {
+        width: 230px !important; /* Slightly smaller than container */
+        margin: 3px auto !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Fix alignment of score displays */
+    .rank-item .strength-score,
+    .rank-item .consistency-score,
+    .rank-item .hybrid-score {
+        width: 230px !important;
+        margin: 5px auto !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Fix for container parent */
+    .leaderboard-container {
+        padding: 10px 0 !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Fix email display */
+    .rank-email {
+        width: 230px !important;
+        margin: 5px auto !important;
+        text-align: center !important;
+    }
+}
+
+/* Small screen specific adjustments */
+@media screen and (max-width: 375px) {
+    /* Adjust for even smaller screens */
+    .rank-item .weight-info,
+    .rank-item .strength-info,
+    .rank-item .consistency-info,
+    .rank-item .hybrid-info,
+    .rank-info {
+        width: 220px !important;
+        max-width: 220px !important;
+    }
+    
+    .rank-item .weight-stat,
+    .rank-item .total-volume,
+    .rank-item .total-workouts,
+    .rank-item .active-days,
+    .rank-item .strength-score,
+    .rank-item .consistency-score,
+    .rank-item .hybrid-score,
+    .rank-email {
+        width: 200px !important;
+    }
+    
+    /* Reduce padding for smaller screens */
+    .rank-item {
+        padding: 12px 0 !important;
+        max-width: 250px !important;
+    }
+}
+
+/* Change label text color to white for weight-stat in rank 4+ */
+.rank-item .weight-info .weight-stat span:first-child {
+    color: #ffffff !important; /* White color for labels */
+    font-weight: 500 !important;
+}
+
+/* Keep the value (kg numbers) in green */
+.rank-item .weight-info .weight-stat span:last-child {
+    color: #00ff84 !important; /* Keep the original green color for values */
+    font-weight: 600 !important;
+    background: rgba(0, 0, 0, 0.3) !important;
+    padding: 4px 10px !important;
+    border-radius: 6px !important;
+    min-width: 65px !important;
+    text-align: right !important;
+}
+
+/* Change label text color to white for weight-stat in top 3 performers */
+.performer .weight-info .weight-stat span:first-child,
+.performer.first .weight-info .weight-stat span:first-child,
+.performer.second .weight-info .weight-stat span:first-child,
+.performer.third .weight-info .weight-stat span:first-child {
+    color: #ffffff !important; /* White color for labels */
+    font-weight: 500 !important;
+}
+
+/* Keep the value (kg numbers) in their original colors for top 3 */
+.performer.first .weight-info .weight-stat span:last-child {
+    color: #ffe066 !important; /* Gold-tinted for first place */
+    font-weight: 700 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+.performer.second .weight-info .weight-stat span:last-child {
+    color: #e6e6e6 !important; /* Silver-tinted for second place */
+    font-weight: 700 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+.performer.third .weight-info .weight-stat span:last-child {
+    color: #e6b980 !important; /* Bronze-tinted for third place */
+    font-weight: 700 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Make text labels white for strength category */
+.strength-info .total-volume,
+.strength-info .total-workouts {
+    color: white;
+}
+
+/* Make text labels white for consistency category */
+.consistency-info .total-workouts,
+.consistency-info .active-days {
+    color: white;
+}
+
+/* Make text labels white for hybrid category */
+.hybrid-info .total-volume,
+.hybrid-info .total-workouts,
+.hybrid-info .active-days {
+    color: white;
+}
+
+/* Reduce spacing in weight info sections for all ranks */
+.weight-info .weight-stat {
+    margin: 0;
+    line-height: 1.3;
+}
+
+/* Apply tighter spacing to all category info containers */
+.weight-info .weight-details,
+.strength-info .strength-stats,
+.consistency-info .consistency-stats,
+.hybrid-info .hybrid-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Make all stats in each category more compact */
+.weight-stat,
+.total-volume,
+.total-workouts,
+.active-days,
+.strength-score,
+.consistency-score,
+.hybrid-score {
+    margin: 0;
+    line-height: 1.3;
+}
+
+/* Ensure bonus details are properly spaced */
+.bonus-details {
+    margin-top: 2px;
+}
+
+/* Make regular rank items (4+) have similar height and styling to the top performers */
+.rank-item {
+    height: auto;
+    min-height: 80px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+}
+
+/* Ensure consistent spacing in mobile view */
+@media screen and (max-width: 768px) {
+    /* Match container height/styling between top performers and other ranks */
+    .rank-item {
+        min-height: 70px;
+        height: auto;
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    
+    /* Apply similar styles to performers for consistency */
+    .performer {
+        min-height: 70px;
+        height: auto;
+        padding: 8px 12px;
+    }
+    
+    /* Force email layout to be inline with icon */
+    .rank-item .rank-email {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* Position email icon to the left */
+    .rank-item .email-icon {
+        position: static !important;
+        display: inline-block !important;
+        margin-right: 5px !important;
+        font-size: 14px !important;
+    }
+    
+    /* Ensure consistent info containers */
+    .rank-item .rank-info,
+    .performer .rank-info {
+        height: auto;
+        min-height: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Ensure equal spacing for all stats containers */
+    .rank-item .weight-info,
+    .rank-item .strength-info,
+    .rank-item .consistency-info,
+    .rank-item .hybrid-info,
+    .performer .weight-info,
+    .performer .strength-info,
+    .performer .consistency-info,
+    .performer .hybrid-info {
+        min-height: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .rank-item .rank-number {
+        position: absolute !important;
+        top: 5px !important;
+        left: 5px !important;
+        width: 24px !important;
+        height: 24px !important;
+        border-radius: 50% !important;
+        background-color: #3a3a3a !important;
+        color: white !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-weight: bold !important;
+        font-size: 12px !important;
+    }
+}
+
+/* Small screen adjustments */
+@media screen and (max-width: 375px) {
+    /* Keep consistent heights on small screens */
+    .rank-item, 
+    .performer {
+        min-height: 60px;
+        padding: 6px 10px;
+    }
+    
+    .rank-item .rank-email {
+        display: flex !important;
+        align-items: center !important;
+    }
+    
+    .rank-item .email-icon {
+        position: static !important;
+        margin-right: 5px !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* Style for rank numbers 4, 5, 6, etc. in mobile view */
+    .rank-item {
+        position: relative !important;
+    }
+    
+    .rank-item .rank-number {
+        position: absolute !important;
+        top: 10px !important;
+        left: 10px !important;
+        width: 30px !important;
+        height: 30px !important;
+        border-radius: 50% !important;
+        background-color: #4caf50 !important; /* Green background for ranks 4+ */
+        color: white !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-weight: bold !important;
+        font-size: 14px !important;
+        z-index: 10 !important;
+        margin: 0 !important;
+        border: 2px solid rgba(255,255,255,0.3) !important;
+    }
+    
+    /* Now style the top 3 rank circles to match desktop */
+    .performer {
+        position: relative !important;
+    }
+    
+    .performer .rank {
+        position: absolute !important;
+        top: 10px !important;
+        left: 10px !important;
+        width: 30px !important;
+        height: 30px !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-weight: bold !important;
+        z-index: 10 !important;
+        margin: 0 !important;
+        border: 2px solid rgba(255,255,255,0.3) !important;
+    }
+    
+    /* Gold for first place */
+    .performer.first .rank {
+        background: linear-gradient(135deg, #ffd700, #f9a602); /* Gold */
+        color: #000;
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+    }
+    
+    /* Silver for second place */
+    .performer.second .rank {
+        background: linear-gradient(135deg, #C0C0C0, #E8E8E8); /* Silver */
+        color: #000;
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+    }
+    
+    /* Bronze for third place */
+    .performer.third .rank {
+        background: linear-gradient(135deg, #CD7F32, #FFA770); /* Bronze */
+        color: #000;
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+    }
+}
+
+/* Add these new, highly specific rules at the very end of the CSS file */
+
+/* Gold for 1st place */
+.leaderboard-page .leaderboard-wrapper .leaderboard-container .leaderboard-content .top-performers .performer.first .rank {
+    background: #ffd700 !important;
+    background: linear-gradient(135deg, #ffd700, #f9a602) !important; 
+    color: #000 !important;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.5) !important;
+    border: 2px solid #ffd700 !important;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5) !important;
+}
+
+/* Silver for 2nd place */
+.leaderboard-page .leaderboard-wrapper .leaderboard-container .leaderboard-content .top-performers .performer.second .rank {
+    background: #C0C0C0 !important;
+    background: linear-gradient(135deg, #C0C0C0, #E8E8E8) !important;
+    color: #000 !important;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.5) !important;
+    border: 2px solid #C0C0C0 !important;
+    box-shadow: 0 0 10px rgba(192, 192, 192, 0.5) !important;
+}
+
+/* Bronze for 3rd place */
+.leaderboard-page .leaderboard-wrapper .leaderboard-container .leaderboard-content .top-performers .performer.third .rank {
+    background: #CD7F32 !important;
+    background: linear-gradient(135deg, #CD7F32, #FFA770) !important;
+    color: #000 !important;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.5) !important;
+    border: 2px solid #CD7F32 !important;
+    box-shadow: 0 0 10px rgba(205, 127, 50, 0.5) !important;
+}
+
+/* Green for ranks 4+ */
+.leaderboard-page .leaderboard-wrapper .leaderboard-container .leaderboard-content .other-ranks .rank-item .rank-number {
+    color: #2ecc71 !important;
+    font-weight: bold !important;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.2) !important;
+    border-color: #1e8449 !important; /* Darker green border color */
+}
+
+/* Make sure mobile specificity is even higher */
+@media screen and (max-width: 768px) {
+    .leaderboard-page .leaderboard-wrapper .leaderboard-container .leaderboard-content .mobile-performers .performer.first .rank {
+        background: #ffd700 !important;
+        background: linear-gradient(135deg, #ffd700, #f9a602) !important; 
+        color: #000 !important;
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5) !important;
+        border: 2px solid #ffd700 !important;
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5) !important;
+    }
+    
+    .leaderboard-page .leaderboard-wrapper .leaderboard-container .leaderboard-content .mobile-performers .performer.second .rank {
+        background: #C0C0C0 !important;
+        background: linear-gradient(135deg, #C0C0C0, #E8E8E8) !important;
+        color: #000 !important;
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5) !important;
+        border: 2px solid #C0C0C0 !important;
+        box-shadow: 0 0 10px rgba(192, 192, 192, 0.5) !important;
+    }
+    
+    .leaderboard-page .leaderboard-wrapper .leaderboard-container .leaderboard-content .mobile-performers .performer.third .rank {
+        background: #CD7F32 !important;
+        background: linear-gradient(135deg, #CD7F32, #FFA770) !important;
+        color: #000 !important;
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5) !important;
+        border: 2px solid #CD7F32 !important;
+        box-shadow: 0 0 10px rgba(205, 127, 50, 0.5) !important;
+    }
+    
+    .leaderboard-page .leaderboard-wrapper .leaderboard-container .leaderboard-content .other-ranks .rank-item .rank-number {
+        color: #2ecc71 !important;
+        font-weight: bold !important;
+        text-shadow: 0 0 2px rgba(0, 0, 0, 0.2) !important;
+        border-color: #1e8449 !important; /* Darker green border color */
+    }
+}
+
+/* Also add styles for very small screens */
+@media screen and (max-width: 375px) {
+    html body .leaderboard-page .leaderboard-wrapper .leaderboard-container .leaderboard-content .mobile-performers .performer.first .rank {
+        background: #ffd700 !important;
+        background: linear-gradient(135deg, #ffd700, #f9a602) !important; 
+        color: #000 !important;
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5) !important;
+        border: 2px solid #ffd700 !important;
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5) !important;
+    }
+    
+    html body .leaderboard-page .leaderboard-wrapper .leaderboard-container .leaderboard-content .mobile-performers .performer.second .rank {
+        background: #C0C0C0 !important;
+        background: linear-gradient(135deg, #C0C0C0, #E8E8E8) !important;
+        color: #000 !important;
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5) !important;
+        border: 2px solid #C0C0C0 !important;
+        box-shadow: 0 0 10px rgba(192, 192, 192, 0.5) !important;
+    }
+    
+    html body .leaderboard-page .leaderboard-wrapper .leaderboard-container .leaderboard-content .mobile-performers .performer.third .rank {
+        background: #CD7F32 !important;
+        background: linear-gradient(135deg, #CD7F32, #FFA770) !important;
+        color: #000 !important;
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5) !important;
+        border: 2px solid #CD7F32 !important;
+        box-shadow: 0 0 10px rgba(205, 127, 50, 0.5) !important;
+    }
+    
+    /* Add dark green styling for rank numbers 4 and beyond */
+    html body .leaderboard-page .leaderboard-wrapper .leaderboard-container .leaderboard-content .other-ranks .rank-item .rank-number {
+        color: #2ecc71 !important;
+        font-weight: bold !important;
+        text-shadow: 0 0 2px rgba(0, 0, 0, 0.2) !important;
+        border-color: #1e8449 !important; /* Darker green border color */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .leaderboard-page .leaderboard-wrapper .leaderboard-container .leaderboard-content .other-ranks .rank-item .rank-number {
+        color: white !important;
+        font-weight: bold !important;
+        text-shadow: 0 0 2px rgba(0, 0, 0, 0.2) !important;
+        background: #0f6e33 !important; /* Darker green background */
+        border: 2px solid #0a5526 !important; /* Even darker green border */
+        box-shadow: 0 0 8px rgba(15, 110, 51, 0.6) !important;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    /* ... existing styles ... */
+    
+    html body .leaderboard-page .leaderboard-wrapper .leaderboard-container .leaderboard-content .other-ranks .rank-item .rank-number {
+        color: white !important;
+        font-weight: bold !important;
+        text-shadow: 0 0 2px rgba(0, 0, 0, 0.2) !important;
+        background: #0f6e33 !important; /* Darker green background */
+        border: 2px solid #0a5526 !important; /* Even darker green border */
+        box-shadow: 0 0 8px rgba(15, 110, 51, 0.6) !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .leaderboard-page .leaderboard-wrapper .leaderboard-container .leaderboard-content .other-ranks .rank-item .rank-number {
+        color: #2ecc71 !important;
+        font-weight: bold !important;
+        text-shadow: 0 0 2px rgba(0, 0, 0, 0.2) !important;
+        background: transparent !important;
+        border: 2px solid #166e29 !important; /* Much darker green border */
+        box-shadow: 0 0 5px rgba(22, 110, 41, 0.7) !important;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    /* ... existing styles for first, second, third ranks ... */
+    
+    html body .leaderboard-page .leaderboard-wrapper .leaderboard-container .leaderboard-content .other-ranks .rank-item .rank-number {
+        color: #2ecc71 !important; /* Keep lightish green text color */
+        font-weight: bold !important;
+        text-shadow: 0 0 2px rgba(0, 0, 0, 0.2) !important;
+        background: transparent !important; /* Transparent background like PC */
+        border: 2px solid #166e29 !important; /* Much darker green border */
+        box-shadow: 0 0 5px rgba(22, 110, 41, 0.7) !important;
+    }
+}
+
+/* Make strength info containers match weight info containers in size only */
+.strength-info, 
+.consistency-info,
+.hybrid-info {
+    padding: 12px !important;
+    border-radius: 8px !important;
+    /* No background-color change */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    margin: 10px 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.strength-stats,
+.consistency-stats,
+.hybrid-stats {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+}
+
+.total-volume, 
+.total-workouts,
+.active-days,
+.strength-score,
+.consistency-score,
+.hybrid-score {
+    padding: 6px 10px !important;
+    /* No background-color change */
+    border-radius: 6px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    font-weight: 500 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 768px) {
+    .strength-info, 
+    .consistency-info,
+    .hybrid-info {
+        padding: 10px !important;
+        margin: 8px 0 !important;
+    }
+
+    .strength-stats,
+    .consistency-stats,
+    .hybrid-stats {
+        gap: 6px !important;
+    }
+
+    .total-volume, 
+    .total-workouts,
+    .active-days,
+    .strength-score,
+    .consistency-score,
+    .hybrid-score {
+        padding: 5px 8px !important;
+        font-size: 0.9rem !important;
+    }
+    
+    .performer .strength-info,
+    .performer .consistency-info,
+    .performer .hybrid-info {
+        width: 90% !important;
+        margin: 8px auto !important;
+    }
+    
+    .rank-item .strength-info,
+    .rank-item .consistency-info,
+    .rank-item .hybrid-info {
+        width: 100% !important;
+        margin: 5px 0 !important;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .strength-info, 
+    .consistency-info,
+    .hybrid-info {
+        padding: 8px !important;
+        margin: 5px 0 !important;
+    }
+
+    .total-volume, 
+    .total-workouts,
+    .active-days,
+    .strength-score,
+    .consistency-score,
+    .hybrid-score {
+        padding: 4px 6px !important;
+        font-size: 0.85rem !important;
+    }
+    
+    .performer .strength-info,
+    .performer .consistency-info,
+    .performer .hybrid-info {
+        width: 95% !important;
+    }
+}
+
+/* Make rank numbers 4+ larger and more consistent with top 3 */
+.rank-item .rank-number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    margin-right: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Make profile containers for ranks 4+ larger */
+.rank-item .leaderboard-profile-container {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 12px;
+    border: 3px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.rank-item .leaderboard-profile-picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.rank-item .profile-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 169, 81, 0.3);
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+/* Make profile placeholder icon larger */
+.rank-item .profile-placeholder svg {
+    width: 30px;
+    height: 30px;
+}
+
+/* Adjust layout of rank-item to accommodate larger elements */
+.rank-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background-color: rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+/* Media queries for mobile devices */
+@media screen and (max-width: 768px) {
+    .rank-item .rank-number {
+        min-width: 34px;
+        height: 34px;
+        font-size: 1rem;
+    }
+    
+    .rank-item .leaderboard-profile-container {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .rank-item .profile-placeholder svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .rank-item .rank-number {
+        min-width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+    
+    .rank-item .leaderboard-profile-container {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .rank-item .profile-placeholder svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* Make rank numbers 4+ much larger */
+.rank-item .rank-number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    margin-right: 15px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Make profile containers for ranks 4+ significantly larger */
+.rank-item .leaderboard-profile-container {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.rank-item .leaderboard-profile-picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.rank-item .profile-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 169, 81, 0.3);
+    color: #fff;
+    font-size: 2rem;
+}
+
+/* Make profile placeholder icon larger */
+.rank-item .profile-placeholder svg {
+    width: 40px;
+    height: 40px;
+}
+
+/* Adjust layout of rank-item to accommodate larger elements */
+.rank-item {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    background-color: rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+/* Adjust text sizes to match larger elements */
+.rank-item .rank-info {
+    flex: 1;
+}
+
+.rank-item .rank-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.rank-item .rank-email {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Media queries for mobile devices - still keeping elements large */
+@media screen and (max-width: 768px) {
+    .rank-item .rank-number {
+        min-width: 44px;
+        height: 44px;
+        font-size: 1.3rem;
+        margin-right: 12px;
+    }
+    
+    .rank-item .leaderboard-profile-container {
+        width: 65px;
+        height: 65px;
+        margin-right: 12px;
+    }
+    
+    .rank-item .profile-placeholder svg {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .rank-item .rank-name {
+        font-size: 1.1rem;
+    }
+    
+    .rank-item .rank-email {
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .rank-item .rank-number {
+        min-width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .rank-item .leaderboard-profile-container {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .rank-item .profile-placeholder svg {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .rank-item {
+        padding: 12px 15px;
+    }
+    
+    .rank-item .rank-name {
+        font-size: 1rem;
+    }
+}
+
+/* Make rank numbers 4+ perfect circles and match size with top 3 */
+.rank-item .rank-number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 50px;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    margin-right: 15px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    flex-shrink: 0; /* Prevent shrinking */
+    aspect-ratio: 1/1; /* Ensure perfect circle */
+}
+
+/* Make profile containers for ranks 4+ match top 3 */
+.rank-item .leaderboard-profile-container {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    flex-shrink: 0; /* Prevent shrinking */
+    aspect-ratio: 1/1; /* Ensure perfect circle */
+}
+
+/* Match rank numbers to top 3 performers for consistency */
+.leaderboard-page .leaderboard-wrapper .leaderboard-container .leaderboard-content .other-ranks .rank-item .rank-number {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+}
+
+/* Mobile styles - ensure perfect circles match top 3 ranks */
+@media screen and (max-width: 768px) {
+    .rank-item .rank-number {
+        width: 46px;
+        height: 46px;
+        min-width: 46px;
+        font-size: 1.3rem;
+        margin-right: 12px;
+        flex-shrink: 0;
+        aspect-ratio: 1/1;
+    }
+    
+    .rank-item .leaderboard-profile-container {
+        width: 65px;
+        height: 65px;
+        margin-right: 12px;
+        flex-shrink: 0;
+        aspect-ratio: 1/1;
+    }
+    
+    /* Match dimensions with performer.first .rank */
+    .leaderboard-page .leaderboard-wrapper .leaderboard-container .leaderboard-content .other-ranks .rank-item .rank-number {
+        width: 46px;
+        height: 46px;
+        font-size: 1.3rem;
+    }
+    
+    /* Explicitly set the same dimensions as top 3 rank circles */
+    .leaderboard-page .leaderboard-wrapper .leaderboard-container .leaderboard-content .other-ranks .rank-item .rank-number {
+        width: 46px !important;
+        height: 46px !important;
+        min-width: 46px !important;
+        aspect-ratio: 1/1 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        border-radius: 50% !important;
+    }
+}
+
+/* Small mobile styles - ensure perfect circles */
+@media screen and (max-width: 375px) {
+    .rank-item .rank-number {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        aspect-ratio: 1/1;
+    }
+    
+    .rank-item .leaderboard-profile-container {
+        width: 55px;
+        height: 55px;
+        flex-shrink: 0;
+        aspect-ratio: 1/1;
+    }
+    
+    /* Match dimensions with performer.first .rank */
+    .leaderboard-page .leaderboard-wrapper .leaderboard-container .leaderboard-content .other-ranks .rank-item .rank-number {
+        width: 42px;
+        height: 42px;
+        font-size: 1.2rem;
+    }
+    
+    /* Explicitly match with top 3 dimensions */
+    html body .leaderboard-page .leaderboard-wrapper .leaderboard-container .leaderboard-content .other-ranks .rank-item .rank-number {
+        width: 42px !important;
+        height: 42px !important;
+        min-width: 42px !important;
+        aspect-ratio: 1/1 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        border-radius: 50% !important;
+    }
+}
+
+/* Override any other styles that might be making them oblong */
+.rank-item .rank-number {
+    box-sizing: border-box !important; 
+    padding: 0 !important;
+}
+
+/* Gold glow for 1st place */
+.performer.first {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+  border: 1px solid rgba(255, 215, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Silver glow for 2nd place */
+.performer.second {
+  box-shadow: 0 0 20px rgba(192, 192, 192, 0.7);
+  border: 1px solid rgba(192, 192, 192, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Bronze glow for 3rd place */
+.performer.third {
+  box-shadow: 0 0 20px rgba(205, 127, 50, 0.7);
+  border: 1px solid rgba(205, 127, 50, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Green glow for ranks 4+ */
+.rank-item {
+  box-shadow: 0 0 12px rgba(72, 187, 120, 0.5);
+  border: 1px solid rgba(72, 187, 120, 0.3);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.rank-item:hover {
+  box-shadow: 0 0 15px rgba(72, 187, 120, 0.7);
+}
+
+/* Smoke/particle effects for top 3 performers */
+.performer::before,
+.performer::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.4;
+}
+
+.performer.first::before,
+.performer.first::after {
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+  animation: particle-float 15s infinite linear;
+}
+
+.performer.second::before,
+.performer.second::after {
+  background: radial-gradient(circle, rgba(192, 192, 192, 0.3) 0%, transparent 70%);
+  animation: particle-float 15s infinite linear;
+}
+
+.performer.third::before,
+.performer.third::after {
+  background: radial-gradient(circle, rgba(205, 127, 50, 0.3) 0%, transparent 70%);
+  animation: particle-float 15s infinite linear;
+}
+
+.performer::before {
+  top: -10px;
+  left: 10%;
+}
+
+.performer::after {
+  bottom: -10px;
+  right: 10%;
+  animation-delay: 7s;
+}
+
+@keyframes particle-float {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(10px) translateX(5px);
+  }
+  50% {
+    transform: translateY(0) translateX(10px);
+  }
+  75% {
+    transform: translateY(-10px) translateX(5px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+/* Subtle smoke effect for rank 4+ items */
+.rank-item::before {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 40px;
+  background: radial-gradient(circle, rgba(72, 187, 120, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  top: 50%;
+  left: -20px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.3;
+  animation: smoke-drift 20s infinite linear;
+}
+
+@keyframes smoke-drift {
+  0% {
+    transform: translateY(-50%) translateX(0);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(-50%) translateX(30px);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-50%) translateX(0);
+    opacity: 0.2;
+  }
+}
+
+.course-filter-label {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 15px;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.course-filter {
+    display: flex;
+    justify-content: center;
+    margin: 5px auto 40px;  
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 8px;
+    width: 60%;
+    max-width: 350px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.course-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin: 0 8px;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    flex: 1;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.course-tab:hover {
+    background-color: rgba(40, 167, 69, 0.2);
+    transform: translateY(-2px);
+}
+
+.course-tab.active {
+    background-color: #28a745;
+    color: white;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+    transform: translateY(-2px);
+    border: 1px solid #28a745;
+}
+
+.course-tab svg {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+/* Adjust the header to create less space at the top */
+.leaderboard-header {
+    margin-bottom: 1rem;  /* Reduced from 2.5rem */
+}
+
+@media screen and (max-width: 768px) {
+    .course-filter {
+        width: 75%;
+        margin-bottom: 15px;
+        padding: 6px;
+    }
+    
+    .course-tab {
+        padding: 8px 12px;
+        font-size: 14px;
+        margin: 0 4px;
+        min-width: 0;
+    }
+    
+    .course-tab svg {
+        margin-right: 6px;
+        font-size: 16px;
+    }
+    
+    .leaderboard-header {
+        margin-bottom: 0.7rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .course-filter {
+        width: 70%;
+        margin-bottom: 12px;
+        padding: 5px;
+    }
+    
+    .course-tab {
+        padding: 7px 10px;
+        font-size: 12px;
+        margin: 0 3px;
+    }
+    
+    .course-tab svg {
+        margin-right: 4px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .course-filter {
+        width: 65%;
+        max-width: 220px;
+    }
+    
+    .course-tab {
+        padding: 6px 8px;
+        font-size: 11px;
+        margin: 0 2px;
+    }
+    
+    .course-tab svg {
+        margin-right: 3px;
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* Keep spacing between course filter and category tabs */
+    .category-tabs {
+        margin-top: 25px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .category-tab {
+        padding: 6px 10px;
+        font-size: 13px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .category-tab svg {
+        font-size: 14px;
+        margin-right: 6px;
+    }
+    
+    .category-tab span {
+        display: inline-block;
+        font-size: 12px;
+    }
+    
+    .course-filter {
+        width: 75%;
+        padding: 6px;
+    }
+    
+    .course-tab {
+        padding: 8px 12px;
+        font-size: 14px;
+        margin: 0 4px;
+        min-width: 0;
+    }
+    
+    .course-tab svg {
+        margin-right: 6px;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .category-tabs {
+        margin-top: 20px;
+        gap: 6px;
+    }
+    
+    .category-tab {
+        padding: 5px 8px;
+        font-size: 12px;
+        border-radius: 6px;
+    }
+    
+    .category-tab svg {
+        font-size: 12px;
+        margin-right: 4px;
+    }
+    
+    .category-tab span {
+        font-size: 11px;
+    }
+    
+    .course-filter {
+        width: 70%;
+        padding: 5px;
+    }
+    
+    .course-tab {
+        padding: 7px 10px;
+        font-size: 12px;
+        margin: 0 3px;
+    }
+    
+    .course-tab svg {
+        margin-right: 4px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .category-tabs {
+        margin-top: 15px;
+        gap: 4px;
+    }
+    
+    .category-tab {
+        padding: 4px 6px;
+        font-size: 10px;
+        border-radius: 5px;
+    }
+    
+    .category-tab svg {
+        font-size: 10px;
+        margin-right: 3px;
+    }
+    
+    .category-tab span {
+        font-size: 9px;
+    }
+    
+    .course-filter {
+        width: 65%;
+        max-width: 220px;
+    }
+    
+    .course-tab {
+        padding: 6px 8px;
+        font-size: 11px;
+        margin: 0 2px;
+    }
+    
+    .course-tab svg {
+        margin-right: 3px;
+        font-size: 12px;
+    }
+}
+
+/* Mobile dropdown styles */
+.mobile-category-dropdown {
+    display: none;
+    position: relative;
+    width: 80%;
+    max-width: 300px;
+    margin: 15px auto 20px;
+}
+
+.mobile-dropdown-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #00A951;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 169, 81, 0.3);
+}
+
+.mobile-dropdown-button svg:first-child {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.dropdown-caret {
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    background: #1B4332;
+    border-radius: 10px;
+    border: 2px solid #00A951;
+    overflow: hidden;
+    z-index: 100;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border: none;
+    background: none;
+    color: white;
+    text-align: left;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item svg {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.dropdown-item:hover {
+    background: rgba(0, 169, 81, 0.2);
+}
+
+.dropdown-item.active {
+    background: rgba(0, 169, 81, 0.3);
+    font-weight: 600;
+}
+
+/* Desktop/mobile visibility */
+.desktop-only {
+    display: flex;
+}
+
+/* Media queries for dropdown visibility */
+@media screen and (max-width: 768px) {
+    .desktop-only {
+        display: none;
+    }
+    
+    .mobile-category-dropdown {
+        display: block;
+    }
+    
+    /* Hide the old category tabs styling */
+    .category-tabs {
+        display: none;
+    }
+    
+    .course-filter {
+        width: 75%;
+        padding: 6px;
+    }
+    
+    .course-tab {
+        padding: 8px 12px;
+        font-size: 14px;
+        margin: 0 4px;
+        min-width: 0;
+    }
+    
+    .course-tab svg {
+        margin-right: 6px;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .mobile-dropdown-button {
+        padding: 10px 18px;
+        font-size: 15px;
+    }
+    
+    .dropdown-item {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+    
+    .dropdown-item svg {
+        font-size: 16px;
+    }
+    
+    .course-filter {
+        width: 70%;
+        padding: 5px;
+    }
+    
+    .course-tab {
+        padding: 7px 10px;
+        font-size: 12px;
+        margin: 0 3px;
+    }
+    
+    .course-tab svg {
+        margin-right: 4px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .mobile-dropdown-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+    
+    .dropdown-item {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+    
+    .dropdown-item svg {
+        font-size: 15px;
+    }
+    
+    .course-filter {
+        width: 65%;
+        max-width: 220px;
+    }
+    
+    .course-tab {
+        padding: 6px 8px;
+        font-size: 11px;
+        margin: 0 2px;
+    }
+    
+    .course-tab svg {
+        margin-right: 3px;
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .name {
+        font-size: 0.95rem;
+        margin-bottom: 0.3rem;
+        line-height: 1.2;
+    }
+    
+    .performer .email {
+        font-size: 0.75rem;
+        padding: 0.2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .performer .email-icon {
+        font-size: 0.7rem;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .name {
+        font-size: 0.85rem;
+    }
+    
+    .performer .email {
+        font-size: 0.7rem;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    /* Consistent profile container sizes for all ranks */
+    .performer.first .leaderboard-profile-container {
+        width: 70px;
+        height: 70px;
+        border: 3px solid gold;
+    }
+    
+    .performer.second .leaderboard-profile-container {
+        width: 70px;
+        height: 70px;
+        border: 3px solid silver;
+    }
+    
+    .performer.third .leaderboard-profile-container {
+        width: 70px;
+        height: 70px;
+        border: 3px solid #cd7f32;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* Consistent profile container sizes for mobile view */
+    .performer.first .leaderboard-profile-container {
+        width: 80px;
+        height: 80px;
+        border: 3px solid gold;
+    }
+    
+    .performer.second .leaderboard-profile-container {
+        width: 80px;
+        height: 80px;
+        border: 3px solid silver;
+    }
+    
+    .performer.third .leaderboard-profile-container {
+        width: 80px;
+        height: 80px;
+        border: 3px solid #cd7f32;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* Make width identical for all performers and rank items */
+    .performer,
+    .performer.first,
+    .performer.second,
+    .performer.third,
+    .rank-item {
+        width: 100%;
+        max-width: 250px;
+        margin: 0.5rem auto;
+        padding: 0.8rem;
+        box-sizing: border-box;
+    }
+    
+    /* Ensure mobile performers container matches other-ranks */
+    .mobile-performers,
+    .other-ranks {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    /* Keep consistent width on small screens too */
+    .performer,
+    .performer.first,
+    .performer.second,
+    .performer.third,
+    .rank-item {
+        width: 100%;
+        max-width: 250px;
+        margin: 0.5rem auto;
+        padding: 0.8rem;
+        box-sizing: border-box;
+    }
+}
+
+/* Update email styles for performers (ranks 1-3) to have similar styling to rank 4+ */
+.performer .email {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: #b3ffd9;
+    font-size: 0.9rem;
+    margin-bottom: 0.7rem;
+    padding: 0.6rem 1rem;
+    background: linear-gradient(145deg, rgba(20, 55, 40, 0.8), rgba(15, 45, 33, 0.8));
+    border-radius: 8px;
+    width: fit-content;
+    margin: 0 auto 0.7rem;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+}
+
+.performer .email-icon {
+    font-size: 0.9rem;
+    color: #00ff84;
+    flex-shrink: 0;
+}
+
+/* Add gold, silver, bronze borders to emails for ranks 1-3 */
+.performer.first .email {
+    border-left: 3px solid #FFD700; /* Gold */
+}
+
+.performer.second .email {
+    border-left: 3px solid #C0C0C0; /* Silver */
+}
+
+.performer.third .email {
+    border-left: 3px solid #CD7F32; /* Bronze */
+}
+
+.performer .email:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(145deg, rgba(25, 60, 45, 0.85), rgba(20, 50, 38, 0.85));
+}
+
+/* Mobile styles for emails to ensure consistency */
+@media screen and (max-width: 768px) {
+    .performer .email {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.8rem;
+        width: 100%;
+    }
+    
+    .rank-item .rank-email {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.8rem;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .performer .email {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.6rem;
+    }
+    
+    .rank-item .rank-email {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.6rem;
+    }
+}
+
+/* Update profile picture sizes to be consistent across ranks 1-3 */
+
+.performers-container .first-profile-container .profile-pic {
+    width: 90px;
+    height: 90px;
+}
+
+.performers-container .second-profile-container .profile-pic {
+    width: 90px;
+    height: 90px;
+}
+
+.performers-container .third-profile-container .profile-pic {
+    width: 90px;
+    height: 90px;
+}
+
+/* Update mobile sizes to maintain consistency */
+@media screen and (max-width: 768px) {
+    .performers-container .first-profile-container .profile-pic,
+    .performers-container .second-profile-container .profile-pic,
+    .performers-container .third-profile-container .profile-pic {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .performers-container .first-profile-container .profile-pic,
+    .performers-container .second-profile-container .profile-pic,
+    .performers-container .third-profile-container .profile-pic {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+/* Center the score values for all categories */
+.strength-score,
+.consistency-score,
+.hybrid-score {
+    justify-content: center !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* Make profile sizes consistent for all ranks on mobile */
+@media screen and (max-width: 768px) {
+    .rank-item .leaderboard-profile-container {
+        width: 80px !important;
+        height: 80px !important;
+        min-width: 80px !important;
+    }
+    
+    .rank-item .leaderboard-profile-picture,
+    .rank-item .profile-placeholder {
+        width: 80px !important;
+        height: 80px !important;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .rank-item .leaderboard-profile-container {
+        width: 70px !important;
+        height: 70px !important;
+        min-width: 70px !important;
+    }
+    
+    .rank-item .leaderboard-profile-picture,
+    .rank-item .profile-placeholder {
+        width: 70px !important;
+        height: 70px !important;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .rank-item .leaderboard-profile-container {
+        width: 70px !important;
+        height: 70px !important;
+        min-width: 70px !important;
+    }
+    
+    .rank-item .leaderboard-profile-picture,
+    .rank-item .profile-placeholder {
+        width: 70px !important;
+        height: 70px !important;
+    }
+}
+
+/* Private profile notice styling */
+.private-profile-notice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    background-color: rgba(255, 68, 68, 0.1);
+    border: 1px solid #ff4444;
+    border-radius: 5px;
+    margin: 0.5rem 0;
+    color: #ff4444;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.private-profile-notice .lock-icon {
+    font-size: 1.2rem;
+}
+
+.performer .private-profile-notice {
+    width: 80%;
+    margin: 0.5rem auto;
+}
+
+.rank-item .private-profile-notice {
+    flex: 1;
+    margin-right: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+    .private-profile-notice {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.9rem;
+    }
+    
+    .private-profile-notice .lock-icon {
+        font-size: 1rem;
+    }
+    
+    .rank-item .private-profile-notice {
+        margin-right: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .private-profile-notice {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+    }
+    
+    .private-profile-notice .lock-icon {
+        font-size: 0.9rem;
+    }
+    
+    .performer .private-profile-notice {
+        width: 90%;
+    }
+}
+
+

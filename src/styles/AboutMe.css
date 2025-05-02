@@ -1,0 +1,69 @@
+/* AboutMe Button Styling */
+.about-me-button {
+    padding: 0.75rem;
+    background: linear-gradient(to right, #7dcea0, #a3e4d7);
+    color: #1a5276;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    width: 70%;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.about-me-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(to right, #a3e4d7, #7dcea0);
+}
+
+.about-me-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.friend-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.friend-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    pointer-events: none;
+    box-shadow: inset 0 0 15px rgba(0, 169, 81, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.friend-card:hover::after {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .about-me-button {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+        width: 60%;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-me-button {
+        padding: 0.5rem;
+        font-size: 0.85rem;
+        width: 50%;
+    }
+} 

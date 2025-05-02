@@ -1,0 +1,127 @@
+/* Workout completion activities styling */
+.activity-item.workout {
+    border: 1px solid rgba(64, 64, 85, 0.6);
+    background: rgba(20, 20, 35, 0.7);
+    padding: 1rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+}
+
+.activity-item.workout .activity-achievement {
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+.activity-item.workout .activity-achievement-title,
+.activity-item.workout .activity-achievement-description {
+    padding: 0;
+}
+
+/* Apply border to the title and description */
+.activity-item.workout .activity-achievement-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 0;
+    text-align: left;
+    border: 1px solid rgba(64, 64, 85, 0.8);
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+    padding: 0.75rem;
+    background: rgba(30, 34, 46, 0.7);
+    color: #ffffff;
+}
+
+.activity-item.workout .activity-achievement-description {
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    margin-top: 0; /* Ensure no gap between elements */
+    text-align: left;
+    border: 1px solid rgba(64, 64, 85, 0.8);
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    padding: 0.75rem;
+    background: rgba(30, 34, 46, 0.7);
+}
+
+/* Add workout icon in title */
+.activity-item.workout .activity-achievement-title:before {
+    content: "💪 ";
+    margin-right: 4px;
+    font-weight: bold;
+}
+
+/* Category-specific styling */
+.activity-item.workout.Dumbbell .activity-achievement-title:before {
+    content: "🏋️ ";
+}
+
+.activity-item.workout.Barbell .activity-achievement-title:before {
+    content: "🏋️‍♂️ ";
+}
+
+.activity-item.workout.Machine .activity-achievement-title:before {
+    content: "🔧 ";
+}
+
+.activity-item.workout.Bodyweight .activity-achievement-title:before {
+    content: "🏃‍♂️ ";
+}
+
+.activity-item.workout .activity-achievement-info {
+    text-align: left;
+    width: 100%;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .activity-item.workout {
+        padding: 1rem;
+    }
+    
+    .activity-item.workout .activity-achievement-title,
+    .activity-item.workout .activity-achievement-description {
+        width: 100%;
+        box-sizing: border-box;
+        margin-left: 0;
+        margin-right: 0;
+        padding: 0.75rem;
+        border: 1px solid rgba(64, 64, 85, 0.8);
+    }
+    
+    .activity-item.workout .activity-achievement-title {
+        border-bottom: none;
+        border-radius: 6px 6px 0 0;
+    }
+    
+    .activity-item.workout .activity-achievement-description {
+        border-top: none;
+        border-radius: 0 0 6px 6px;
+    }
+    
+    .activity-item.workout .activity-achievement-info {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .activity-item.workout .activity-achievement {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .activity-item.workout {
+        padding: 0.75rem;
+    }
+    
+    .activity-item.workout .activity-achievement-title,
+    .activity-item.workout .activity-achievement-description {
+        padding: 0.625rem;
+    }
+} 

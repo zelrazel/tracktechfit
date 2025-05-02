@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+.signin-container {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #1B4332 0%, #081C15 80%);
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+.signin-card {
+  width: 100%;
+  max-width: 400px;
+  background-color: rgba(177, 167, 166, 0.25);
+  border-radius: 50px;
+  padding: 40px;
+  text-align: center;
+}
+
+.signin-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.signin-icon {
+    display: none;
+}
+
+.signin-title {
+  color: #FFFFFF;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.signin-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.signin-input-container {
+  background-color: white;
+  border-radius: 50px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  padding: 5px 15px;
+  border: none;
+}
+
+.signin-input-icon {
+  color: #333;
+  margin-right: 10px;
+}
+
+.signin-input {
+  background: transparent;
+  border: none;
+  padding: 15px;
+  width: 100%;
+  font-size: 16px;
+  color: #333;
+  border-radius: 50px;
+}
+
+.signin-input[type="password"]::-ms-reveal,
+.signin-input[type="password"]::-ms-clear {
+  display: none;
+}
+
+.signin-input[type="password"]::-webkit-contacts-auto-fill-button,
+.signin-input[type="password"]::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  display: none !important;
+  pointer-events: none;
+  height: 0;
+  width: 0;
+  margin: 0;
+}
+
+.signin-password-toggle {
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.signin-password-icon {
+  color: #64748B;
+}
+
+.signin-button {
+  background-color: #00A951;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 50px;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  display: block;   text-align: center;
+}
+
+.signin-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(34, 211, 238, 0.3);
+}
+
+.signin-button-icon {
+    display: none;
+}
+
+.signin-signup-link {
+  font-size: 14px;
+  color: white;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.signin-signup-link a {
+  color: #00A951;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+@media (max-width: 480px) {
+  .signin-container {
+    align-items: flex-start;     padding-top: 60px;   }
+
+  .signin-card {
+    margin: 15px;
+    padding: 30px 20px;
+    max-width: 100%;
+  }
+
+  .signin-title {
+    font-size: 28px;
+  }
+
+  .signin-subtitle {
+    font-size: 14px;
+  }
+
+  .signin-input-container {
+    padding: 0 10px;
+  }
+
+  .signin-input {
+    font-size: 14px;
+    padding: 12px 0;
+  }
+
+  .signin-input-icon,
+  .signin-password-icon,
+  .signin-button-icon {
+    size: 20px;
+  }
+
+  .signin-button {
+    padding: 12px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .signin-container {
+    padding-top: 40px;   }
+
+  .signin-card {
+    margin: 10px;
+    padding: 20px 12px;
+  }
+
+  .signin-title {
+    font-size: 24px;
+  }
+}
+
+.swal-custom-popup {
+    background: rgba(16, 16, 28, 0.95) !important;
+    border: 2px solid #00ff84 !important;
+    box-shadow: 0 0 20px #00ff84, inset 0 0 20px #00ff84 !important;
+}
+
+.swal-custom-title {
+    color: #00ff84 !important;
+    text-shadow: 0 0 10px #00ff84 !important;
+}
+
+.swal-custom-content {
+    color: #ffffff !important;
+}
+
+.swal-custom-icon {
+    border: none !important;
+    background: transparent !important;
+}
+
+.swal2-success {
+    border: 0.25em solid #00ff84 !important;
+    box-shadow: 0 0 15px rgba(0, 255, 132, 0.5) !important;
+}
+
+.swal2-success-circular-line-left,
+.swal2-success-circular-line-right,
+.swal2-success-fix {
+    background: transparent !important;
+}
+
+.swal2-success-ring {
+    border: 0.25em solid rgba(0, 255, 132, 0.3) !important;
+    box-shadow: 0 0 15px rgba(0, 255, 132, 0.5) !important;
+}
+
+.swal2-icon.swal2-success [class^='swal2-success-line'] {
+    background-color: #00ff84 !important;
+    box-shadow: 0 0 15px rgba(0, 255, 132, 0.5) !important;
+}
+
+.swal2-icon.swal2-success .swal2-success-ring {
+    border-color: #00ff84 !important;
+    animation: successRing 0.5s ease-in-out !important;
+}
+
+@keyframes successRing {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.swal2-icon.swal2-error {
+    border-color: #ff4444 !important;
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.5) !important;
+}
+
+.swal2-icon.swal2-error [class^='swal2-x-mark-line'] {
+    background-color: #ff4444 !important;
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.5) !important;
+}

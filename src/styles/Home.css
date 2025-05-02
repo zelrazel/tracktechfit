@@ -1,0 +1,124 @@
+.home-page {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #1B4332, #081C15 85%);
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+}
+
+.home-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid #00A951;
+    background: rgba(27, 67, 50, 0.8);
+    animation: borderGlow 4s infinite alternate;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-icon {
+    font-size: 2.5rem;
+    color: #00ff84;
+}
+
+.mirror {
+    transform: scaleX(-1);
+}
+
+.page-header h2 {
+    display: block;
+    font-size: 2.5rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    margin: 0 auto;
+    padding: 0;
+}
+
+.welcome-text {
+    text-align: center;
+    color: #ffffff;
+    font-size: 2rem;
+    margin-top: -20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes borderGlow {
+    from {
+        box-shadow: 0 0 10px rgba(0, 255, 132, 0.2);
+    }
+    to {
+        box-shadow: 0 0 20px rgba(0, 255, 132, 0.4);
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .home-container {
+        width: 90%;           
+        padding: 1rem;
+        margin: 0 auto;       
+    }
+
+    .page-header {
+        padding: 1rem;        
+        margin-bottom: 2rem;  
+        background: rgba(27, 67, 50, 0.8);
+        border: 1px solid #00A951;
+    }
+
+    .header-icon {
+        font-size: 1.8rem;    
+        margin: 0 0.5rem;     
+        color: #00ff84;
+    }
+
+    .page-header h2 {
+        font-size: 1.8rem;    
+        padding: 0.5rem 0;    
+        color: #00ff84;
+        text-shadow: 0 0 10px rgba(0, 255, 132, 0.5);
+    }
+
+    .welcome-text {
+        font-size: 1.3rem;    
+        margin-top: -10px;    
+        padding: 0.5rem;      
+        color: #00ff84;
+        text-shadow: 0 0 10px rgba(0, 255, 132, 0.3);
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    .home-container {
+        width: 95%;           
+        padding: 0.5rem;
+    }
+
+    .page-header h2 {
+        font-size: 1.5rem;    
+    }
+
+    .header-icon {
+        font-size: 1.5rem;    
+    }
+
+    .welcome-text {
+        font-size: 1.2rem;    
+        margin-top: -8px;     
+    }
+}

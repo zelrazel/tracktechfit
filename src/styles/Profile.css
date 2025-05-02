@@ -1,0 +1,5578 @@
+.profile-container {
+    --neon-green: #00ff84;
+    --dark-green: #00cc69;
+    --bg-dark: #0a0a0a;
+    --card-bg: #151515;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --neon-blue: #0ff;
+    --neon-purple: #f0f;
+    
+    min-height: 100vh;
+    padding: 2rem;
+    background: linear-gradient(360deg, #081C15 0%, #1B4332 90%);     display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-family: 'Inter', sans-serif;
+}
+
+.profile-card {
+    background: rgba(177, 167, 166, 0.25);     border-radius: 50px;
+    border: 1px solid #00A951;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 132, 0.1),
+        inset 0 0 20px rgba(0, 255, 132, 0.05);
+    width: 100%;
+    max-width: 1200px;     padding: 2rem;     animation: borderGlow 4s infinite alternate;
+    margin: 0 auto;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    width: 100%;
+    position: relative;
+}
+
+.profile-picture-container {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    border: 4px solid var(--neon-green) !important;
+    overflow: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 15px var(--neon-green);
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.profile-icon {
+    width: 80px;
+    height: 80px;
+    color: var(--neon-green);
+}
+
+/* Add extra outline to ensure visibility */
+.profile-picture-container::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: 50%;
+    border: 3px solid var(--neon-green);
+    box-shadow: 0 0 20px rgba(0, 255, 132, 0.5);
+    z-index: -1;
+    animation: borderPulse 2s infinite alternate;
+}
+
+@keyframes borderPulse {
+    0% {
+        box-shadow: 0 0 15px rgba(0, 255, 132, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 25px rgba(0, 255, 132, 0.7);
+    }
+}
+
+.profile-picture-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}
+
+/* Fix icon button specifically for the camera/close buttons */
+.profile-picture-container .icon-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    border: 2px solid var(--bg-dark);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.profile-picture-container .camera-button {
+    background-color: var(--neon-green);
+    color: var(--bg-dark);
+    font-size: 1rem;
+}
+
+.profile-picture-container .close-photo-button {
+    background-color: #dc3545;
+    color: white;
+    font-size: 1rem;
+}
+
+.profile-picture-container .icon-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(0, 255, 132, 0.5);
+}
+
+@media (max-width: 768px) {
+    .profile-picture-container {
+        width: 150px !important;
+        height: 150px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .profile-icon {
+        width: 60px !important;
+        height: 60px !important;
+    }
+    
+    .icon-button {
+        width: 30px !important;
+        height: 30px !important;
+        bottom: 5px !important;
+        right: 5px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-picture-container {
+        width: 120px !important;
+        height: 120px !important;
+    }
+    
+    .profile-icon {
+        width: 45px !important;
+        height: 45px !important;
+    }
+    
+    .icon-button {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 12px !important;
+    }
+}
+
+.profile-picture,
+.profile-picture-placeholder {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.profile-picture-placeholder svg {
+    width: 80px;
+    height: 80px;
+    color: var(--neon-green);
+    filter: drop-shadow(0 0 10px rgba(0, 255, 132, 0.5));
+    animation: iconGlow 2s infinite alternate;
+}
+
+@keyframes iconGlow {
+    from { filter: drop-shadow(0 0 5px rgba(0, 255, 132, 0.3)); }
+    to { filter: drop-shadow(0 0 15px rgba(0, 255, 132, 0.6)); }
+}
+
+.edit-button {
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    background: var(--neon-green);
+    color: var(--bg-dark);
+    box-shadow: 0 0 15px rgba(0, 255, 132, 0.3);
+    margin: 0 auto;
+    display: block;
+}
+
+.edit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0, 255, 132, 0.4);
+}
+
+.edit-controls {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.file-input-container {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.file-input {
+    display: none;
+}
+
+.file-input-label {
+    background: #e9ecef;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    transition: background-color 0.2s;
+}
+
+.file-input-label:hover {
+    background: #dee2e6;
+}
+
+.selected-file {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.upload-button,
+.delete-button {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.upload-button {
+    background: #28a745;
+    color: white;
+}
+
+.upload-button:hover {
+    background: #218838;
+}
+
+.upload-button:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+}
+
+.delete-button {
+    background: #dc3545;
+    color: white;
+}
+
+.delete-button:hover {
+    background: #c82333;
+}
+
+.profile-info {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 255, 132, 0.2);
+}
+
+.profile-info h2 {
+    color: #ffffff;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    gap: 2.5rem;
+    margin: 0 auto;
+    max-width: 1000px;
+    padding: 0 2rem;
+    justify-content: center;
+    align-items: start;
+}
+
+.info-item {
+    background: #1B4332;
+    padding: 1.2rem;
+    border: 1px solid #00A951;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 250px;
+    height: 120px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.5rem;
+}
+
+.info-item:hover {
+    transform: translateY(-2px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 255, 132, 0.4);
+}
+
+.info-item label {
+    display: block;
+    color: var(--neon-green);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px rgba(0, 255, 132, 0.5);
+    width: 100% !important;     max-width: 200px !important;     text-align: center; }
+
+.info-item p,
+.edit-info-input {
+    background: rgba(177, 167, 166, 0.5);     color: #fff;
+    font-size: 1rem;
+    border: 1px solid #00A951;
+    border-radius: 10px;
+    padding: 0.8rem;
+    width: 100% !important;     max-width: 200px !important;     text-align: center; }
+
+.info-item p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.loading-container,
+.error-container {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+}
+
+.name-section,
+.name-display,
+.edit-name-form,
+.edit-name-input {
+    display: none;  }
+
+.action-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.edit-button,
+.save-button,
+.cancel-button {
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.edit-button:hover {
+    background: var(--dark-green);
+    border-color: var(--dark-green);
+    box-shadow: 0 0 20px rgba(0, 255, 132, 0.4);
+    transform: translateY(-2px);
+}
+
+.edit-info-input {
+    background: rgba(177, 167, 166, 0.5) !important;
+    color: #fff;
+    font-size: 1rem;
+    border: 1px solid #00A951;
+    border-radius: 10px;
+    padding: 0.8rem;
+    width: 100% !important;
+    max-width: 200px !important;
+    text-align: center;
+}
+
+.edit-info-input.error {
+    border-color: #ff4444;
+    box-shadow: 0 0 5px rgba(255, 68, 68, 0.3);
+}
+
+.error-message {
+    color: #ff4444;
+    font-size: 12px;
+    margin-top: 5px;
+    padding: 5px 10px;
+    text-align: left;
+    border-radius: 4px;
+    background-color: rgba(255, 68, 68, 0.1);
+    display: block;
+    width: 100%;
+    font-weight: 500;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.edit-info-input:focus {
+    outline: none;
+    border-color: var(--neon-green);
+    box-shadow: 0 0 15px rgba(0, 255, 132, 0.2);
+}
+
+select.edit-info-input {
+    background: rgba(177, 167, 166, 0.5) !important;
+    color: #fff;
+    width: 200px !important;     max-width: 200px !important;
+    height: auto !important;     min-height: 40px !important;     text-align: center;
+    text-align-last: center;
+    margin: 0 !important;
+    padding: 8px 30px 8px 8px !important;     appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    white-space: normal !important;     word-wrap: break-word;
+    overflow: visible;
+}
+
+.edit-info-input option {
+    background: #1B4332;
+    color: #fff;
+    padding: 10px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    white-space: normal;
+}
+
+select.edit-info-input {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ffffff' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 10px center !important;
+}
+
+.edit-info-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 2rem auto;
+}
+
+.edit-info-form .info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    gap: 1rem 5rem;     margin: 2rem auto;
+    max-width: 1000px;
+    padding: 0.1rem;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.edit-info-form .info-item {
+    background: #1B4332;
+    padding: 1.2rem;
+    border: 1px solid #00A951;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 250px;
+    height: 120px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.5rem;
+}
+
+.privacy-toggle {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.toggle-button {
+    background: var(--neon-green);     border: 2px solid var(--neon-green);
+    color: var(--bg-dark);     padding: 0.8rem 2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 132, 0.3);
+}
+
+.toggle-button.private {
+    background: #ff4444;     border-color: #ff4444;
+    color: var(--bg-dark);     box-shadow: 0 0 10px rgba(255, 68, 68, 0.3);
+}
+
+.toggle-button:hover {
+    background: var(--dark-green);
+    border-color: var(--dark-green);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0, 255, 132, 0.4);
+}
+
+.toggle-button.private:hover {
+    background: #ff3333;
+    border-color: #ff3333;
+    box-shadow: 0 0 20px rgba(255, 68, 68, 0.4);
+}
+
+@keyframes borderGlow {
+    from { box-shadow: 0 0 20px rgba(0, 255, 132, 0.1); }
+    to { box-shadow: 0 0 40px rgba(0, 255, 132, 0.3); }
+}
+
+@keyframes avatarGlow {
+    from { box-shadow: 0 0 20px rgba(0, 255, 132, 0.2); }
+    to { box-shadow: 0 0 40px rgba(0, 255, 132, 0.4); }
+}
+
+@keyframes buttonGlow {
+    from { box-shadow: 0 0 10px rgba(0, 255, 132, 0.3); }
+    to { box-shadow: 0 0 20px rgba(0, 255, 132, 0.5); }
+}
+
+/* SweetAlert2 Custom Styles */
+.swal2-popup {
+    background: rgba(16, 16, 28, 0.95) !important;
+    border: 2px solid #ff4444 !important;
+    box-shadow: 0 0 20px rgba(255, 68, 68, 0.3) !important;
+}
+
+.swal2-title {
+    color: #ffffff !important;
+    font-size: 1.5rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    margin-bottom: 1rem !important;
+}
+
+.swal2-html-container {
+    color: #e0e0e0 !important;
+    font-size: 1.1rem !important;
+}
+
+.swal2-confirm {
+    background: #ff4444 !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.3) !important;
+    padding: 12px 24px !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 1px !important;
+    transition: all 0.3s ease !important;
+}
+
+.swal2-confirm:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 0 20px rgba(255, 68, 68, 0.4) !important;
+}
+
+.swal2-cancel {
+    background: transparent !important;
+    color: #ffffff !important;
+    border: 2px solid #2b2b40 !important;
+    padding: 12px 24px !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 1px !important;
+    transition: all 0.3s ease !important;
+}
+
+.swal2-cancel:hover {
+    background: rgba(43, 43, 64, 0.5) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Success message specific styles */
+.swal2-success {
+    border-color: #00ff84 !important;
+}
+
+.swal2-icon.swal2-success {
+    border-color: #00ff84 !important;
+    color: #00ff84 !important;
+}
+
+.swal2-icon.swal2-success [class^='swal2-success-line'] {
+    background-color: #00ff84 !important;
+}
+
+.swal2-icon.swal2-success .swal2-success-ring {
+    border-color: #00ff84 !important;
+}
+
+/* Warning icon specific styles */
+.swal2-icon.swal2-warning {
+    border-color: #ff4444 !important;
+    color: #ff4444 !important;
+}
+
+/* Error icon specific styles */
+.swal2-icon.swal2-error {
+    border-color: #ff4444 !important;
+}
+
+.swal2-icon.swal2-error [class^='swal2-x-mark-line'] {
+    background-color: #ff4444 !important;
+}
+
+@media (max-width: 768px) {
+    .swal2-popup {
+        width: 90% !important;
+        font-size: 0.9rem !important;
+    }
+
+    .swal2-title {
+        font-size: 1.2rem !important;
+    }
+
+    .swal2-html-container {
+        font-size: 1rem !important;
+    }
+
+    .swal2-confirm,
+    .swal2-cancel {
+        padding: 10px 20px !important;
+        font-size: 0.9rem !important;
+    }
+}
+
+.swal2-actions {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+    padding: 1rem !important;
+    width: 100% !important;
+}
+
+.swal2-confirm,
+.swal2-cancel {
+    width: 100% !important;
+    max-width: 280px !important;
+    height: 45px !important;
+    padding: 0.75rem !important;
+    margin: 0 auto !important;
+    font-size: 0.9rem !important;
+    white-space: nowrap !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .swal2-popup {
+        width: 90% !important;
+        max-width: 400px !important;
+    }
+
+    .swal2-actions {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+    }
+
+    .swal2-confirm,
+    .swal2-cancel {
+        width: 85% !important;
+        max-width: 280px !important;
+        height: 40px !important;
+        margin: 0.25rem auto !important;
+        font-size: 0.85rem !important;
+        text-align: center !important;
+    }
+}
+@media (max-width: 360px) {
+    .swal2-confirm,
+    .swal2-cancel {
+        max-width: 240px !important;
+        height: 35px !important;
+        font-size: 0.8rem !important;
+    }
+}
+
+@media (max-width: 1200px) {
+    .profile-card {
+        max-width: 95%;
+        padding: 1.5rem;
+    }
+    
+    .info-grid {
+        grid-template-columns: repeat(3, minmax(200px, 1fr));
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    .info-item {
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 0.5rem;
+    }
+    
+    .profile-card {
+        max-width: 100%;
+        padding: 0.8rem;
+        margin: 0;
+    }
+
+    .profile-picture-container {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto 1.5rem;
+        border: 3px solid var(--neon-green);
+        box-shadow: 
+            0 0 15px rgba(0, 255, 132, 0.3),
+            inset 0 0 10px rgba(0, 255, 132, 0.2);
+    }
+
+    .profile-picture-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .info-grid,
+    .edit-info-form .info-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0.5rem;
+        max-width: 100%;
+    }
+    
+    .info-item,
+    .edit-info-form .info-item {
+        max-width: 100%;
+        height: auto;
+        min-height: 90px;
+        padding: 0.8rem;
+        margin: 0 auto;
+        gap: 0.3rem;
+    }
+
+    .info-item label {
+        font-size: 0.8rem;
+        margin-bottom: 0.3rem;
+        max-width: 150px !important;
+    }
+
+    .info-item p,
+    .edit-info-input,
+    select.edit-info-input {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+        width: 150px !important;
+        max-width: 150px !important;
+        height: 35px !important;
+        margin: 0 auto;
+    }
+
+    .profile-info h2 {
+        font-size: 1.2rem;
+        margin: 1rem 0;
+    }
+
+    .edit-button,
+    .save-button,
+    .cancel-button {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    .toggle-button {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.8rem;
+    }
+
+    .action-buttons {
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .profile-container {
+        padding: 0.5rem;
+    }
+
+    .profile-card {
+        padding: 1rem;
+        width: 95%;
+        margin: 0 auto;
+        border-radius: 20px;
+    }
+
+    .info-item,
+    .edit-info-form .info-item {
+        min-height: 65px;
+        padding: 0.5rem;
+        margin: 0.3rem auto;
+        width: 85%;
+        max-width: 300px;
+        height: auto;
+        gap: 0.2rem;
+        background: rgba(27, 67, 50, 0.9);
+    }
+
+    .info-grid,
+    .edit-info-form .info-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        padding: 0.3rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .info-item label {
+        font-size: 0.75rem;
+        margin-bottom: 0.2rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .info-item p,
+    .edit-info-input,
+    select.edit-info-input {
+        font-size: 0.85rem;
+        padding: 0.3rem;
+        width: 80% !important;
+        max-width: 200px !important;
+        height: 32px !important;
+        margin: 0 auto;
+    }
+
+    .edit-info-form {
+        padding: 0.5rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .action-buttons {
+        width: 85%;
+        max-width: 300px;
+        margin: 1rem auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .edit-button,
+    .save-button,
+    .cancel-button {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0.6rem;
+    }
+
+    .icon-button {
+        width: 35px;
+        height: 35px;
+        bottom: 5px;
+        right: 5px;
+        font-size: 0.9rem;
+    }
+
+    .edit-button,
+    .toggle-button {
+        width: 85%;
+        max-width: 300px;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+@media (max-width: 375px) {
+    .info-item,
+    .edit-info-form .info-item {
+        min-height: 80px;
+        padding: 0.6rem;
+    }
+
+    .info-item label {
+        font-size: 0.75rem;
+        max-width: 130px !important;
+    }
+
+    .info-item p,
+    .edit-info-input,
+    select.edit-info-input {
+        font-size: 0.85rem;
+        height: 30px !important;
+        min-height: 30px;
+        width: 130px !important;
+        max-width: 130px !important;
+    }
+
+    .profile-card {
+        width: 98%;
+        padding: 0.8rem;
+    }
+
+    .info-item,
+    .edit-info-form .info-item {
+        width: 90%;
+        min-height: 60px;
+        padding: 0.4rem;
+    }
+
+    .info-item label {
+        font-size: 0.7rem;
+    }
+
+    .info-item p,
+    .edit-info-input,
+    select.edit-info-input {
+        font-size: 0.8rem;
+        height: 30px !important;
+        min-height: 30px;
+        width: 75% !important;
+        max-width: 180px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .info-item,
+    .edit-info-form .info-item {
+        min-height: 70px;         padding: 0.5rem;
+        margin: 0.3rem auto;
+        max-width: 100%;
+        height: auto;
+        gap: 0.2rem;    
+        background: rgba(27, 67, 50, 0.9);
+    }
+
+    .info-item label {
+        font-size: 0.75rem;
+        margin-bottom: 0.2rem;
+        max-width: 100% !important;
+        letter-spacing: 0.5px;
+    }
+
+    .info-item p,
+    .edit-info-input,
+    select.edit-info-input {
+        font-size: 0.85rem;
+        padding: 0.3rem;
+        width: 90% !important;
+        max-width: 90% !important;
+        height: 32px !important;
+        margin: 0 auto;
+        min-height: 32px;
+    }
+
+    .info-grid,
+    .edit-info-form .info-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        padding: 0.3rem;
+        width: 100%;
+    }
+
+    .edit-info-form {
+        padding: 0.5rem;
+        width: 100%;
+    }
+
+    .select.edit-info-input {
+        padding-right: 25px !important;         background-position: right 8px center !important;
+    }
+}
+
+@media (max-width: 375px) {
+    .info-item,
+    .edit-info-form .info-item {
+        min-height: 65px;
+        padding: 0.4rem;
+    }
+
+    .info-item label {
+        font-size: 0.7rem;
+    }
+
+    .info-item p,
+    .edit-info-input,
+    select.edit-info-input {
+        font-size: 0.8rem;
+        height: 30px !important;
+        min-height: 30px;
+        width: 85% !important;
+        max-width: 85% !important;
+    }
+
+    .info-grid {
+        gap: 0.4rem;
+    }
+}
+
+.edit-info-input,
+select.edit-info-input {
+    text-align: center !important;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: rgba(177, 167, 166, 0.3) !important;
+}
+
+@media (max-width: 768px) {
+    .edit-info-input,
+    select.edit-info-input {
+        border-radius: 6px;
+        border: 1px solid rgba(0, 169, 81, 0.5);
+    }
+
+    .edit-info-form .info-item + .info-item {
+        margin-top: 0.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .edit-info-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .edit-info-form .info-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 0.8rem;
+        padding: 0;
+    }
+
+    .edit-info-form .info-item {
+        width: 85% !important;
+        max-width: 280px;
+        min-height: 70px;
+        padding: 0.8rem;
+        margin: 0.4rem auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.3rem;
+    }
+
+    .edit-info-form .edit-info-input,
+    .edit-info-form select.edit-info-input {
+        width: 85% !important;
+        max-width: 200px !important;
+        height: 35px !important;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .action-buttons {
+        width: 85%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        margin: 1.5rem auto;
+    }
+
+    .save-button,
+    .cancel-button {
+        width: 100%;
+        max-width: 280px;
+        height: 40px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 375px) {
+    .edit-info-form .info-item {
+        width: 90%;
+        max-width: 250px;
+    }
+
+    .edit-info-form .edit-info-input,
+    .edit-info-form select.edit-info-input {
+        width: 90% !important;
+        max-width: 200px !important;
+    }
+
+    .action-buttons {
+        width: 90%;
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .profile-card {
+        width: 100%;
+        max-width: 100%;
+        padding: 1rem 0.5rem;
+        margin: 0;
+    }
+
+    .edit-info-form {
+        width: 100%;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .edit-info-form .info-grid {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+    }
+
+    .edit-info-form .info-item {
+        width: 260px !important;
+        min-height: 70px;
+        margin: 0.4rem 0;
+        padding: 0.6rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.3rem;
+    }
+
+    .edit-info-form .edit-info-input,
+    .edit-info-form select.edit-info-input {
+        width: 200px !important;
+        height: 32px !important;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .edit-info-form .action-buttons {
+        width: 260px !important;
+        margin: 1.2rem auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .edit-info-form .info-item {
+        width: 240px !important;
+    }
+
+    .edit-info-form .edit-info-input,
+    .edit-info-form select.edit-info-input {
+        width: 180px !important;
+    }
+
+    .edit-info-form .action-buttons {
+        width: 240px !important;
+    }
+}
+
+.icon-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 100;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.icon-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 255, 132, 0.6);
+}
+
+.camera-button {
+    background: var(--neon-green);
+    color: var(--bg-dark);
+    font-size: 1rem;
+}
+
+.close-photo-button {
+    background: #dc3545;
+    color: white;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 0.5rem;
+    }
+    
+    .profile-card {
+        max-width: 100%;
+        padding: 0.8rem;
+        margin: 0;
+    }
+
+    .profile-picture-container {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto 1.5rem;
+        border: 3px solid var(--neon-green);
+        box-shadow: 
+            0 0 15px rgba(0, 255, 132, 0.3),
+            inset 0 0 10px rgba(0, 255, 132, 0.2);
+    }
+
+    .profile-picture-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .icon-button {
+        width: 35px;
+        height: 35px;
+        bottom: 5px;
+        right: 5px;
+        font-size: 0.9rem;
+    }
+}
+
+.save-button:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 255, 132, 0.5);
+}
+
+.profile-picture-title {
+    color: #ffffff;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* My Rankings Section - Updated to match Profile Information section exactly */
+.my-rankings-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 255, 132, 0.2);
+    width: 100%;
+    max-width: 1000px;  /* Match the profile-info max-width */
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.rankings-title {
+    color: #ffffff;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+/* Rankings Grid - Changed to horizontal layout on desktop */
+.rankings-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Updated rank box styling for horizontal layout */
+.rank-box {
+    background: #1B4332;
+    padding: 0.8rem;
+    border: 1px solid #00A951;
+    border-radius: 8px;
+    width: 220px;
+    max-width: 220px;
+    height: 110px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.4rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex-shrink: 0;
+}
+
+.rank-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0, 255, 132, 0.4);
+}
+
+.rank-box-title {
+    margin-bottom: 5px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rank-box-title svg {
+    color: white;
+    margin-right: 5px;
+    font-size: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+.rank-box-title span {
+    color: var(--neon-green);
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: inline-block;
+    vertical-align: middle;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px rgba(0, 255, 132, 0.5);
+}
+
+.rank-box-content {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1100px) {
+    .rankings-grid {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .rank-box {
+        width: 200px;
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 900px) {
+    .rankings-grid {
+        gap: 0.8rem;
+    }
+    
+    .rank-box {
+        width: 180px;
+        max-width: 180px;
+        height: 110px;
+        padding: 0.8rem;
+    }
+}
+
+/* Mobile responsiveness - keep existing vertical stacking */
+@media (max-width: 768px) {
+    /* Make the section match the info section */
+    .my-rankings-section {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /* Convert grid to vertical layout for mobile */
+    .rankings-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 90%;
+        align-items: center;
+        margin: 0 auto;
+        padding: 0.3rem;
+    }
+    
+    /* Match rank-box exactly to info-item for mobile */
+    .rank-box {
+        width: 85% !important;
+        max-width: 280px !important;
+        min-height: 65px !important;
+        margin: 0.4rem 0 !important;
+        padding: 0.5rem !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.3rem;
+        background: rgba(27, 67, 50, 0.9) !important;
+        border: 2px solid #00ff84 !important;
+        border-radius: 8px !important;
+        box-shadow: 0 0 8px rgba(0, 255, 132, 0.4) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .rank-box {
+        width: 90% !important;
+        max-width: 250px !important;
+        min-height: 60px !important;
+        border: 3px solid #00ff84 !important;
+        border-radius: 8px !important;
+        box-shadow: 0 0 10px rgba(0, 255, 132, 0.5) !important;
+    }
+}
+
+.rank-num {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    vertical-align: middle;
+}
+
+.rank-divider {
+    font-size: 16px;
+    color: #ccc;
+    margin: 0 2px;
+    vertical-align: middle;
+}
+
+.rank-total {
+    font-size: 14px;
+    color: #ccc;
+    vertical-align: middle;
+}
+
+.no-ranking {
+    font-size: 14px;
+    color: white;
+    font-style: italic;
+}
+
+/* Top ranks styling - keeping gold/silver/bronze colors */
+.rank-num.top-1 { color: gold; }
+.rank-num.top-2 { color: silver; }
+.rank-num.top-3 { color: #cd7f32; }
+
+/* New container style for rank numbers similar to email container */
+.rank-value-container {
+    background: rgba(177, 167, 166, 0.5);
+    color: #fff;
+    border: 1px solid #00A951;
+    border-radius: 10px;
+    padding: 0.8rem;
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    margin: 0 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Update rank-box-content to properly align the container */
+.rank-box-content {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Styling for rank numbers and not ranked text */
+.rank-num {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    vertical-align: middle;
+}
+
+.rank-divider {
+    font-size: 16px;
+    color: #ccc;
+    margin: 0 2px;
+    vertical-align: middle;
+}
+
+.rank-total {
+    font-size: 14px;
+    color: #ccc;
+    vertical-align: middle;
+}
+
+.no-ranking {
+    font-size: 14px;
+    color: white;
+    font-style: italic;
+}
+
+/* Top ranks styling - keeping gold/silver/bronze colors */
+.rank-num.top-1 { color: gold; }
+.rank-num.top-2 { color: silver; }
+.rank-num.top-3 { color: #cd7f32; }
+
+/* Mobile adjustments for rank value container */
+@media (max-width: 768px) {
+    .rank-value-container {
+        max-width: 85% !important;
+        height: 35px;
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .rank-value-container {
+        max-width: 130px;
+        height: 32px;
+        padding: 0.3rem 0.5rem;
+    }
+    
+    .rank-box {
+        min-height: 80px;
+        padding: 0.6rem;
+    }
+}
+
+/* Add floating animation for medal icons */
+@keyframes floatIcon {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+.rank-medal {
+    margin-right: 5px;
+    animation: floatIcon 3s ease-in-out infinite;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Different timings for each medal rank */
+.rank-num.top-1 + .rank-medal {
+    animation-duration: 3s;
+}
+
+.rank-num.top-2 + .rank-medal {
+    animation-duration: 3.5s;
+}
+
+.rank-num.top-3 + .rank-medal {
+    animation-duration: 4s;
+}
+
+/* Add styles for the course indicator in rankings */
+.rankings-course {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    padding: 8px 15px;
+    background-color: rgba(0, 255, 132, 0.1);
+    border-radius: 20px;
+    border: 1px solid rgba(0, 255, 132, 0.3);
+    color: #00ff84;
+    font-weight: 500;
+    font-size: 16px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.rankings-course .course-icon {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.rankings-course span {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Tab Navigation Styles */
+.profile-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    padding: 0 1rem;
+    flex-wrap: wrap;
+}
+
+.tab-button {
+    background: transparent;
+    color: var(--text-secondary);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tab-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.tab-text {
+    font-size: 0.9rem;
+}
+
+.tab-button::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--neon-green);
+    transition: width 0.3s ease;
+}
+
+.tab-button:hover {
+    color: var(--text-primary);
+}
+
+.tab-button:hover::after {
+    width: 100%;
+}
+
+.tab-button.active {
+    color: var(--neon-green);
+}
+
+.tab-button.active::after {
+    width: 100%;
+    box-shadow: 0 0 10px var(--neon-green);
+}
+
+.tab-content {
+    padding: 2rem 1rem;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile Responsive Tabs */
+@media (max-width: 768px) {
+    .profile-tabs {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.3rem;
+        margin: 1.5rem 0;
+        padding: 0 0.5rem;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 30px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 169, 81, 0.3);
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .tab-button {
+        flex: 1;
+        padding: 0.8rem 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0;
+        position: relative;
+        gap: 0.3rem;
+    }
+    
+    .tab-icon {
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+    }
+    
+    .tab-text {
+        display: none;
+    }
+    
+    .tab-button.active {
+        background: rgba(0, 169, 81, 0.2);
+    }
+    
+    .tab-button.active .tab-icon {
+        color: var(--neon-green);
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 5px var(--neon-green));
+    }
+    
+    .tab-button::after {
+        bottom: 0;
+        height: 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-tabs {
+        width: 95%;
+        border-radius: 25px;
+        padding: 0.3rem;
+    }
+    
+    .tab-button {
+        padding: 0.7rem 0;
+    }
+    
+    .tab-icon {
+        font-size: 1.1rem;
+    }
+    
+    /* Add subtle pulse animation to active tab icon */
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+    
+    .tab-button.active .tab-icon {
+        animation: pulse 2s infinite ease-in-out;
+    }
+}
+
+/* Adding CSS for Achievements display in profile page */
+
+/* Achievements section styles */
+.achievements-section {
+    padding: 1rem;
+}
+
+.achievements-section h2 {
+    text-align: center;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.achievement-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.achievement-category {
+    background: rgba(177, 167, 166, 0.15);
+    border-radius: 15px;
+    padding: 1rem;
+    border: 1px solid #00A951;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.achievement-category h3 {
+    color: var(--neon-green);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 255, 132, 0.3);
+    font-size: 1.2rem;
+}
+
+.achievement-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    position: relative;
+    padding: 10px 0 40px 0;
+}
+
+.badge-item {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: rgba(32, 32, 32, 0.6);
+    border: 2px solid #444;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    overflow: visible;
+    z-index: 1;
+}
+
+.badge-item.unlocked {
+    filter: grayscale(0%);
+    opacity: 1;
+    border-color: var(--neon-green);
+    box-shadow: 0 0 15px rgba(0, 255, 132, 0.3);
+    background: radial-gradient(circle, rgba(0, 255, 132, 0.2) 0%, rgba(32, 32, 32, 0.8) 70%);
+}
+
+.badge-item:hover {
+    z-index: 100;
+}
+
+.badge-item:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    z-index: 10;
+    border: 1px solid var(--neon-green);
+    width: max-content;
+    max-width: 200px;
+}
+
+.badge-image {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+/* Different colors for different achievement types */
+.badge-icon.strength {
+    color: #FFD700; /* Gold color for strength */
+}
+
+.badge-icon.consistency {
+    color: #1E90FF; /* Blue color for consistency */
+}
+
+.badge-icon.hybrid {
+    color: #FF1493; /* Pink color for hybrid */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .badge-item {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .badge-icon {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .achievement-badges {
+        gap: 10px;
+    }
+    
+    .badge-item:hover::after {
+        font-size: 10px;
+        padding: 3px 6px;
+        bottom: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 480px) {
+    .badge-item {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .badge-icon {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .achievement-category h3 {
+        font-size: 15px;
+    }
+    
+    .achievement-badges {
+        gap: 8px;
+    }
+    
+    .badge-image {
+        width: 85%;
+        height: 85%;
+    }
+}
+
+.loading-achievements {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(70, 120, 100, 0.55);
+    border: 1px solid var(--neon-green);
+    border-radius: 15px;
+    color: white;
+    margin: 1rem 0;
+    font-size: 1.1rem;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Badge tooltip styles for desktop (hover) */
+.badge-tooltip {
+    position: absolute;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(5, 20, 15, 0.95);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    z-index: 1000;
+    width: 220px;
+    max-width: 300px;
+    text-align: center;
+    border: 1px solid var(--neon-green);
+    box-shadow: 0 0 20px rgba(0, 255, 132, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+/* Show tooltips on hover only on desktop */
+@media (min-width: 769px) {
+    .badge-item:hover .badge-tooltip {
+        opacity: 1;
+        visibility: visible;
+        display: block;
+    }
+
+    /* Hide click popups on desktop */
+    .achievement-popup-overlay {
+        display: none !important;
+    }
+}
+
+/* Achievement popup styles for mobile (click) */
+.achievement-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Hide tooltips on mobile */
+@media (max-width: 768px) {
+    .badge-tooltip {
+        display: none !important;
+    }
+}
+
+.achievement-popup {
+    background: #151515;
+    border: 2px solid var(--neon-green);
+    border-radius: 20px;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 0 30px rgba(0, 255, 132, 0.4);
+    position: relative;
+    animation: popupFadeIn 0.3s ease;
+}
+
+@keyframes popupFadeIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.achievement-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 255, 132, 0.3);
+    padding-bottom: 10px;
+}
+
+.achievement-popup-header h3 {
+    color: var(--neon-green);
+    font-size: 18px;
+    margin: 0;
+}
+
+.close-popup {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.2s ease;
+}
+
+.close-popup:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.achievement-popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.achievement-popup-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--neon-green);
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.achievement-popup-image img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+}
+
+.achievement-popup-details {
+    text-align: center;
+    color: white;
+}
+
+.achievement-popup-desc {
+    margin-bottom: 15px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.achievement-popup-status {
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.achievement-popup-status.unlocked {
+    background: rgba(0, 255, 132, 0.2);
+    color: var(--neon-green);
+}
+
+.achievement-popup-status.locked {
+    background: rgba(255, 107, 107, 0.2);
+    color: #ff6b6b;
+}
+
+.status-icon {
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .achievement-popup {
+        width: 90%;
+        max-width: 280px;
+        padding: 15px;
+    }
+    
+    .popup-badge-image {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 8px;
+    }
+    
+    .popup-title {
+        font-size: 15px;
+        margin-bottom: 6px;
+    }
+    
+    .popup-description {
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+    
+    .popup-status {
+        font-size: 11px;
+        padding: 3px 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .achievement-popup {
+        width: 85%;
+        max-width: 220px;
+        padding: 10px;
+    }
+    
+    .popup-badge-image {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 6px;
+    }
+    
+    .popup-title {
+        font-size: 13px;
+        margin-bottom: 5px;
+    }
+    
+    .popup-description {
+        font-size: 11px;
+        margin-bottom: 6px;
+    }
+    
+    .popup-status {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+    
+    .close-popup {
+        top: 5px;
+        right: 5px;
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+    }
+}
+
+.badge-item {
+    position: relative;
+}
+
+.badge-tooltip-title {
+    font-weight: bold;
+    color: var(--neon-green);
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.badge-tooltip-desc {
+    font-size: 12px;
+    margin-bottom: 8px;
+    opacity: 0.9;
+}
+
+.badge-tooltip-status {
+    font-size: 12px;
+    color: #6EFFB8;
+    font-weight: bold;
+}
+
+.badge-tooltip-status.locked {
+    color: #ff6b6b;
+}
+
+/* Achievement popup styles */
+.popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+}
+
+.popup-badge-image {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.popup-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.popup-description {
+    font-size: 14px;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.popup-status {
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.popup-status.unlocked {
+    background: rgba(0, 255, 132, 0.2);
+    color: var(--neon-green);
+}
+
+.popup-status.locked {
+    background: rgba(255, 107, 107, 0.2);
+    color: #ff6b6b;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .achievement-popup {
+        width: 90%;
+        max-width: 300px;
+        padding: 15px;
+    }
+    
+    .popup-badge-image {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 10px;
+    }
+    
+    .popup-title {
+        font-size: 16px;
+    }
+    
+    .popup-description {
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+    
+    .popup-status {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .achievement-popup {
+        width: 85%;
+        max-width: 250px;
+        padding: 12px;
+    }
+    
+    .popup-badge-image {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 8px;
+    }
+    
+    .popup-title {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    
+    .popup-description {
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+    
+    .popup-status {
+        font-size: 11px;
+        padding: 3px 6px;
+    }
+    
+    .close-popup {
+        top: 5px;
+        right: 5px;
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+    }
+}
+
+/* Add edit-button-container styling */
+.edit-button-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+/* Make sure the hover state for profile-picture-container is restored */
+.profile-picture-container:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 30px rgba(0, 255, 132, 0.6),
+                inset 0 0 20px rgba(0, 255, 132, 0.4);
+}
+
+/* Ensure proper placement for SVG in profile picture container */
+.profile-picture-container > svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.save-button,
+.cancel-button {
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.save-button {
+    background: var(--neon-green);
+    color: var(--bg-dark);
+    box-shadow: 0 0 15px rgba(0, 255, 132, 0.3);
+}
+
+.cancel-button {
+    background: transparent;
+    color: white;
+    border: 1px solid var(--neon-green);
+}
+
+.save-button:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 255, 132, 0.5);
+}
+
+.cancel-button:hover {
+    background: rgba(0, 255, 132, 0.1);
+    box-shadow: 0 0 10px rgba(0, 255, 132, 0.2);
+}
+
+@media (max-width: 768px) {
+    select.edit-info-input {
+        padding-right: 25px !important;
+        background-position: right 8px center !important;
+    }
+    
+    .edit-button-container .edit-button,
+    .privacy-toggle .toggle-button {
+        width: 85%;
+        max-width: 300px;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+.activity-feed-section h2 {
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.activity-item {
+    background: rgba(20, 20, 35, 0.7);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(64, 64, 85, 0.6);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.activity-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.activity-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.activity-user-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 1rem;
+    border: 2px solid var(--neon-green);
+    box-shadow: 0 0 10px rgba(0, 255, 120, 0.3);
+    overflow: hidden;
+}
+
+.activity-user-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.activity-user-placeholder {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.activity-user-placeholder .profile-icon {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #222;
+    color: #00ff84;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    border: 2px solid var(--neon-green);
+    box-shadow: 0 0 10px rgba(0, 255, 120, 0.3);
+    overflow: hidden;
+}
+
+.activity-user-info {
+    flex: 1;
+}
+
+.activity-user-name {
+    font-weight: bold;
+    color: var(--text-primary);
+    margin-bottom: 0.2rem;
+    margin-right: 8px;
+}
+
+.activity-timestamp {
+    font-size: 0.8rem;
+    color: #00ff84;
+    margin-left: 8px;
+    opacity: 0.8;
+}
+
+.activity-content {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.activity-achievement {
+    display: flex;
+    align-items: center;
+    background: rgba(30, 30, 45, 0.8);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.activity-achievement-icon {
+    width: 60px;
+    height: 60px;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.activity-achievement-icon img {
+    max-width: 100%;
+    max-height: 100%;
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.activity-achievement-info {
+    flex: 1;
+}
+
+.activity-achievement-title {
+    font-weight: bold;
+    color: var(--neon-green);
+    margin-bottom: 0.3rem;
+}
+
+.activity-achievement-description {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.activity-course-info {
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+    padding: 0.5rem;
+    background: rgba(0, 255, 132, 0.08);
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    color: #e0e0e0;
+    border-left: 3px solid var(--neon-green);
+}
+
+/* Special styling for course change activities */
+.activity-achievement-info .activity-course-info {
+    background: rgba(0, 255, 132, 0.08);
+    border-left-color: var(--neon-green);
+}
+
+.course-label {
+    font-weight: bold;
+    margin-right: 5px;
+    color: var(--neon-green);
+}
+
+/* Course label in profile category */
+.activity-achievement-info .course-label {
+    color: var(--neon-green);
+}
+
+/* Styling for rank activities with course info */
+.rank-achievement .activity-course-info {
+    display: inline-flex;
+    margin-top: 10px;
+    background: rgba(255, 215, 0, 0.1);
+    border-left-color: gold;
+}
+
+.rank-achievement.rank-1 .activity-course-info {
+    border-left-color: gold;
+}
+
+.rank-achievement.rank-2 .activity-course-info {
+    border-left-color: silver;
+}
+
+.rank-achievement.rank-3 .activity-course-info {
+    border-left-color: #cd7f32; /* bronze */
+}
+
+.rank-achievement .course-label {
+    color: #FFD700;
+}
+
+.rank-achievement.rank-2 .course-label {
+    color: #C0C0C0;
+}
+
+.rank-achievement.rank-3 .course-label {
+    color: #CD7F32;
+}
+
+.activity-interactions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.activity-reactions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.reaction-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.reaction-button {
+    background: rgba(64, 64, 85, 0.4);
+    border: 1px solid rgba(64, 64, 85, 0.8);
+    border-radius: 20px;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.reaction-button:hover, .reaction-button.active {
+    background: rgba(0, 255, 120, 0.15);
+    border-color: var(--neon-green);
+    transform: scale(1.05);
+}
+
+.reaction-button.active {
+    box-shadow: 0 0 8px rgba(0, 255, 120, 0.4);
+}
+
+.reaction-count {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.activity-comments-container {
+    margin-top: 0.5rem;
+}
+
+.comments-toggle {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.comments-toggle:hover {
+    color: var(--text-primary);
+}
+
+.activity-comments {
+    margin-top: 1rem;
+}
+
+.comment-item {
+    padding: 0.8rem;
+    background: rgba(40, 40, 60, 0.5);
+    border-radius: 6px;
+    margin-bottom: 0.8rem;
+    display: flex;
+    gap: 0.8rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+.comment-user-image {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 12px;
+    flex-shrink: 0;
+    border: 2px solid var(--neon-green);
+    box-shadow: 0 0 6px rgba(0, 255, 120, 0.3);
+}
+
+.comment-user-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.comment-user-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #222;
+    color: #00ff84;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.comment-user-placeholder .profile-icon {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #222;
+    color: #00ff84;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.comment-content {
+    flex: 1;
+    min-width: 0; /* This prevents flex child from overflowing */
+    max-width: calc(100% - 60px); /* Account for avatar width and margins */
+}
+
+.comment-user-name {
+    font-weight: 600;
+    color: #fff;
+    font-size: 0.95rem;
+    margin-right: 8px;  /* Added spacing after name */
+}
+
+.comment-text {
+    margin-top: 5px;
+    color: #e0e0e0;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    white-space: pre-wrap;
+}
+
+.comment-timestamp {
+    color: #00ff84;  /* Changed to neon green */
+    font-size: 0.8rem;
+    margin-left: 8px;
+    opacity: 0.8;
+}
+
+.comment-form {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    align-items: center;
+}
+
+.comment-input {
+    flex: 1;
+    background: rgba(30, 30, 45, 0.7);
+    border: 1px solid rgba(64, 64, 85, 0.8);
+    border-radius: 20px;
+    padding: 0.7rem 1rem;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    height: 40px;
+}
+
+.comment-input:focus {
+    outline: none;
+    border-color: var(--neon-green);
+    box-shadow: 0 0 8px rgba(0, 255, 120, 0.3);
+}
+
+.comment-submit {
+    background: rgba(0, 255, 120, 0.2);
+    border: 1px solid var(--neon-green);
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    color: var(--neon-green);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.comment-submit:hover {
+    background: rgba(0, 255, 120, 0.3);
+    transform: scale(1.05);
+}
+
+.comment-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.no-activities {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.activity-loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+}
+
+.activity-loader {
+    border: 4px solid rgba(64, 64, 85, 0.3);
+    border-top: 4px solid var(--neon-green);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .activity-feed-section {
+        padding: 1rem;
+    }
+
+    .activity-item {
+        padding: 1rem;
+    }
+
+    .activity-achievement {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .activity-achievement-icon {
+        margin-right: 0;
+        margin-bottom: 0.8rem;
+    }
+
+    .reaction-buttons {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 5px;
+        gap: 0.25rem;
+        justify-content: flex-start;
+        max-width: 100%;
+        scrollbar-width: none; /* Firefox */
+    }
+    
+    .reaction-buttons::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Edge */
+    }
+    
+    .reaction-button {
+        padding: 0.3rem 0.5rem;
+        font-size: 0.8rem;
+        white-space: nowrap;
+        min-width: auto;
+        flex-shrink: 0;
+    }
+    
+    /* Comment section mobile styling */
+    .comment-item {
+        padding: 0.6rem;
+        margin-bottom: 0.6rem;
+    }
+    
+    .comment-user-image {
+        width: 28px;
+        height: 28px;
+        margin-right: 8px;
+    }
+    
+    .comment-user-name {
+        font-size: 0.85rem;
+    }
+    
+    .comment-text {
+        font-size: 0.85rem;
+        line-height: 1.3;
+        padding-right: 20px; /* Space for delete button */
+    }
+    
+    .comment-timestamp {
+        font-size: 0.75rem;
+    }
+    
+    .comment-header {
+        position: relative;
+        padding-right: 25px; /* Make space for delete button */
+    }
+    
+    .delete-comment-button {
+        padding: 4px;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .delete-comment-button svg {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .comment-form {
+        gap: 0.3rem;
+    }
+    
+    .comment-input {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.75rem;
+        height: 36px;
+    }
+    
+    .comment-submit {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.85rem;
+        min-width: 60px;
+    }
+    
+    /* Smaller and more compact user info in activities */
+    .activity-user-image,
+    .activity-user-placeholder {
+        width: 40px;
+        height: 40px;
+    }
+    
+    /* Properly sized achievement icons */
+    .activity-achievement-icon img {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .activity-achievement-title {
+        font-size: 0.95rem;
+    }
+    
+    .activity-achievement-description {
+        font-size: 0.85rem;
+    }
+    
+  
+    
+    
+    /* Course indicators and rank displays */
+    .activity-course-info, 
+    .rank-course-indicator {
+        font-size: 0.8rem;
+        padding: 0.3rem;
+    }
+    
+    .rank-emoji {
+        font-size: 1.1rem;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+    .activity-item {
+        padding: 0.75rem;
+    }
+    
+    .activity-user-image,
+    .activity-user-placeholder {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .activity-achievement-icon {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .activity-achievement-icon img {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .comment-user-image {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .comment-text {
+        font-size: 0.8rem;
+        line-height: 1.2;
+    }
+    
+    .delete-comment-button svg {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .reaction-button {
+        padding: 0.25rem 0.4rem;
+        font-size: 0.75rem;
+    }
+    
+    .comment-submit {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+    }
+    
+    .activity-achievement-title {
+        font-size: 0.9rem;
+    }
+    
+    .activity-achievement-description {
+        font-size: 0.8rem;
+    }
+}
+
+.no-activities {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.activity-prompt {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(30, 30, 45, 0.7);
+    border-radius: 10px;
+    border: 1px solid rgba(64, 64, 85, 0.8);
+    text-align: left;
+    font-style: normal;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.activity-prompt p {
+    margin-bottom: 0.8rem;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.activity-prompt p::before {
+    content: "→";
+    color: var(--neon-green);
+    font-weight: bold;
+}
+
+.check-achievements-btn {
+    margin-top: 1.5rem;
+    background: rgba(0, 255, 120, 0.2);
+    color: var(--neon-green);
+    border: 1px solid var(--neon-green);
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    width: 100%;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 10px rgba(0, 255, 120, 0.2);
+}
+
+.check-achievements-btn:hover {
+    background: rgba(0, 255, 120, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 255, 120, 0.3);
+}
+
+/* Coming Soon styles */
+.coming-soon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 1rem;
+    height: 300px;
+}
+
+.coming-soon-message {
+    background: rgba(30, 30, 45, 0.7);
+    border: 1px solid var(--neon-green);
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 0 20px rgba(0, 255, 132, 0.2);
+}
+
+.coming-soon-message h3 {
+    color: var(--neon-green);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.coming-soon-message p {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.refresh-activities-btn {
+    background-color: #00ff84;
+    color: #151522;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 0; /* Remove margin-top */
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.refresh-activities-btn:hover {
+    background-color: #00cc6a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 255, 132, 0.3);
+}
+
+.refresh-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Change to flex-end to align buttons to the right */
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.activity-prompt button {
+    margin: 5px;
+}
+
+.comment-spinner {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #ffffff;
+    animation: comment-spin 0.6s linear infinite;
+}
+
+@keyframes comment-spin {
+    to { transform: rotate(360deg); }
+}
+
+.reaction-icon {
+    margin-right: 4px;
+    transition: transform 0.2s;
+}
+
+.heart-icon {
+    color: #ff5757;
+}
+
+.fire-icon {
+    color: #ff9500;
+}
+
+.dumbbell-icon {
+    color: #35bbff;
+}
+
+.clap-icon {
+    color: #6cdb00;
+}
+
+.reaction-button {
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    margin-right: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.reaction-button:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.reaction-button.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.reaction-button:hover .reaction-icon,
+.reaction-button.active .reaction-icon {
+    transform: scale(1.2);
+}
+
+.emoji-icon {
+    font-size: 16px;
+    margin-right: 6px;
+    transform-origin: center;
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.reaction-button:hover .emoji-icon,
+.reaction-button.active .emoji-icon {
+    transform: scale(1.3);
+}
+
+.reaction-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    margin-right: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(20, 20, 35, 0.5);
+    border-radius: 20px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.reaction-button:hover {
+    background-color: rgba(40, 40, 60, 0.6);
+    transform: translateY(-2px);
+}
+
+.reaction-button.active {
+    background-color: rgba(60, 60, 80, 0.7);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.comment-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.reply-button, 
+.show-replies-button {
+    background: none;
+    border: none;
+    color: #00ff84;
+    cursor: pointer;
+    font-size: 0.8rem;
+    padding: 0;
+    opacity: 0.8;
+    transition: all 0.2s ease;
+}
+
+.reply-button:hover, 
+.show-replies-button:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.reply-form {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+    margin-bottom: 0.5rem;
+    align-items: center;
+}
+
+.reply-input {
+    flex: 1;
+    background: rgba(20, 20, 35, 0.7);
+    border: 1px solid rgba(64, 64, 85, 0.8);
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    height: 32px;
+}
+
+.reply-submit {
+    background: rgba(0, 255, 120, 0.15);
+    border: 1px solid var(--neon-green);
+    border-radius: 20px;
+    padding: 0.4rem 0.8rem;
+    color: var(--neon-green);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.8rem;
+}
+
+.reply-submit:hover {
+    background: rgba(0, 255, 120, 0.25);
+    transform: scale(1.05);
+}
+
+.comment-replies {
+    margin-top: 0.8rem;
+    margin-left: 1rem;
+    padding-left: 1rem;
+    border-left: 2px solid rgba(0, 255, 132, 0.2);
+}
+
+.reply-item {
+    display: flex;
+    padding: 0.6rem;
+    background: rgba(30, 30, 45, 0.4);
+    border-radius: 6px;
+    margin-bottom: 0.6rem;
+    gap: 0.6rem;
+}
+
+.reply-user-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 8px;
+    flex-shrink: 0;
+    background-color: #1e1e30;
+    border: 2px solid #2b2b40;
+}
+
+.reply-user-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.reply-user-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2b2b40;
+    color: #00ff84;
+    font-weight: bold;
+    font-size: 12px;
+    border-radius: 50%;
+}
+
+.reply-content {
+    flex: 1;
+    min-width: 0;
+    max-width: calc(100% - 50px);
+}
+
+.reply-user-name {
+    font-weight: 600;
+    color: #fff;
+    font-size: 0.9rem;
+    margin-right: 8px;  /* Added spacing after name */
+}
+
+.reply-text {
+    margin-top: 4px;
+    color: #e0e0e0;
+    font-size: 0.85rem;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    white-space: pre-wrap;
+}
+
+.reply-timestamp {
+    color: #00ff84;  /* Changed to neon green */
+    font-size: 0.8rem;
+    margin-left: 8px;
+    opacity: 0.8;
+}
+
+/* Styling for rank achievements */
+.activity-achievement-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
+
+.activity-achievement-title .rank-emoji {
+    margin-right: 8px;
+    font-size: 1.4rem;
+}
+
+.activity-item.rank-achievement {
+    border-left: 4px solid #FFD700;
+    background: linear-gradient(to right, rgba(255, 215, 0, 0.1), rgba(0, 0, 0, 0.2));
+}
+
+.activity-item.rank-achievement.rank-1 {
+    border-left-color: #FFD700; /* Gold */
+    background: linear-gradient(to right, rgba(255, 215, 0, 0.1), rgba(0, 0, 0, 0.2));
+}
+
+.activity-item.rank-achievement.rank-2 {
+    border-left-color: #C0C0C0; /* Silver */
+    background: linear-gradient(to right, rgba(192, 192, 192, 0.1), rgba(0, 0, 0, 0.2));
+}
+
+.activity-item.rank-achievement.rank-3 {
+    border-left-color: #CD7F32; /* Bronze */
+    background: linear-gradient(to right, rgba(205, 127, 50, 0.1), rgba(0, 0, 0, 0.2));
+}
+
+.activity-item.weightLoss-rank {
+    border-top: 2px solid #00ff84;
+}
+
+.activity-item.strength-rank {
+    border-top: 2px solid #ff7b00;
+}
+
+.activity-item.consistency-rank {
+    border-top: 2px solid #00a9ff;
+}
+
+.activity-item.hybrid-rank {
+    border-top: 2px solid #ff00c8;
+}
+
+/* Add styles for the rank banner display */
+.rank-banner {
+    display: flex;
+    align-items: center;
+    background: rgba(30, 30, 45, 0.7);
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.rank-banner .rank-emoji {
+    font-size: 24px;
+    margin-right: 12px;
+}
+
+.rank-banner h3 {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.activity-achievement-description {
+    margin: 8px 0 16px;
+    color: var(--text-secondary);
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 0 8px;
+}
+
+/* Add color styling for different rank types */
+.weightLoss-rank .rank-banner {
+    border-left: 4px solid #ff6b6b;
+}
+
+.strength-rank .rank-banner {
+    border-left: 4px solid #4d96ff;
+}
+
+.consistency-rank .rank-banner {
+    border-left: 4px solid #ffd166;
+}
+
+.hybrid-rank .rank-banner {
+    border-left: 4px solid #06d6a0;
+}
+
+/* Enhance rank emoji display */
+.rank-emoji {
+    display: inline-block;
+    animation: pulseEmoji 2s infinite;
+}
+
+@keyframes pulseEmoji {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Add rank-based colors instead of category-based colors */
+
+/* Gold medal color for rank 1 */
+.rank-1 .rank-banner {
+    border-top: 4px solid gold;
+    border-left: none;
+}
+
+/* Silver medal color for rank 2 */
+.rank-2 .rank-banner {
+    border-top: 4px solid silver;
+    border-left: none;
+}
+
+/* Bronze medal color for rank 3 */
+.rank-3 .rank-banner {
+    border-top: 4px solid #cd7f32; /* bronze color */
+    border-left: none;
+}
+
+/* Remove the category-specific colors */
+.weightLoss-rank .rank-banner,
+.strength-rank .rank-banner,
+.consistency-rank .rank-banner,
+.hybrid-rank .rank-banner {
+    border-left: none;
+}
+
+/* Enhance the rank banner with a gradient background based on rank */
+.rank-1 .rank-banner {
+    background: linear-gradient(to right, rgba(40, 40, 55, 0.7), rgba(40, 40, 55, 0.9)), 
+                linear-gradient(to bottom, rgba(255, 215, 0, 0.1), transparent);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
+}
+
+.rank-2 .rank-banner {
+    background: linear-gradient(to right, rgba(40, 40, 55, 0.7), rgba(40, 40, 55, 0.9)), 
+                linear-gradient(to bottom, rgba(192, 192, 192, 0.1), transparent);
+    box-shadow: 0 0 15px rgba(192, 192, 192, 0.1);
+}
+
+.rank-3 .rank-banner {
+    background: linear-gradient(to right, rgba(40, 40, 55, 0.7), rgba(40, 40, 55, 0.9)), 
+                linear-gradient(to bottom, rgba(205, 127, 50, 0.1), transparent);
+    box-shadow: 0 0 15px rgba(205, 127, 50, 0.1);
+}
+
+/* Make the rank emoji color match the rank as well */
+.rank-1 .rank-emoji {
+    color: gold;
+}
+
+.rank-2 .rank-emoji {
+    color: silver;
+}
+
+.rank-3 .rank-emoji {
+    color: #cd7f32; /* bronze color */
+}
+
+/* Remove the category-specific colored borders */
+.weightLoss-rank .rank-banner,
+.strength-rank .rank-banner,
+.consistency-rank .rank-banner,
+.hybrid-rank .rank-banner {
+    border-top: none;
+}
+
+/* Replace with rank-specific colored top borders for the activity item itself */
+.activity-item.rank-achievement.rank-1 {
+    border-top: 4px solid gold;
+}
+
+.activity-item.rank-achievement.rank-2 {
+    border-top: 4px solid silver;
+}
+
+.activity-item.rank-achievement.rank-3 {
+    border-top: 4px solid #cd7f32; /* bronze */
+}
+
+/* Remove the old category-specific top borders */
+.activity-item.weightLoss-rank,
+.activity-item.strength-rank,
+.activity-item.consistency-rank,
+.activity-item.hybrid-rank {
+    border-top: none;
+}
+
+/* Enhance rank-specific activity items with gradients and glow effects */
+.activity-item.rank-achievement.rank-1 {
+    border-top: 4px solid gold;
+    background: linear-gradient(to bottom, rgba(255,215,0,0.1) 0%, rgba(30,40,44,0) 50%);
+    box-shadow: 0 0 15px rgba(255,215,0,0.15);
+}
+
+.activity-item.rank-achievement.rank-2 {
+    border-top: 4px solid silver;
+    background: linear-gradient(to bottom, rgba(192,192,192,0.1) 0%, rgba(30,40,44,0) 50%);
+    box-shadow: 0 0 15px rgba(192,192,192,0.15);
+}
+
+.activity-item.rank-achievement.rank-3 {
+    border-top: 4px solid #cd7f32; /* bronze */
+    background: linear-gradient(to bottom, rgba(205,127,50,0.1) 0%, rgba(30,40,44,0) 50%);
+    box-shadow: 0 0 15px rgba(205,127,50,0.15);
+}
+
+/* Remove the old category-specific background colors */
+.activity-item.weightLoss-rank,
+.activity-item.strength-rank,
+.activity-item.consistency-rank,
+.activity-item.hybrid-rank {
+    border-top: none;
+    background: transparent;
+}
+
+/* Make sure the top medal colors work well with our design */
+.rank-1 .rank-emoji {
+    color: gold;
+    text-shadow: 0 0 8px rgba(255,215,0,0.4);
+}
+
+.rank-2 .rank-emoji {
+    color: silver;
+    text-shadow: 0 0 8px rgba(192,192,192,0.4);
+}
+
+.rank-3 .rank-emoji {
+    color: #cd7f32; /* bronze */
+    text-shadow: 0 0 8px rgba(205,127,50,0.4);
+}
+
+/* Activity course tag - cleaner display */
+.activity-course-tag {
+    display: inline-block;
+    margin-top: 0.6rem;
+    padding: 3px 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Special styling for rank-specific course tags */
+.rank-achievement.rank-1 .activity-course-tag {
+    background: rgba(255, 215, 0, 0.15);
+    border-color: rgba(255, 215, 0, 0.4);
+    color: gold;
+}
+
+.rank-achievement.rank-2 .activity-course-tag {
+    background: rgba(192, 192, 192, 0.15);
+    border-color: rgba(192, 192, 192, 0.4);
+    color: silver;
+}
+
+.rank-achievement.rank-3 .activity-course-tag {
+    background: rgba(205, 127, 50, 0.15);
+    border-color: rgba(205, 127, 50, 0.4);
+    color: #cd7f32;
+}
+
+/* Course label in profile category */
+.activity-achievement-info .course-label {
+    color: var(--neon-green);
+}
+
+/* Styling for rank activities with course info */
+.rank-achievement .activity-course-info {
+    display: inline-flex;
+    margin-top: 10px;
+    background: rgba(255, 215, 0, 0.1);
+    border-left-color: gold;
+}
+
+.activity-achievement-title .rank-emoji {
+    margin-right: 8px;
+    font-size: 1.4rem;
+}
+
+.rank-course-indicator {
+    font-size: 0.8rem;
+    font-weight: normal;
+    opacity: 0.9;
+    margin-left: 5px;
+}
+
+.rank-achievement.rank-1 .rank-course-indicator {
+    color: rgba(255, 215, 0, 0.9);
+}
+
+.rank-achievement.rank-2 .rank-course-indicator {
+    color: rgba(192, 192, 192, 0.9);
+}
+
+.rank-achievement.rank-3 .rank-course-indicator {
+    color: rgba(205, 127, 50, 0.9);
+}
+
+.activity-item.rank-achievement {
+    border-left: 4px solid #FFD700;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 4px;
+    width: 100%;
+    position: relative;
+}
+
+.comment-user-name {
+    font-weight: 600;
+    color: #fff;
+    font-size: 0.95rem;
+    margin-right: 4px;
+}
+
+.comment-timestamp {
+    color: #00ff84;
+    font-size: 0.8rem;
+    opacity: 0.8;
+    flex-grow: 1;
+}
+
+.delete-comment-button {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #ff4444;
+    cursor: pointer;
+    padding: 6px;
+    opacity: 0.6;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.delete-comment-button:hover {
+    opacity: 1;
+    background: rgba(255, 68, 68, 0.1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.delete-comment-button svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Ensure the comment text doesn't overlap with the delete button */
+.comment-text {
+    margin-top: 4px;
+    color: #e0e0e0;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: calc(100% - 30px); /* Account for delete button */
+    white-space: pre-wrap;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    padding-right: 25px;
+}
+
+/* Mobile responsiveness for comments */
+@media (max-width: 768px) {
+    .comment-header {
+        padding-right: 30px; /* Make space for delete button */
+    }
+
+    .comment-timestamp {
+        font-size: 0.75rem;
+    }
+
+    .delete-comment-button {
+        padding: 4px;
+    }
+
+    .delete-comment-button svg {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+
+
+
+
+
+.activity-comments-container {
+    text-align: left;
+}
+
+.comment-item {
+    text-align: left !important;
+    align-items: flex-start !important;
+}
+
+.comment-content {
+    text-align: left !important;
+}
+
+.comment-text {
+    text-align: left !important;
+}
+
+
+
+.activity-content {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.rank-course-indicator {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    margin-left: 4px;
+    font-size: 0.85em;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 2px 8px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rank-1 .rank-course-indicator {
+    background-color: rgba(255, 215, 0, 0.3);
+}
+
+.rank-2 .rank-course-indicator {
+    background-color: rgba(192, 192, 192, 0.3);
+}
+
+.rank-3 .rank-course-indicator {
+    background-color: rgba(205, 127, 50, 0.3);
+}
+
+/* Course tag styling for the activity achievement info */
+.activity-course-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 10px;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.8em;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+/* Style for course indicators in different rank achievements */
+.rank-achievement.rank-1 .activity-course-tag {
+    background-color: rgba(255, 215, 0, 0.2);
+    border: 1px solid rgba(255, 215, 0, 0.5);
+}
+
+.rank-achievement.rank-2 .activity-course-tag {
+    background-color: rgba(192, 192, 192, 0.2);
+    border: 1px solid rgba(192, 192, 192, 0.5);
+}
+
+.rank-achievement.rank-3 .activity-course-tag {
+    background-color: rgba(205, 127, 50, 0.2);
+    border: 1px solid rgba(205, 127, 50, 0.5);
+}
+
+@media (max-width: 768px) {
+    /* Fix activity cards spacing and alignment */
+    .activity-item {
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+    
+    /* Fix activity header alignment */
+    .activity-header {
+        align-items: flex-start;
+        margin-bottom: 10px;
+    }
+    
+    /* Improve user info layout */
+    .activity-user-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .activity-user-name {
+        font-size: 0.9rem;
+        margin-bottom: 2px;
+        margin-right: 0;
+    }
+    
+    .activity-timestamp {
+        font-size: 0.7rem;
+        margin-left: 0;
+        opacity: 0.8;
+    }
+    
+    /* Fix reaction buttons to display horizontally */
+    .reaction-buttons {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: 5px 0;
+        gap: 6px;
+        margin-top: 5px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    
+    .reaction-buttons::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .reaction-button {
+        padding: 4px 8px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+        border-radius: 15px;
+        min-width: auto;
+        height: 28px;
+        display: flex;
+        align-items: center;
+    }
+    
+    /* Fix comment issues */
+    .comment-item {
+        padding: 8px;
+        margin-bottom: 8px;
+        position: relative;
+    }
+    
+    .comment-header {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding-right: 25px;
+        margin-bottom: 2px;
+    }
+    
+    .comment-user-image {
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+        flex-shrink: 0;
+    }
+    
+    .comment-content {
+        flex: 1;
+        min-width: 0;
+    }
+    
+    .comment-user-name {
+        font-size: 0.85rem;
+        margin-right: 4px;
+    }
+    
+    .comment-timestamp {
+        font-size: 0.7rem;
+    }
+    
+    .comment-text {
+        font-size: 0.8rem;
+        line-height: 1.3;
+        padding-right: 0;
+        margin-top: 3px;
+    }
+    
+    .delete-comment-button {
+        position: absolute;
+        right: 5px;
+        top: 8px;
+        padding: 3px;
+    }
+    
+    .delete-comment-button svg {
+        width: 12px;
+        height: 12px;
+    }
+    
+    /* Fix comment form */
+    .comment-form {
+        margin-top: 8px;
+        gap: 6px;
+    }
+    
+    .comment-input {
+        height: 32px;
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .comment-submit {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+        height: 32px;
+    }
+    
+    /* Fix Comments toggle button */
+    .comments-toggle {
+        font-size: 0.8rem;
+        padding: 5px 0;
+    }
+    
+    /* Fix activity content text */
+    .activity-content {
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+    }
+    
+    .activity-achievement-description {
+        font-size: 0.8rem;
+        line-height: 1.3;
+    }
+}
+
+/* Additional fixes for very small screens */
+@media (max-width: 480px) {
+    .activity-item {
+        padding: 10px;
+    }
+    
+    .activity-user-image,
+    .activity-user-placeholder {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .comment-user-image {
+        width: 22px;
+        height: 22px;
+        margin-right: 6px;
+    }
+    
+    .reaction-button {
+        padding: 3px 6px;
+        font-size: 0.75rem;
+        height: 24px;
+    }
+    
+    .activity-content {
+        font-size: 0.85rem;
+    }
+    
+    .comment-text {
+        font-size: 0.75rem;
+    }
+    
+    .delete-comment-button {
+        right: 3px;
+        top: 6px;
+    }
+    
+    .delete-comment-button svg {
+        width: 10px;
+        height: 10px;
+    }
+    
+    /* Fix comment toggle button on small screens */
+    .comments-toggle {
+        font-size: 0.75rem;
+    }
+}
+
+/* Fix comment section layout issues */
+@media (max-width: 768px) {
+    /* Comment item container */
+    .comment-item {
+        display: flex;
+        padding: 8px;
+        margin-bottom: 8px;
+        background: rgba(40, 40, 60, 0.5);
+        border-radius: 6px;
+        position: relative;
+        gap: 8px;
+    }
+    
+    /* Comment header layout */
+    .comment-header {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        position: relative;
+    }
+    
+    /* User image in comments */
+    .comment-user-image {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        margin-right: 8px;
+        flex-shrink: 0;
+    }
+    
+    /* Comment content container */
+    .comment-content {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-width: 0;
+    }
+    
+    /* Username in comments */
+    .comment-user-name {
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-right: 8px;
+        color: #fff;
+    }
+    
+    /* Timestamp in comments */
+    .comment-timestamp {
+        font-size: 0.7rem;
+        color: #00ff84;
+        opacity: 0.8;
+    }
+    
+    /* Comment text */
+    .comment-text {
+        font-size: 0.85rem;
+        margin-top: 4px;
+        line-height: 1.3;
+        color: #e0e0e0;
+        word-wrap: break-word;
+        word-break: break-word;
+        padding-right: 24px;
+    }
+    
+    /* Delete comment button */
+    .delete-comment-button {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 4px;
+        background: none;
+        border: none;
+        color: #ff4444;
+        opacity: 0.7;
+    }
+    
+    .delete-comment-button svg {
+        width: 12px;
+        height: 12px;
+    }
+    
+    /* Comment form */
+    .comment-form {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 10px;
+        padding: 0 5px;
+    }
+    
+    /* Comment input field */
+    .comment-input {
+        flex: 1;
+        height: 36px;
+        background: rgba(30, 30, 45, 0.7);
+        border: 1px solid rgba(64, 64, 85, 0.8);
+        border-radius: 18px;
+        padding: 0 12px;
+        color: #ffffff;
+        font-size: 0.85rem;
+    }
+    
+    /* Post button */
+    .comment-submit {
+        height: 36px;
+        padding: 0 14px;
+        background: rgba(0, 255, 120, 0.2);
+        border: 1px solid var(--neon-green);
+        border-radius: 18px;
+        color: var(--neon-green);
+        font-size: 0.85rem;
+        min-width: 60px;
+    }
+    
+    /* Comments toggle button */
+    .comments-toggle {
+        display: flex;
+        align-items: center;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        background: none;
+        border: none;
+        padding: 5px 0;
+        cursor: pointer;
+        gap: 5px;
+    }
+}
+
+/* Additional fixes for very small screens */
+@media (max-width: 480px) {
+    .comment-item {
+        padding: 6px;
+    }
+    
+    .comment-user-image {
+        width: 24px;
+        height: 24px;
+        margin-right: 6px;
+    }
+    
+    .comment-user-name {
+        font-size: 0.75rem;
+    }
+    
+    .comment-timestamp {
+        font-size: 0.65rem;
+    }
+    
+    .comment-text {
+        font-size: 0.75rem;
+        line-height: 1.2;
+    }
+    
+    .comment-input {
+        height: 32px;
+        font-size: 0.75rem;
+    }
+    
+    .comment-submit {
+        height: 32px;
+        padding: 0 10px;
+        font-size: 0.75rem;
+    }
+    
+    .delete-comment-button svg {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .comments-toggle {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Fix comment header with timestamp alignment */
+    .comment-header {
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        width: 100%;
+        position: relative;
+    }
+    
+    /* Make timestamp and date display horizontally */
+    .activity-timestamp,
+    .comment-timestamp {
+        display: inline-block;
+        white-space: nowrap;
+        line-height: 1.2;
+        font-size: 0.7rem;
+    }
+    
+    /* Fix Post button positioning */
+    .comment-form {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 10px;
+        padding: 0;
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .comment-input {
+        flex: 1;
+        height: 36px;
+        min-width: 0;
+        max-width: calc(100% - 80px);
+        background: rgba(30, 30, 45, 0.7);
+        border: 1px solid rgba(64, 64, 85, 0.8);
+        border-radius: 18px;
+        padding: 0 12px;
+        color: #ffffff;
+        font-size: 0.8rem;
+    }
+    
+    .comment-submit {
+        height: 36px;
+        padding: 0 15px;
+        background: rgba(0, 255, 120, 0.2);
+        border: 1px solid var(--neon-green);
+        border-radius: 18px;
+        color: var(--neon-green);
+        font-size: 0.8rem;
+        min-width: 60px;
+        max-width: 70px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    
+    /* User info in comments */
+    .activity-user-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    /* Fix username and date in activities */
+    .activity-user-name {
+        margin-right: 0;
+        margin-bottom: 2px;
+        display: block;
+    }
+    
+    /* Make comment sections properly contained */
+    .activity-comments-container {
+        width: 100%;
+        padding: 0;
+    }
+    
+    .activity-comments {
+        width: 100%;
+    }
+}
+
+/* Additional fixes for very small screens */
+@media (max-width: 480px) {
+    /* Ensure the comment form fits properly */
+    .comment-form {
+        gap: 6px;
+    }
+    
+    .comment-input {
+        height: 34px;
+        font-size: 0.75rem;
+        max-width: calc(100% - 70px);
+    }
+    
+    .comment-submit {
+        height: 34px;
+        min-width: 50px;
+        max-width: 60px;
+        padding: 0 10px;
+        font-size: 0.75rem;
+    }
+    
+    /* Fix timestamp display */
+    .activity-timestamp,
+    .comment-timestamp {
+        font-size: 0.65rem;
+        white-space: nowrap;
+    }
+    
+    /* Fix date display in comments */
+    .comment-header {
+        padding-right: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Fix delete button alignment with username */
+    .delete-comment-button {
+        position: absolute;
+        right: 0;
+        top: 0; 
+        padding: 4px;
+        background: none;
+        border: none;
+        color: #ff4444;
+        opacity: 0.7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 24px;
+        width: 24px;
+    }
+    
+    /* Ensure the delete button aligns with username */
+    .comment-header {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    /* Create proper space for the delete button */
+    .comment-user-info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex: 1;
+        padding-right: 25px; /* Make space for delete button */
+    }
+    
+    /* Fix alignment within comments */
+    .comment-user-name {
+        margin-bottom: 0;
+        line-height: 1.2;
+    }
+    
+    /* Fix alignment with timestamp */
+    .activity-timestamp,
+    .comment-timestamp {
+        line-height: 1.2;
+    }
+    
+    /* Delete button in activities */
+    .activity-delete-button,
+    .delete-comment-button {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Ensure the content has proper spacing */
+    .comment-content {
+        width: 100%;
+    }
+}
+
+/* Smaller screens */
+@media (max-width: 480px) {
+    .delete-comment-button {
+        height: 20px;
+        width: 20px;
+        padding: 3px;
+    }
+    
+    .delete-comment-button svg {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Fix the comment layout for better alignment */
+    .comment-item {
+        display: flex;
+        align-items: flex-start;
+        padding: 8px;
+        position: relative;
+    }
+    
+    /* Improve the comment header structure */
+    .comment-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        position: relative;
+    }
+    
+    /* Align the username and timestamp */
+    .comment-user-name {
+        display: inline-block;
+        text-align: left;
+        margin-bottom: 1px;
+        font-size: 0.85rem;
+        line-height: 1.2;
+    }
+    
+    /* Move timestamp next to username */
+    .comment-timestamp,
+    .activity-timestamp {
+        display: block;
+        text-align: left;
+        margin-left: 0;
+        color: #00ff84;
+        font-size: 0.7rem;
+        line-height: 1.2;
+        opacity: 0.8;
+        white-space: nowrap;
+    }
+    
+    /* Ensure date displays properly in activities */
+    .activity-user-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+    
+    /* Make sure the comment text is properly aligned */
+    .comment-text {
+        margin-top: 5px;
+        padding-right: 20px;
+        width: 100%;
+        text-align: left;
+    }
+    
+    /* Fix layout for user info in comments */
+    .comment-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+    
+    /* Fix activity header layout */
+    .activity-header {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    
+    /* Fix the activity user name and date */
+    .activity-user-name {
+        display: block;
+        text-align: left;
+        margin-bottom: 1px;
+    }
+    
+    /* Fix the activity content */
+    .activity-content {
+        text-align: left;
+        width: 100%;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+    .comment-user-name {
+        font-size: 0.8rem;
+    }
+    
+    .comment-timestamp,
+    .activity-timestamp {
+        font-size: 0.65rem;
+    }
+    
+    .comment-text {
+        margin-top: 4px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Reduce size of rank achievements */
+    .activity-item.rank-achievement {
+        padding: 10px;
+    }
+    
+    /* Make rank banner smaller */
+    .rank-banner {
+        padding: 8px;
+        margin-bottom: 8px;
+    }
+    
+    /* Reduce size of rank emoji and icons */
+    .rank-banner .rank-emoji,
+    .rank-emoji {
+        font-size: 16px;
+        margin-right: 6px;
+    }
+    
+    .rank-banner h3 {
+        font-size: 0.9rem;
+    }
+    
+    /* Make achievement title and crown icons smaller */
+    .activity-achievement-title {
+        font-size: 0.9rem;
+    }
+    
+    .activity-achievement-title .rank-emoji {
+        font-size: 16px;
+        margin-right: 5px;
+    }
+    
+    /* Make activity achievement icons smaller */
+    .activity-achievement-icon {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .activity-achievement-icon img {
+        width: 30px;
+        height: 30px;
+    }
+    
+    /* Reduce size of achievement description */
+    .activity-achievement-description {
+        font-size: 0.8rem;
+        margin: 5px 0 8px;
+    }
+}
+
+/* Additional sizing reduction for smaller screens */
+@media (max-width: 480px) {
+    /* Further reduce size of rank achievements */
+    .activity-item.rank-achievement {
+        padding: 8px;
+    }
+    
+    /* Make rank banner even smaller */
+    .rank-banner {
+        padding: 6px;
+        margin-bottom: 6px;
+    }
+    
+    /* Further reduce size of emoji and icons */
+    .rank-banner .rank-emoji,
+    .rank-emoji {
+        font-size: 14px;
+        margin-right: 4px;
+    }
+    
+    .rank-banner h3 {
+        font-size: 0.85rem;
+    }
+    
+    /* Make achievement title and crown icons smaller */
+    .activity-achievement-title {
+        font-size: 0.85rem;
+    }
+    
+    .activity-achievement-title .rank-emoji {
+        font-size: 14px;
+    }
+    
+    /* Make activity achievement icons smaller */
+    .activity-achievement-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .activity-achievement-icon img {
+        width: 26px;
+        height: 26px;
+    }
+    
+    /* Reduce padding around achievements */
+    .activity-achievement {
+        padding: 6px;
+        gap: 6px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Make ONLY regular achievements display horizontally, not rank achievements */
+    .activity-item:not(.rank-achievement) .activity-achievement {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    /* Achievement icon sizing for regular achievements */
+    .activity-item:not(.rank-achievement) .activity-achievement-icon {
+        width: 36px;
+        height: 36px;
+        margin-right: 0;
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+    
+    .activity-item:not(.rank-achievement) .activity-achievement-icon img {
+        width: 30px;
+        height: 30px;
+    }
+    
+    /* Make achievement info display properly for regular achievements */
+    .activity-item:not(.rank-achievement) .activity-achievement-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        flex: 1;
+    }
+    
+    /* Preserve the styling for rank achievements */
+    .activity-item.rank-achievement .activity-achievement {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .activity-item.rank-achievement .rank-banner {
+        padding: 8px;
+        margin-bottom: 8px;
+    }
+    
+    .activity-item.rank-achievement .rank-emoji {
+        font-size: 16px;
+        margin-right: 6px;
+    }
+    
+    .activity-item.rank-achievement .rank-banner h3 {
+        font-size: 0.9rem;
+    }
+}
+
+/* Further refinements for small screens */
+@media (max-width: 480px) {
+    .activity-item:not(.rank-achievement) .activity-achievement {
+        padding: 8px;
+        gap: 8px;
+    }
+    
+    .activity-item:not(.rank-achievement) .activity-achievement-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .activity-item:not(.rank-achievement) .activity-achievement-icon img {
+        width: 26px;
+        height: 26px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Add spacing between username and date in activities */
+    .activity-user-name {
+        margin-bottom: 4px !important;
+        display: block;
+    }
+    
+    .activity-timestamp {
+        margin-top: 2px;
+        margin-bottom: 6px;
+        display: block;
+        color: #00ff84;
+        font-size: 0.7rem;
+        opacity: 0.8;
+    }
+    
+    /* Add spacing in comments as well */
+    .comment-user-name {
+        margin-bottom: 4px;
+        display: block;
+    }
+    
+    .comment-timestamp {
+        margin-top: 2px;
+        display: block;
+        color: #00ff84;
+        font-size: 0.7rem;
+        opacity: 0.8;
+    }
+    
+    /* Ensure spacing in all activity types */
+    .activity-item .activity-header .activity-user-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* Small screens */
+@media (max-width: 480px) {
+    /* Maintain spacing on very small screens */
+    .activity-user-name,
+    .comment-user-name {
+        margin-bottom: 3px !important;
+    }
+    
+    .activity-timestamp,
+    .comment-timestamp {
+        margin-top: 1px;
+        margin-bottom: 5px;
+        font-size: 0.65rem;
+    }
+}
+
+@media (max-width: 768px) {
+    
+    
+
+    
+ 
+    
+    
+}
+
+
+
+@media (max-width: 768px) {
+    /* Fix issues with missing content in activities */
+    .activity-item {
+        display: flex;
+        flex-direction: column;
+        padding: 12px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* Ensure activity content is visible */
+    .activity-content {
+        display: block !important;
+        width: 100% !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        margin-top: 8px;
+        margin-bottom: 10px;
+    }
+    
+    /* Fix any hidden achievement content */
+    .activity-achievement {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100%;
+    }
+    
+    /* Ensure reaction buttons are visible */
+    .activity-reactions,
+    .reaction-buttons {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100%;
+        margin-top: 8px;
+    }
+    
+    /* Ensure comments are visible */
+    .activity-comments-container,
+    .activity-comments {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100%;
+    }
+    
+    /* Fix comment toggle button */
+    .comments-toggle {
+        display: flex !important;
+        align-items: center;
+        visibility: visible !important;
+        opacity: 1 !important;
+        margin-top: 5px;
+    }
+    
+   
+    
+    /* For rank achievements */
+    .activity-item.rank-achievement .activity-content,
+    .activity-item.rank-achievement .activity-achievement,
+    .activity-item.rank-achievement .activity-reactions,
+    .activity-item.rank-achievement .activity-comments-container {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    /* Fix potential z-index or position issues */
+    .activity-content,
+    .activity-achievement,
+    .activity-reactions,
+    .activity-comments-container {
+        position: relative;
+        z-index: 1;
+    }
+    
+    /* Fixed potential hidden elements due to overflow */
+    .activity-item {
+        overflow: visible !important;
+    }
+    
+    /* Ensure all icons are visible */
+    .reaction-icon,
+    .comment-icon,
+    .achievement-icon {
+        display: inline-flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Ensure visibility on very small screens */
+@media (max-width: 480px) {
+    .activity-item {
+        padding: 10px;
+    }
+    
+    /* Re-enforce visibility on small screens */
+    .activity-content,
+    .activity-achievement,
+    .activity-reactions,
+    .activity-comments-container,
+    .comments-toggle {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100%;
+    }
+}
+
+/* Weight change activities */
+.activity-item.weight-change {
+    border: 1px solid rgba(0, 255, 132, 0.3);
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 255, 132, 0.1));
+}
+
+.activity-item.weight-change .activity-achievement-title {
+    color: #00ff84;
+    font-weight: bold;
+}
+
+.activity-item.weight-change.loss {
+    border: 1px solid rgba(0, 255, 132, 0.5);
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 255, 132, 0.2));
+}
+
+.activity-item.weight-change.gain {
+    border: 1px solid rgba(255, 147, 0, 0.5);
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(255, 147, 0, 0.2));
+}
+
+.activity-item.weight-change .weight-icon {
+    display: inline-block;
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+
+.activity-item.weight-change.loss .activity-achievement-title {
+    color: #00ff84;
+}
+
+.activity-item.weight-change.gain .activity-achievement-title {
+    color: #ff9300;
+}
+
+.activity-item.weight-change .activity-achievement-description {
+    color: #e0e0e0;
+}
+
+/* Additional fixes for weight-change activities */
+@media (max-width: 768px) {
+    .activity-item.weight-change {
+        overflow: hidden;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .activity-item.weight-change .activity-reactions,
+    .activity-item.weight-change .activity-comments-container {
+        width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+    
+    .activity-item.weight-change .reaction-buttons {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 5px;
+    }
+    
+    .activity-item.weight-change .activity-comments {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .activity-item.weight-change .comment-item {
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 5px;
+    }
+    
+    .activity-item.weight-change .comments-toggle {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .activity-item.weight-change .comment-form {
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+    }
+    
+    .activity-item.weight-change .comment-input {
+        flex: 1;
+    }
+}
+
+
+
+
+
+
+/* Global fixes for reaction buttons on mobile */
+@media (max-width: 768px) {
+    .activity-item .activity-reactions {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 5px;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .activity-item .reaction-buttons {
+        display: flex;
+        max-width: 100%;
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        overflow-x: visible;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .activity-item .reaction-button {
+        flex: 1;
+        min-width: auto;
+        white-space: nowrap;
+        margin: 0 2px;
+        padding: 3px 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.9rem;
+    }
+    
+    .activity-item .reaction-button .reaction-icon,
+    .activity-item .reaction-button .reaction-count {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+
+/* Fix activity container width on mobile */
+@media (max-width: 768px) {
+    .activity-item {
+        max-width: 100% !important;
+        width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .activity-content,
+    .activity-interactions {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .activity-achievement {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+/* General fix for reaction buttons on small screens */
+@media (max-width: 400px) {
+    .activity-item .reaction-buttons {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        width: 100% !important;
+        gap: 1px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .activity-item .reaction-button {
+        padding: 2px !important;
+        margin: 0 !important;
+        font-size: 0.75rem !important;
+        min-width: 0 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+    
+    .activity-item .reaction-icon {
+        margin-right: 2px !important;
+        font-size: 0.9em !important;
+    }
+    
+    .activity-item .reaction-count {
+        font-size: 0.75em !important;
+    }
+}
+
+
+
+
+
+
+/* Hide achievements and activity sections for private profiles when viewed by others */
+.profile-container.private-profile .tab-content[data-tab="achievements"],
+.profile-container.private-profile .tab-content[data-tab="activity"] {
+    display: none;
+}
+
+.profile-container.private-profile .tab-button[data-tab="achievements"],
+.profile-container.private-profile .tab-button[data-tab="activity"] {
+    opacity: 0.5;
+    pointer-events: none;
+    position: relative;
+}
+
+.profile-container.private-profile .tab-button[data-tab="achievements"]::after,
+.profile-container.private-profile .tab-button[data-tab="activity"]::after {
+    content: "🔒";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+}
+
+/* Private profile message for achievements and activity tabs */
+.private-content-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 600px;
+    background-color: rgba(255, 68, 68, 0.1);
+    border: 1px solid #ff4444;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.private-content-message h3 {
+    color: #ff4444;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.private-content-message p {
+    color: #e5e5e5;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.private-content-message .lock-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #ff4444;
+}
+
+@media (max-width: 768px) {
+    .private-content-message {
+        padding: 1.5rem;
+        margin: 1.5rem auto;
+    }
+    
+    .private-content-message h3 {
+        font-size: 1.2rem;
+    }
+    
+    .private-content-message p {
+        font-size: 0.9rem;
+    }
+    
+    .private-content-message .lock-icon {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .private-content-message {
+        padding: 1rem;
+        margin: 1rem auto;
+    }
+    
+    .private-content-message h3 {
+        font-size: 1.1rem;
+    }
+    
+    .private-content-message p {
+        font-size: 0.85rem;
+    }
+    
+    .private-content-message .lock-icon {
+        font-size: 1.8rem;
+    }
+}
+
+/* Private profile indicator banner */
+.private-profile-banner {
+    background-color: rgba(255, 68, 68, 0.15);
+    border: 1px solid #ff4444;
+    border-radius: 8px;
+    margin: 0 auto 1.5rem;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 90%;
+}
+
+.private-profile-banner .lock-icon {
+    font-size: 1.8rem;
+    color: #ff4444;
+    margin-bottom: 0.5rem;
+}
+
+.private-profile-banner h3 {
+    color: #ff4444;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.private-profile-banner p {
+    color: #e5e5e5;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .private-profile-banner {
+        padding: 0.8rem;
+        margin-bottom: 1.2rem;
+    }
+    
+    .private-profile-banner .lock-icon {
+        font-size: 1.5rem;
+    }
+    
+    .private-profile-banner h3 {
+        font-size: 1.1rem;
+    }
+    
+    .private-profile-banner p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .private-profile-banner {
+        padding: 0.6rem;
+        margin-bottom: 1rem;
+    }
+    
+    .private-profile-banner .lock-icon {
+        font-size: 1.3rem;
+    }
+    
+    .private-profile-banner h3 {
+        font-size: 1rem;
+    }
+    
+    .private-profile-banner p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Add specific CSS to fix achievement text alignment in mobile view */
+@media (max-width: 768px) {
+    .activity-item .activity-achievement {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+    }
+    
+    .activity-item .activity-achievement-icon {
+        margin-top: 4px !important;
+    }
+    
+    .activity-item .activity-achievement-info {
+        margin-left: 10px !important;
+        margin-top: 0 !important;
+    }
+    
+    .activity-item .activity-achievement-title {
+        margin-top: 0 !important;
+        margin-bottom: 4px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .activity-item .activity-achievement-icon {
+        margin-top: 2px !important;
+    }
+}
+
+.refresh-activities-btn {
+    background-color: var(--neon-green);
+    color: #0a0a0a;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 0 10px rgba(0, 255, 132, 0.4);
+}
+
+.refresh-activities-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(0, 255, 132, 0.6);
+}
+
+.activity-filter-dropdown {
+    background-color: rgba(0, 169, 81, 0.2);
+    color: white;
+    border: 1px solid var(--neon-green);
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 255, 132, 0.2);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300ff84%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    min-width: 180px;
+}
+
+.activity-filter-dropdown:hover {
+    background-color: rgba(0, 169, 81, 0.3);
+    box-shadow: 0 0 15px rgba(0, 255, 132, 0.3);
+}
+
+.activity-filter-dropdown option {
+    background-color: #1B4332;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .refresh-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+    
+    .refresh-activities-btn,
+    .activity-filter-dropdown {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+    
+    .activity-filter-dropdown {
+        min-width: 160px;
+    }
+}
+
+@media (max-width: 480px) {
+    .refresh-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    
+    .refresh-activities-btn,
+    .activity-filter-dropdown {
+        width: 100%;
+    }
+}
+
+/* Notification highlight effects */
+.activity-highlight {
+    animation: highlight-pulse 2s ease-in-out;
+    box-shadow: 0 0 10px rgba(0, 255, 132, 0.6);
+    border: 2px solid #00ff84 !important;
+}
+
+.comment-highlight {
+    animation: highlight-pulse 2s ease-in-out;
+    box-shadow: 0 0 10px rgba(0, 255, 132, 0.6);
+    border: 2px solid #00ff84 !important;
+}
+
+@keyframes highlight-pulse {
+    0%, 100% { box-shadow: 0 0 5px rgba(0, 255, 132, 0.6); }
+    50% { box-shadow: 0 0 20px rgba(0, 255, 132, 0.8); }
+}
+
+/* Profile Activity Filter Styles */
+.profile-activity-filters {
+    position: relative;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+}
+
+.profile-filter-toggle {
+    background-color: rgba(0, 255, 132, 0.1);
+    color: #00ff84;
+    border: 1px solid rgba(0, 255, 132, 0.5);
+    padding: 0 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    height: 36px;
+    line-height: 36px;
+}
+
+.profile-filter-toggle:hover {
+    background-color: rgba(0, 255, 132, 0.2);
+    transform: translateY(-2px);
+}
+
+.profile-filter-dropdown {
+    position: absolute;
+    top: calc(100% + 5px);
+    right: 0;
+    background: linear-gradient(135deg, rgba(10, 31, 10, 0.95) 0%, rgba(20, 45, 20, 0.95) 100%);
+    border: 1px solid rgba(0, 255, 132, 0.3);
+    border-radius: 5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 30;
+    width: 200px;
+    overflow: hidden;
+    animation: profileFilterFadeIn 0.2s ease;
+}
+
+@keyframes profileFilterFadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.profile-filter-option {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    text-align: left;
+    background: none;
+    border: none;
+    color: #ddd;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid rgba(0, 255, 132, 0.1);
+}
+
+.profile-filter-option:last-child {
+    border-bottom: none;
+}
+
+.profile-filter-option:hover {
+    background-color: rgba(0, 255, 132, 0.1);
+}
+
+.profile-filter-option.active {
+    background-color: rgba(0, 255, 132, 0.2);
+    color: #00ff84;
+}
+
+/* Media Queries for Profile Activity Filters */
+@media (max-width: 768px) {
+    .profile-activity-filters {
+        position: relative;
+    }
+
+    .profile-filter-toggle {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    .profile-filter-dropdown {
+        width: 180px;
+        right: 0;
+    }
+
+    .profile-filter-option {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-filter-toggle {
+        font-size: 11px;
+        padding: 5px 8px;
+    }
+
+    .profile-filter-dropdown {
+        width: 160px;
+    }
+
+    .profile-filter-option {
+        font-size: 12px;
+        padding: 7px 10px;
+    }
+}
+
+/* Remove old activity filter dropdown styles */
+.activity-filter-dropdown {
+    display: none;
+}
+
+/* Update mobile styles to maintain right alignment */
+@media (max-width: 480px) {
+    .refresh-container {
+        flex-direction: row; /* Keep buttons in a row */
+        justify-content: flex-end; /* Keep right alignment on mobile */
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .refresh-activities-btn,
+    .profile-filter-toggle {
+        width: auto;
+    }
+}
+
+
+
+

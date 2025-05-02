@@ -1,0 +1,211 @@
+.settings-container {
+    position: relative;
+}
+
+.settings-button {
+    background: rgba(0, 255, 132, 0.1);
+    color: #00ff84;
+    padding: 8px 16px;
+    border: 1px solid #00ff84;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.settings-button:hover {
+    background: rgba(0, 255, 132, 0.2);
+    box-shadow: 0 0 15px rgba(0, 255, 132, 0.3);
+    transform: translateY(-2px);
+}
+
+.settings-dropdown {
+    position: absolute;
+    right: 0;
+    top: 45px;
+    background: linear-gradient(135deg, #0a1f0a 0%, #1a2f1a 100%);
+    padding: 1rem;
+    border: 1px solid #00ff84;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 255, 132, 0.2);
+    z-index: 1000;
+    min-width: 200px;
+    backdrop-filter: blur(10px);
+    animation: dropdownFade 0.3s ease;
+}
+
+.settings-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.settings-dropdown ul li {
+    margin-bottom: 0.5rem;
+}
+
+.settings-dropdown ul li:last-child {
+    margin-bottom: 0;
+}
+
+.settings-dropdown ul li a {
+    color: #00ff84;
+    text-decoration: none;
+    display: block;
+    padding: 12px 16px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    font-size: 14px;
+    text-align: center; }
+
+.settings-dropdown ul li a:hover {
+    background: rgba(0, 255, 132, 0.1);
+    border-color: #00ff84;
+    transform: translateY(-2px);     box-shadow: 0 0 15px rgba(0, 255, 132, 0.2);
+}
+
+.signout-button {
+    width: 100%;
+    text-align: center;     padding: 12px 16px;
+    background: rgba(255, 68, 68, 0.1);
+    border: 1px solid transparent;
+    color: #ff4444;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+}
+
+.signout-button:hover {
+    background: rgba(255, 68, 68, 0.15);
+    border-color: #ff4444;
+    transform: translateX(5px);
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.2);
+}
+
+/* Mobile settings menu */
+.mobile-settings-menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 0;
+}
+
+.mobile-settings-menu .mobile-nav-link {
+    color: #00ff84;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 500;
+    padding: 12px 16px;
+    margin-bottom: 0;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+}
+
+.mobile-settings-menu .mobile-nav-link:hover {
+    background: rgba(0, 255, 132, 0.1);
+    border-color: #00ff84;
+    transform: translateX(-5px);
+}
+
+.mobile-settings-menu .signout-button {
+    background: rgba(255, 68, 68, 0.1);
+    color: #ff4444;
+    border: 1px solid transparent;
+    text-align: left;
+    margin-top: 12px;
+    padding: 12px 16px;
+    font-size: 17px;
+    font-weight: 500;
+    width: auto;
+}
+
+.mobile-settings-menu .signout-button:hover {
+    background: rgba(255, 68, 68, 0.15);
+    border-color: #ff4444;
+    transform: translateX(-5px);
+}
+
+@keyframes dropdownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .settings-dropdown {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 400px;
+        margin: 0 auto 1rem;
+        border-radius: 12px;
+        padding: 1rem;
+        animation: slideUp 0.3s ease;
+        box-shadow: 0 -4px 20px rgba(0, 255, 132, 0.2);
+    }
+
+    .settings-dropdown ul li a {
+        padding: 12px 16px;
+        font-size: 16px;     }
+
+    .signout-button {
+        padding: 12px 16px;
+        font-size: 16px;
+        margin-top: 0.75rem;
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translate(-50%, 100%);
+            opacity: 0;
+        }
+        to {
+            transform: translate(-50%, 0);
+            opacity: 1;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .mobile-settings-menu .mobile-nav-link,
+        .mobile-settings-menu .signout-button {
+            font-size: 16px;
+            padding: 10px 14px;
+        }
+    }
+
+    @media (max-width: 380px) {
+        .settings-dropdown {
+            width: 95%;
+            padding: 0.75rem;
+        }
+
+        .settings-dropdown ul li a,
+        .signout-button {
+            padding: 10px 14px;
+            font-size: 15px;
+        }
+        
+        .mobile-settings-menu .mobile-nav-link,
+        .mobile-settings-menu .signout-button {
+            font-size: 15px;
+            padding: 10px;
+        }
+    }
+}

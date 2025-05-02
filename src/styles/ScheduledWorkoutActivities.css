@@ -1,0 +1,128 @@
+/* Scheduled Workout Activities */
+.activity-achievement.scheduled-workout {
+    display: flex;
+    padding: 15px;
+    background: rgba(20, 20, 35, 0.7);
+    border-radius: 10px;
+    border-left: none;
+    margin: 10px 0;
+}
+
+.activity-achievement.scheduled-workout .activity-achievement-icon {
+    display: none;
+}
+
+.activity-achievement.scheduled-workout .workout-type-icon {
+    font-size: 24px;
+    color: #00ff84;
+}
+
+.scheduled-workout-details {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: flex-start;
+}
+
+.scheduled-workout-details .detail-item {
+    display: flex;
+    align-items: center;
+    background: rgba(30, 34, 46, 0.7);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #ffffff;
+    border: 1px solid rgba(64, 64, 85, 0.6);
+}
+
+.scheduled-workout-details .detail-icon {
+    margin-right: 5px;
+    color: #00ff84;
+}
+
+.activity-achievement.scheduled-workout .activity-achievement-title {
+    color: #ffffff;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.activity-achievement.scheduled-workout .activity-achievement-description {
+    color: #e5e5e5;
+    margin-bottom: 10px;
+}
+
+/* Activity item style for scheduled workouts */
+.activity-item.scheduled-workout {
+    background: rgba(20, 20, 35, 0.7);
+    border: 1px solid rgba(64, 64, 85, 0.6);
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+}
+
+.activity-item.scheduled-workout::before {
+    display: none;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    .activity-achievement.scheduled-workout {
+        flex-direction: column;
+        padding: 10px;
+        align-items: center;
+    }
+    
+    .activity-achievement.scheduled-workout .activity-achievement-icon {
+        display: none;
+    }
+    
+    .activity-achievement.scheduled-workout .activity-achievement-info {
+        text-align: center;
+        width: 100%;
+    }
+    
+    .scheduled-workout-details {
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        gap: 6px;
+    }
+    
+    .scheduled-workout-details .detail-item {
+        font-size: 0.8rem;
+        flex: 1;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .activity-achievement.scheduled-workout .workout-type-icon {
+        font-size: 18px;
+    }
+    
+    .scheduled-workout-details {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        gap: 4px;
+        margin-top: 6px;
+    }
+    
+    .scheduled-workout-details .detail-item {
+        width: auto;
+        min-width: auto;
+        max-width: none;
+        justify-content: center;
+        padding: 4px 6px;
+        font-size: 0.7rem;
+        flex: 1;
+        border-radius: 15px;
+    }
+    
+    .scheduled-workout-details .detail-icon {
+        margin-right: 3px;
+        font-size: 12px;
+    }
+} 
