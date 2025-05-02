@@ -61,7 +61,12 @@ function Leaderboard() {
           return;
       }
 
-      const response = await axios.get(`${API_URL}api/leaderboard/${endpoint}?course=${selectedCourse}`);
+      const response = await axios.get(`${API_URL}api/leaderboard/${endpoint}?course=${selectedCourse}`, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
       console.log(`Received ${response.data.length} entries for ${endpoint} leaderboard with course ${selectedCourse}`);
       setLeaderboardData(response.data);
       setError(null);
