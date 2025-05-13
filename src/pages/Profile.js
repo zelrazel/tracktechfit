@@ -3165,7 +3165,7 @@ const Profile = () => {
                 }
                 return (
                     <div className="profile-friends-tab">
-                        <Friends showOnlyFriendsList profileEmail={profileEmail} isOwnProfile={isOwnProfile} />
+                        <Friends showOnlyFriendsList profileEmail={profileEmail} />
                     </div>
                 );
             default:
