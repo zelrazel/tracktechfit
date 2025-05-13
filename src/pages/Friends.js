@@ -23,7 +23,7 @@ const NoProfilePicture = ({ name }) => (
 );
 
 // Update the FriendCard component
-const FriendCard = ({ friend, onRemove }) => {
+const FriendCard = ({ friend, onRemove, isOwnProfile = true }) => {
     const navigate = useNavigate();
     const [mutualCount, setMutualCount] = useState(0);
     
@@ -84,12 +84,14 @@ const FriendCard = ({ friend, onRemove }) => {
                         <FaUserFriends className="mutual-friends-icon" />
                         <span>{mutualCount} Mutual Friends</span>
                     </div>
-                    <button 
-                        className="remove-friend-button" 
-                        onClick={() => onRemove(friend.email)}
-                    >
-                        Remove Friend
-                    </button>
+                    {isOwnProfile && (
+                        <button 
+                            className="remove-friend-button" 
+                            onClick={() => onRemove(friend.email)}
+                        >
+                            Remove Friend
+                        </button>
+                    )}
                 </div>
             </div>
         </div>
@@ -530,6 +532,7 @@ const Friends = ({ showOnlyFriendsList, profileEmail }) => {
                                 key={friend._id} 
                                 friend={friend}
                                 onRemove={removeFriend}
+                                isOwnProfile={false}
                             />
                         ))}
                     </div>
@@ -564,6 +567,7 @@ const Friends = ({ showOnlyFriendsList, profileEmail }) => {
                                 key={friend._id} 
                                 friend={friend}
                                 onRemove={removeFriend}
+                                isOwnProfile={true}
                             />
                         ))}
                     </div>
@@ -936,6 +940,7 @@ const Friends = ({ showOnlyFriendsList, profileEmail }) => {
                                     key={friend._id} 
                                     friend={friend}
                                     onRemove={removeFriend}
+                                    isOwnProfile={true}
                                 />
                             ))}
                         </div>
