@@ -23,7 +23,7 @@ const NoProfilePicture = ({ name }) => (
 );
 
 // Update the FriendCard component
-const FriendCard = ({ friend, onRemove }) => {
+const FriendCard = ({ friend, onRemove, isOwnOrMainPage = true }) => {
     const navigate = useNavigate();
     const [mutualCount, setMutualCount] = useState(0);
     
@@ -84,12 +84,14 @@ const FriendCard = ({ friend, onRemove }) => {
                         <FaUserFriends className="mutual-friends-icon" />
                         <span>{mutualCount} Mutual Friends</span>
                     </div>
-                    <button 
-                        className="remove-friend-button" 
-                        onClick={() => onRemove(friend.email)}
-                    >
-                        Remove Friend
-                    </button>
+                    {isOwnOrMainPage && (
+                        <button 
+                            className="remove-friend-button" 
+                            onClick={() => onRemove(friend.email)}
+                        >
+                            Remove Friend
+                        </button>
+                    )}
                 </div>
             </div>
         </div>
@@ -327,7 +329,7 @@ const SentRequestCard = ({ request, cancelRequest, navigate }) => {
     );
 };
 
-const Friends = ({ showOnlyFriendsList, profileEmail }) => {
+const Friends = ({ showOnlyFriendsList, profileEmail, isOwnProfile = true }) => {
     const navigate = useNavigate();
     const [searchEmail, setSearchEmail] = useState("");
     const [searchResult, setSearchResult] = useState(null);
@@ -336,6 +338,7 @@ const Friends = ({ showOnlyFriendsList, profileEmail }) => {
     const [friends, setFriends] = useState([]);
     const [token] = useState(localStorage.getItem('token'));
     const [loading, setLoading] = useState(false);
+    const [friendsLoading, setFriendsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [userEmail, setUserEmail] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
@@ -410,6 +413,7 @@ const Friends = ({ showOnlyFriendsList, profileEmail }) => {
     // Modify fetchFriends function to use profileEmail if provided
     const fetchFriends = async () => {
         try {
+            setFriendsLoading(true);
             let url;
             if (profileEmail) {
                 url = `${API_URL}api/friends/list?email=${profileEmail}`;
@@ -420,6 +424,8 @@ const Friends = ({ showOnlyFriendsList, profileEmail }) => {
             setFriends(data);
         } catch (error) {
             console.error('Failed to fetch friends:', error);
+        } finally {
+            setFriendsLoading(false);
         }
     };
 
@@ -530,6 +536,7 @@ const Friends = ({ showOnlyFriendsList, profileEmail }) => {
                                 key={friend._id} 
                                 friend={friend}
                                 onRemove={removeFriend}
+                                isOwnOrMainPage={isOwnProfile}
                             />
                         ))}
                     </div>
@@ -564,6 +571,7 @@ const Friends = ({ showOnlyFriendsList, profileEmail }) => {
                                 key={friend._id} 
                                 friend={friend}
                                 onRemove={removeFriend}
+                                isOwnOrMainPage={isOwnProfile}
                             />
                         ))}
                     </div>
@@ -906,9 +914,8 @@ const Friends = ({ showOnlyFriendsList, profileEmail }) => {
                     </div>
                 </div>
 
-                <div className="friends-list-section">
-                    <h2>Friends ({filteredFriends.length})</h2>
-                    {/* Add search container */}
+                <div className="friends-section">
+                    <h2 className="section-title">My Friends</h2>
                     <div className="friends-search-container">
                         <input
                             type="text"
@@ -918,17 +925,16 @@ const Friends = ({ showOnlyFriendsList, profileEmail }) => {
                             className="friends-search-input"
                         />
                         {searchQuery && (
-                            <button 
-                                onClick={handleClearSearch}
-                                className="clear-search-button"
-                            >
-                                Clear
-                            </button>
+                            <button onClick={handleClearSearch} className="clear-search-button">Clear</button>
                         )}
                     </div>
-
-                    {friends.length === 0 ? (
-                        <p>No friends yet</p>
+                    {friendsLoading && (
+                        <div className="section-loading">
+                            <div className="loading-spinner"></div>
+                        </div>
+                    )}
+                    {!friendsLoading && friends.length === 0 ? (
+                        <p className="no-data-message">You haven't added any friends yet.</p>
                     ) : (
                         <div className="friends-grid">
                             {filteredFriends.map(friend => (
@@ -936,6 +942,7 @@ const Friends = ({ showOnlyFriendsList, profileEmail }) => {
                                     key={friend._id} 
                                     friend={friend}
                                     onRemove={removeFriend}
+                                    isOwnOrMainPage={true}
                                 />
                             ))}
                         </div>
