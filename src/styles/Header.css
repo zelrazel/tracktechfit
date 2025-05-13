@@ -746,3 +746,32 @@
     font-weight: 600;
     color: #ffb74d;
   }
+
+  /* Notification Dropdown Loading State */
+  .notification-dropdown-content.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 120px;
+    padding: 20px 0;
+  }
+
+  .notification-loading-spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(0, 255, 132, 0.1);
+    border-radius: 50%;
+    border-top-color: #00ff84;
+    animation: spin 1s linear infinite;
+  }
+
+  .notification-loading-text {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #00ff84;
+    text-align: center;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }

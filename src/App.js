@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import axios from 'axios';
 import Home from './pages/Home';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
@@ -25,6 +26,25 @@ import Footer from './components/Footer';
 import './styles/App.css'; 
 
 function App() {
+  // Add keep-alive mechanism to prevent backend from sleeping
+  useEffect(() => {
+    const API_URL = process.env.REACT_APP_BACKEND_URL;
+    
+    // Function to ping the backend to keep it warm
+    const keepAlive = () => {
+      axios.get(`${API_URL}health`)
+        .catch(err => console.log("Keep-alive ping error (can be ignored)"));
+    };
+    
+    // Initial ping when app loads
+    keepAlive();
+    
+    // Set up interval for regular pings (every 4 minutes)
+    const interval = setInterval(keepAlive, 240000);
+    
+    return () => clearInterval(interval);
+  }, []);
+  
   return (
     <Router>
       <Header />

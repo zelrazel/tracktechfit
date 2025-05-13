@@ -35,6 +35,12 @@ const API_URL = process.env.REACT_APP_BACKEND_URL;
 const WeightLossAchievements = () => {
     const [weightHistory, setWeightHistory] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [categoryLoading, setCategoryLoading] = useState({
+        weightLoss: true,
+        strength: true,
+        consistency: true,
+        hybrid: true
+    });
     const [allAchievements, setAllAchievements] = useState([]);
     const [recentAchievements, setRecentAchievements] = useState([]);
     const [initialWeight, setInitialWeight] = useState(null);
@@ -47,6 +53,7 @@ const WeightLossAchievements = () => {
 
     const fetchData = async () => {
         try {
+            setCategoryLoading(prev => ({...prev, weightLoss: true}));
             const token = localStorage.getItem('token');
             if (!token) {
                 setError("Authentication required");
@@ -121,16 +128,19 @@ const WeightLossAchievements = () => {
                 console.error("Invalid weight data:", { startWeight, currentWeight });
             }
             
+            setCategoryLoading(prev => ({...prev, weightLoss: false}));
             setLoading(false);
         } catch (error) {
             console.error('Error fetching data:', error);
             setError("Failed to load achievements data");
+            setCategoryLoading(prev => ({...prev, weightLoss: false}));
             setLoading(false);
         }
     };
 
     const fetchStrengthData = async () => {
         try {
+            setCategoryLoading(prev => ({...prev, strength: true}));
             const token = localStorage.getItem('token');
             if (!token) {
                 setError("Authentication required");
@@ -144,10 +154,12 @@ const WeightLossAchievements = () => {
 
             setTotalWeightLifted(response.data.totalWeightLifted || 0);
             calculateStrengthAchievements(response.data.totalWeightLifted || 0);
+            setCategoryLoading(prev => ({...prev, strength: false}));
             setLoading(false);
         } catch (error) {
             console.error('Error fetching strength data:', error);
             setError("Failed to load strength achievements");
+            setCategoryLoading(prev => ({...prev, strength: false}));
             setLoading(false);
         }
     };

@@ -47,9 +47,10 @@ const WeightTracking = () => {
     const [token] = useState(localStorage.getItem('token'));
     const [weightInput, setWeightInput] = useState('');
     const [currentWeight, setCurrentWeight] = useState(0);
+    const [weightLoading, setWeightLoading] = useState(true);
     const [weightHistory, setWeightHistory] = useState([]);
     const [toasts, setToasts] = useState([]);
-    const [error, setError] = useState(null); // Add this line with other useState declarations
+    const [error, setError] = useState(null);
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const [hasLoggedToday, setHasLoggedToday] = useState(false);
     const [showInfoPopup, setShowInfoPopup] = useState(false);
@@ -134,6 +135,7 @@ const WeightTracking = () => {
     // Modify fetchCurrentWeight function
     const fetchCurrentWeight = async () => {
         try {
+            setWeightLoading(true);
             const token = localStorage.getItem('token');
             if (!token) {
                 Swal.fire({
@@ -152,6 +154,7 @@ const WeightTracking = () => {
                         navigate('/signin');
                     }
                 });
+                setWeightLoading(false);
                 return;
             }
 
@@ -159,7 +162,9 @@ const WeightTracking = () => {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setCurrentWeight(response.data.weight);
+            setWeightLoading(false);
         } catch (error) {
+            setWeightLoading(false);
             if (error.response && error.response.status === 401) {
                 localStorage.removeItem('token');
                 Swal.fire({
@@ -897,9 +902,13 @@ const WeightTracking = () => {
             <div className="weight-tracking-card">
                 <h1>Weight Tracking</h1>
 
-                <div className="current-weight-display">
-                    <h2>Current Weight</h2>
-                    <div className="weight-value">{currentWeight} kg</div>
+                <div className="current-weight-container">
+                    <h3>CURRENT WEIGHT</h3>
+                    {weightLoading ? (
+                        <div className="weight-value loading">Loading...</div>
+                    ) : (
+                        <div className="weight-value">{currentWeight} kg</div>
+                    )}
                 </div>
 
                 {/* Add tab navigation */}

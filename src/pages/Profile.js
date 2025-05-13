@@ -82,6 +82,7 @@ const Profile = () => {
     const { email: profileEmail } = useParams(); // Get email from URL params
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [profileDataLoading, setProfileDataLoading] = useState(true); // Add this line for more specific loading state
     const [userRanks, setUserRanks] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
     const [isEditingPhoto, setIsEditingPhoto] = useState(false); 

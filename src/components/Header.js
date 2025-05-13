@@ -15,6 +15,7 @@ function Header() {
   const [notifications, setNotifications] = useState([]);
   const [notificationCount, setNotificationCount] = useState(0);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [notificationsLoading, setNotificationsLoading] = useState(false);
   const notificationRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
@@ -81,6 +82,7 @@ function Header() {
     }
 
     try {
+      setNotificationsLoading(true);
       const token = localStorage.getItem('token');
       const response = await axios.get(`${API_URL}api/notifications`, {
         headers: { Authorization: `Bearer ${token}` }
@@ -92,6 +94,8 @@ function Header() {
       setNotifications(recentNotifications);
     } catch (error) {
       console.error('Failed to fetch notifications:', error);
+    } finally {
+      setNotificationsLoading(false);
     }
   };
 
@@ -399,8 +403,13 @@ function Header() {
                       <h3>Notifications</h3>
                       <Link to="/notifications" className="view-all">View All</Link>
                     </div>
-                    <div className="notification-dropdown-content">
-                      {notifications.length === 0 ? (
+                    <div className={`notification-dropdown-content ${notificationsLoading ? 'loading' : ''}`}>
+                      {notificationsLoading ? (
+                        <div className="notification-loading">
+                          <div className="notification-loading-spinner"></div>
+                          <p className="notification-loading-text">Loading...</p>
+                        </div>
+                      ) : notifications.length === 0 ? (
                         <div className="no-notifications">
                           <p>No notifications yet</p>
                         </div>
