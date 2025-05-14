@@ -15,50 +15,54 @@ function Home() {
 
   return (
     <div className="home-page">
-      <div className="hero-section">
-        <div className="hero-content">
-          <div className="hero-text">
-            <div className="accent-text">Train Smart. Stay Connected. Get Results.</div>
-            <h1>
-              Welcome to<br />
-              <span className="brand-name-outline">TrackTechFit</span><br />
-              Built for Champions Like You.
-            </h1>
-            <p>
-              At TrackTechFit, we're transforming the way MMSU students stay active, track their progress, and stay motivated. Whether you're just starting your fitness journey or you're already hitting your goals, TrackTechFit is here to support, challenge, and reward you.
-            </p>
-            {!isSignedIn && (
-              <button className="get-started-btn" onClick={handleGetStarted}>Get Started</button>
-            )}
-          </div>
-          <div className="hero-image">
-            <img src={homeImage} alt="People working out" />
+      <div className="hero-container">
+        <div className="hero-section">
+          <div className="hero-content">
+            <div className="hero-text">
+              <div className="accent-text">Train Smart. Stay Connected. Get Results.</div>
+              <h1>
+                Welcome to<br />
+                <span className="brand-name-outline">TrackTechFit</span><br />
+                Built for Champions Like You.
+              </h1>
+              <p>
+                At TrackTechFit, we're transforming the way MMSU students stay active, track their progress, and stay motivated. Whether you're just starting your fitness journey or you're already hitting your goals, TrackTechFit is here to support, challenge, and reward you.
+              </p>
+              {!isSignedIn && (
+                <button className="get-started-btn" onClick={handleGetStarted}>Get Started</button>
+              )}
+            </div>
+            <div className="hero-image">
+              <img src={homeImage} alt="People working out" />
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="program-section">
-        <h2 className="program-heading">EXPLORE OUR PROGRAM</h2>
-        
-        <div className="program-grid">
-          <div className="program-card">
-            <h3>Dumbbell Exercise</h3>
-            <p>Complete dumbbell workout routines for all muscle groups. Build strength, muscle, and definition with these targeted exercises.</p>
-          </div>
+      <div className="program-section-container">
+        <div className="program-section">
+          <h2 className="program-heading">EXPLORE OUR PROGRAM</h2>
           
-          <div className="program-card">
-            <h3>Machine Exercise</h3>
-            <p>A training with specialized equipment. Ideal for targeted muscle development with controlled motion paths.</p>
-          </div>
-          
-          <div className="program-card">
-            <h3>Barbell Exercise</h3>
-            <p>Fundamental strength exercises for maximum muscle and power development. Build functional strength with these classic barbell movements.</p>
-          </div>
-          
-          <div className="program-card">
-            <h3>Bodyweight Exercise</h3>
-            <p>Effective exercises using only your body weight for resistance. Build functional strength anywhere with no equipment needed.</p>
+          <div className="program-grid">
+            <div className="program-card">
+              <h3>Dumbbell Exercise</h3>
+              <p>Complete dumbbell workout routines for all muscle groups. Build strength, muscle, and definition with these targeted exercises.</p>
+            </div>
+            
+            <div className="program-card">
+              <h3>Machine Exercise</h3>
+              <p>A training with specialized equipment. Ideal for targeted muscle development with controlled motion paths.</p>
+            </div>
+            
+            <div className="program-card">
+              <h3>Barbell Exercise</h3>
+              <p>Fundamental strength exercises for maximum muscle and power development. Build functional strength with these classic barbell movements.</p>
+            </div>
+            
+            <div className="program-card">
+              <h3>Bodyweight Exercise</h3>
+              <p>Effective exercises using only your body weight for resistance. Build functional strength anywhere with no equipment needed.</p>
+            </div>
           </div>
         </div>
       </div>
