@@ -1,6 +1,6 @@
 .notifications-container {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 30px auto;
     padding: 20px;
     background: linear-gradient(135deg, rgba(10, 31, 10, 0.9) 0%, rgba(20, 45, 20, 0.9) 100%);
     border-radius: 10px;
@@ -62,7 +62,6 @@
 .notification-filters {
     position: relative;
     z-index: 1001;
-    display: inline-block;
 }
 
 .filter-toggle {
@@ -672,10 +671,25 @@
     position: relative;
     display: inline-block;
     z-index: 1001;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.bell-icon-container:hover {
+    background-color: rgba(0, 255, 132, 0.1);
+    border-radius: 50%;
 }
 
 .notification-dropdown {
-    position: fixed;
+    position: absolute;
+    top: 100%;
+    right: 0;
     z-index: 1002;
     pointer-events: auto;
+    min-width: 300px;
+    background: linear-gradient(135deg, rgba(10, 31, 10, 0.95) 0%, rgba(20, 45, 20, 0.95) 100%);
+    border: 1px solid rgba(0, 255, 132, 0.3);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    margin-top: 5px;
 }
