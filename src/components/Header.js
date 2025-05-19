@@ -399,9 +399,9 @@ function Header() {
                     </div>
                     <div className={`notification-dropdown-content ${notificationsLoading ? 'loading' : ''}`}>
                       {notificationsLoading ? (
-                        <div className="notification-loading" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 120 }}>
+                        <div className="notification-loading">
                           <div className="notification-loading-spinner"></div>
-                          <p className="notification-loading-text">Loading notifications...</p>
+                          <p className="notification-loading-text">Loading...</p>
                         </div>
                       ) : notifications.length === 0 ? (
                         <div className="no-notifications">
