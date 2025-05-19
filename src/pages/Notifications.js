@@ -322,17 +322,6 @@ const Notifications = () => {
         }
     };
 
-    if (loading) {
-        return (
-            <div className="notifications-loading-overlay">
-                <div>
-                    <span className="loading-spinner" style={{marginRight: 12}}></span>
-                    Loading notifications...
-                </div>
-            </div>
-        );
-    }
-
     if (error) {
         return (
             <div className="notifications-container error">
@@ -345,69 +334,79 @@ const Notifications = () => {
     }
 
     return (
-        <div className="notifications-page-wrapper">
-            <div className="notifications-container">
-                <div className="notifications-header">
-                    <h1>Notifications</h1>
-                    <div className="notifications-actions">
-                        {notifications.length > 0 && (
-                            <button className="clear-all-btn" onClick={handleClearAll}>
-                                Clear All
-                            </button>
-                        )}
-                        {renderFilterOptions()}
+        <div className={`notifications-container${loading ? ' loading' : ''}`} style={{position: 'relative', minHeight: 400}}>
+            {loading && (
+                <div className="notifications-loading-overlay">
+                    <div>
+                        <span className="loading-spinner" style={{marginRight: 12}}></span>
+                        Loading notifications...
                     </div>
                 </div>
-
-                {filteredNotifications.length === 0 ? (
-                    <div className="empty-notifications">
-                        <FaBell className="empty-icon" />
-                        <p>You don't have any {filterType !== 'all' ? filterType.replace('_', ' ') : ''} notifications yet.</p>
+            )}
+            <div className="notifications-page-wrapper">
+                <div className="notifications-container">
+                    <div className="notifications-header">
+                        <h1>Notifications</h1>
+                        <div className="notifications-actions">
+                            {notifications.length > 0 && (
+                                <button className="clear-all-btn" onClick={handleClearAll}>
+                                    Clear All
+                                </button>
+                            )}
+                            {renderFilterOptions()}
+                        </div>
                     </div>
-                ) : (
-                    <>
-                        <div className="notifications-list">
-                            {getCurrentPageItems().map(notification => (
-                                <div 
-                                    key={notification._id} 
-                                    className={`notification-item ${notification.read ? 'read' : 'unread'} ${notification.type === 'scheduled_workout' ? 'workout-notification' : ''} ${notification.content?.isStartingSoon ? 'starting-soon' : ''}`}
-                                    onClick={() => handleNotificationClick(notification)}
-                                >
-                                    <div className="notification-content">
-                                        {notification.type !== 'scheduled_workout' && (
-                                            <div className="notification-avatar-container">
-                                                {getNotificationAvatar(notification)}
+
+                    {filteredNotifications.length === 0 ? (
+                        <div className="empty-notifications">
+                            <FaBell className="empty-icon" />
+                            <p>You don't have any {filterType !== 'all' ? filterType.replace('_', ' ') : ''} notifications yet.</p>
+                        </div>
+                    ) : (
+                        <>
+                            <div className="notifications-list">
+                                {getCurrentPageItems().map(notification => (
+                                    <div 
+                                        key={notification._id} 
+                                        className={`notification-item ${notification.read ? 'read' : 'unread'} ${notification.type === 'scheduled_workout' ? 'workout-notification' : ''} ${notification.content?.isStartingSoon ? 'starting-soon' : ''}`}
+                                        onClick={() => handleNotificationClick(notification)}
+                                    >
+                                        <div className="notification-content">
+                                            {notification.type !== 'scheduled_workout' && (
+                                                <div className="notification-avatar-container">
+                                                    {getNotificationAvatar(notification)}
+                                                </div>
+                                            )}
+                                            <div className="notification-text">
+                                                <p className="notification-message">
+                                                    {notification.content.message}
+                                                </p>
+                                                <p className="notification-time">
+                                                    {formatDate(notification.createdAt)}
+                                                </p>
                                             </div>
-                                        )}
-                                        <div className="notification-text">
-                                            <p className="notification-message">
-                                                {notification.content.message}
-                                            </p>
-                                            <p className="notification-time">
-                                                {formatDate(notification.createdAt)}
-                                            </p>
+                                        </div>
+                                        <div className="notification-actions">
+                                            <button 
+                                                className="delete-btn" 
+                                                onClick={(e) => {
+                                                    e.stopPropagation(); // Prevent triggering parent's onClick
+                                                    handleDelete(notification._id);
+                                                }}
+                                                title="Delete"
+                                                aria-label="Delete notification"
+                                            >
+                                                <FaTrash />
+                                            </button>
                                         </div>
                                     </div>
-                                    <div className="notification-actions">
-                                        <button 
-                                            className="delete-btn" 
-                                            onClick={(e) => {
-                                                e.stopPropagation(); // Prevent triggering parent's onClick
-                                                handleDelete(notification._id);
-                                            }}
-                                            title="Delete"
-                                            aria-label="Delete notification"
-                                        >
-                                            <FaTrash />
-                                        </button>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                        
-                        {renderPagination()}
-                    </>
-                )}
+                                ))}
+                            </div>
+                            
+                            {renderPagination()}
+                        </>
+                    )}
+                </div>
             </div>
         </div>
     );

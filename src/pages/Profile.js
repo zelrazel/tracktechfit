@@ -3251,11 +3251,16 @@ const Profile = () => {
     };
 
     if (loading) {
+        // Instead of returning a fullscreen overlay, render the overlay inside the profile card below
         return (
-            <div className="profile-loading-overlay">
-                <div>
-                    <span className="loading-spinner" style={{marginRight: 12}}></span>
-                    Loading user profile...
+            <div className="profile-page-wrapper">
+                <div className="profile-card" style={{position: 'relative', minHeight: 400}}>
+                    <div className="profile-loading-overlay">
+                        <div>
+                            <span className="loading-spinner" style={{marginRight: 12}}></span>
+                            Loading user profile...
+                        </div>
+                    </div>
                 </div>
             </div>
         );
@@ -3268,204 +3273,207 @@ const Profile = () => {
     return (
         <ErrorBoundary>
             <div className={`profile-container ${user?.isPrivate && !isOwnProfile ? 'private-profile' : ''}`}>
-                {loading ? (
-                    <div className="loading-container">Loading profile...</div>
-                ) : (
-                    <div className="profile-card">
-                        {user?.isPrivate && !isOwnProfile && (
-                            <div className="private-profile-banner">
-                                <span className="lock-icon">🔒</span>
-                                <h3>Private Profile</h3>
-                                <p>This user has set their profile to private. Only basic information is visible.</p>
-                            </div>
-                        )}
-                        <div className="profile-header">
-                            <div className="profile-picture-container">
-                                {previewUrl ? (
-                                    <img 
-                                        src={previewUrl} 
-                                        alt="Preview" 
-                                        className="profile-image"
-                                    />
-                                ) : user.profilePicture ? (
-                                    <img 
-                                        src={user.profilePicture}  
-                                        alt="Profile" 
-                                        className="profile-image"
-                                    />
-                                ) : (
-                                    <FaUser className="profile-icon" />
-                                )}
-
-                                {isOwnProfile && (
-                                    <button 
-                                        className={`icon-button ${isEditingPhoto ? 'close-photo-button' : 'camera-button'}`}
-                                        onClick={() => isEditingPhoto ? cancelEdit() : setIsEditingPhoto(true)}
-                                        title={isEditingPhoto ? "Close editing" : "Edit profile picture"}
-                                    >
-                                        {isEditingPhoto ? <FaTimes /> : <FaCamera />}
-                                    </button>
-                                )}
-                            </div>
-
-                            {isEditingPhoto && ( 
-                                <div className="edit-controls">
-                                    <div className="file-input-container">
-                                        <input 
-                                            type="file" 
-                                            id="profile-upload"
-                                            onChange={handleFileChange}
-                                            accept="image/jpeg,image/png,image/gif,image/webp,image/bmp,image/tiff"
-                                            className="file-input"
-                                        />
-                                        <label htmlFor="profile-upload" className="file-input-label">
-                                            Choose Photo
-                                        </label>
-                                        {selectedFile && (
-                                            <span className="selected-file">{selectedFile.name}</span>
-                                        )}
-                                    </div>
-                                    <div className="action-buttons">
-                                        {selectedFile && (
-                                            <button 
-                                                className="upload-button"
-                                                onClick={handleUpload}
-                                            >
-                                                Upload
-                                            </button>
-                                        )}
-                                        {user.profilePicture && (
-                                            <button 
-                                                className="delete-button"
-                                                onClick={handleDelete}
-                                            >
-                                                <FaTrash /> Delete
-                                            </button>
-                                        )}
-                                    </div>
+                {/* Remove the old fullscreen overlay logic here, as it's now handled inside the card */}
+                <div className="profile-card">
+                    {loading ? (
+                        <div className="loading-container">Loading profile...</div>
+                    ) : (
+                        <>
+                            {user?.isPrivate && !isOwnProfile && (
+                                <div className="private-profile-banner">
+                                    <span className="lock-icon">🔒</span>
+                                    <h3>Private Profile</h3>
+                                    <p>This user has set their profile to private. Only basic information is visible.</p>
                                 </div>
                             )}
-                        </div>
+                            <div className="profile-header">
+                                <div className="profile-picture-container">
+                                    {previewUrl ? (
+                                        <img 
+                                            src={previewUrl} 
+                                            alt="Preview" 
+                                            className="profile-image"
+                                        />
+                                    ) : user.profilePicture ? (
+                                        <img 
+                                            src={user.profilePicture}  
+                                            alt="Profile" 
+                                            className="profile-image"
+                                        />
+                                    ) : (
+                                        <FaUser className="profile-icon" />
+                                    )}
 
-                        {isOwnProfile && (
-                            <div className="privacy-toggle">
+                                    {isOwnProfile && (
+                                        <button 
+                                            className={`icon-button ${isEditingPhoto ? 'close-photo-button' : 'camera-button'}`}
+                                            onClick={() => isEditingPhoto ? cancelEdit() : setIsEditingPhoto(true)}
+                                            title={isEditingPhoto ? "Close editing" : "Edit profile picture"}
+                                        >
+                                            {isEditingPhoto ? <FaTimes /> : <FaCamera />}
+                                        </button>
+                                    )}
+                                </div>
+
+                                {isEditingPhoto && ( 
+                                    <div className="edit-controls">
+                                        <div className="file-input-container">
+                                            <input 
+                                                type="file" 
+                                                id="profile-upload"
+                                                onChange={handleFileChange}
+                                                accept="image/jpeg,image/png,image/gif,image/webp,image/bmp,image/tiff"
+                                                className="file-input"
+                                            />
+                                            <label htmlFor="profile-upload" className="file-input-label">
+                                                Choose Photo
+                                            </label>
+                                            {selectedFile && (
+                                                <span className="selected-file">{selectedFile.name}</span>
+                                            )}
+                                        </div>
+                                        <div className="action-buttons">
+                                            {selectedFile && (
+                                                <button 
+                                                    className="upload-button"
+                                                    onClick={handleUpload}
+                                                >
+                                                    Upload
+                                                </button>
+                                            )}
+                                            {user.profilePicture && (
+                                                <button 
+                                                    className="delete-button"
+                                                    onClick={handleDelete}
+                                                >
+                                                    <FaTrash /> Delete
+                                                </button>
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                            {isOwnProfile && (
+                                <div className="privacy-toggle">
+                                    <button 
+                                        className={`toggle-button ${user?.isPrivate ? 'private' : 'public'}`}
+                                        onClick={togglePrivacy}
+                                    >
+                                        {user?.isPrivate ? 'Private Profile' : 'Public Profile'}
+                                    </button>
+                                </div>
+                            )}
+
+                            {/* New Tab Navigation */}
+                            <div className="profile-tabs">
                                 <button 
-                                    className={`toggle-button ${user?.isPrivate ? 'private' : 'public'}`}
-                                    onClick={togglePrivacy}
+                                    className={`tab-button ${activeTab === 'profile' ? 'active' : ''}`}
+                                    onClick={() => setActiveTab('profile')}
+                                    data-tab="profile"
+                                    aria-label={isOwnProfile ? 'My Profile' : 'Profile'}
                                 >
-                                    {user?.isPrivate ? 'Private Profile' : 'Public Profile'}
+                                    <span className="tab-icon"><FaUser /></span>
+                                    <span className="tab-text">{isOwnProfile ? 'MY PROFILE' : 'PROFILE'}</span>
+                                </button>
+                                <button 
+                                    className={`tab-button ${activeTab === 'rankings' ? 'active' : ''}`}
+                                    onClick={() => setActiveTab('rankings')}
+                                    data-tab="rankings"
+                                    aria-label={isOwnProfile ? 'My Rankings' : 'Rankings'}
+                                >
+                                    <span className="tab-icon"><FaGraduationCap /></span>
+                                    <span className="tab-text">{isOwnProfile ? 'MY RANKINGS' : 'RANKINGS'}</span>
+                                </button>
+                                <button 
+                                    className={`tab-button ${activeTab === 'achievements' ? 'active' : ''}`}
+                                    onClick={() => setActiveTab('achievements')}
+                                    data-tab="achievements"
+                                    aria-label={isOwnProfile ? 'My Achievements' : 'Achievements'}
+                                    disabled={user?.isPrivate && !isOwnProfile}
+                                    style={user?.isPrivate && !isOwnProfile ? { pointerEvents: 'none', opacity: 0.5, display: 'flex', alignItems: 'center' } : {}}
+                                >
+                                    <span className="tab-icon"><FaMedal /></span>
+                                    <span className="tab-text">{isOwnProfile ? 'MY ACHIEVEMENTS' : 'ACHIEVEMENTS'}</span>
+                                    {user?.isPrivate && !isOwnProfile && <span className="tab-lock" style={{marginLeft: 6}}>🔒</span>}
+                                </button>
+                                <button 
+                                    className={`tab-button ${activeTab === 'workout-tracking' ? 'active' : ''}`}
+                                    onClick={() => setActiveTab('workout-tracking')}
+                                    data-tab="workout-tracking"
+                                    aria-label="Workout Tracking"
+                                    disabled={user?.isPrivate && !isOwnProfile}
+                                    style={user?.isPrivate && !isOwnProfile ? { pointerEvents: 'none', opacity: 0.5, display: 'flex', alignItems: 'center' } : {}}
+                                >
+                                    <span className="tab-icon"><FaDumbbell /></span>
+                                    <span className="tab-text">WORKOUT TRACKING</span>
+                                    {user?.isPrivate && !isOwnProfile && <span className="tab-lock" style={{marginLeft: 6}}>🔒</span>}
+                                </button>
+                                <button 
+                                    className={`tab-button ${activeTab === 'weight-tracking' ? 'active' : ''}`}
+                                    onClick={() => setActiveTab('weight-tracking')}
+                                    data-tab="weight-tracking"
+                                    aria-label="Weight Tracking"
+                                    disabled={user?.isPrivate && !isOwnProfile}
+                                    style={user?.isPrivate && !isOwnProfile ? { pointerEvents: 'none', opacity: 0.5, display: 'flex', alignItems: 'center' } : {}}
+                                >
+                                    <span className="tab-icon"><FaWeight /></span>
+                                    <span className="tab-text">WEIGHT TRACKING</span>
+                                    {user?.isPrivate && !isOwnProfile && <span className="tab-lock" style={{marginLeft: 6}}>🔒</span>}
+                                </button>
+                                <button 
+                                    className={`tab-button ${activeTab === 'friends' ? 'active' : ''}`}
+                                    onClick={() => setActiveTab('friends')}
+                                    data-tab="friends"
+                                    aria-label="Friends"
+                                    disabled={user?.isPrivate && !isOwnProfile}
+                                    style={user?.isPrivate && !isOwnProfile ? { pointerEvents: 'none', opacity: 0.5, display: 'flex', alignItems: 'center' } : {}}
+                                >
+                                    <span className="tab-icon"><FaUserFriends /></span>
+                                    <span className="tab-text">FRIENDS</span>
+                                    {user?.isPrivate && !isOwnProfile && <span className="tab-lock" style={{marginLeft: 6}}>🔒</span>}
+                                </button>
+                                <button 
+                                    className={`tab-button ${activeTab === 'activity' ? 'active' : ''}`}
+                                    onClick={() => setActiveTab('activity')}
+                                    data-tab="activity"
+                                    aria-label="Activity"
+                                    disabled={user?.isPrivate && !isOwnProfile}
+                                    style={user?.isPrivate && !isOwnProfile ? { pointerEvents: 'none', opacity: 0.5, display: 'flex', alignItems: 'center' } : {}}
+                                >
+                                    <span className="tab-icon"><FaChartLine /></span>
+                                    <span className="tab-text">ACTIVITY</span>
+                                    {user?.isPrivate && !isOwnProfile && <span className="tab-lock" style={{marginLeft: 6}}>🔒</span>}
                                 </button>
                             </div>
-                        )}
-
-                        {/* New Tab Navigation */}
-                        <div className="profile-tabs">
-                            <button 
-                                className={`tab-button ${activeTab === 'profile' ? 'active' : ''}`}
-                                onClick={() => setActiveTab('profile')}
-                                data-tab="profile"
-                                aria-label={isOwnProfile ? 'My Profile' : 'Profile'}
-                            >
-                                <span className="tab-icon"><FaUser /></span>
-                                <span className="tab-text">{isOwnProfile ? 'MY PROFILE' : 'PROFILE'}</span>
-                            </button>
-                            <button 
-                                className={`tab-button ${activeTab === 'rankings' ? 'active' : ''}`}
-                                onClick={() => setActiveTab('rankings')}
-                                data-tab="rankings"
-                                aria-label={isOwnProfile ? 'My Rankings' : 'Rankings'}
-                            >
-                                <span className="tab-icon"><FaGraduationCap /></span>
-                                <span className="tab-text">{isOwnProfile ? 'MY RANKINGS' : 'RANKINGS'}</span>
-                            </button>
-                            <button 
-                                className={`tab-button ${activeTab === 'achievements' ? 'active' : ''}`}
-                                onClick={() => setActiveTab('achievements')}
-                                data-tab="achievements"
-                                aria-label={isOwnProfile ? 'My Achievements' : 'Achievements'}
-                                disabled={user?.isPrivate && !isOwnProfile}
-                                style={user?.isPrivate && !isOwnProfile ? { pointerEvents: 'none', opacity: 0.5, display: 'flex', alignItems: 'center' } : {}}
-                            >
-                                <span className="tab-icon"><FaMedal /></span>
-                                <span className="tab-text">{isOwnProfile ? 'MY ACHIEVEMENTS' : 'ACHIEVEMENTS'}</span>
-                                {user?.isPrivate && !isOwnProfile && <span className="tab-lock" style={{marginLeft: 6}}>🔒</span>}
-                            </button>
-                            <button 
-                                className={`tab-button ${activeTab === 'workout-tracking' ? 'active' : ''}`}
-                                onClick={() => setActiveTab('workout-tracking')}
-                                data-tab="workout-tracking"
-                                aria-label="Workout Tracking"
-                                disabled={user?.isPrivate && !isOwnProfile}
-                                style={user?.isPrivate && !isOwnProfile ? { pointerEvents: 'none', opacity: 0.5, display: 'flex', alignItems: 'center' } : {}}
-                            >
-                                <span className="tab-icon"><FaDumbbell /></span>
-                                <span className="tab-text">WORKOUT TRACKING</span>
-                                {user?.isPrivate && !isOwnProfile && <span className="tab-lock" style={{marginLeft: 6}}>🔒</span>}
-                            </button>
-                            <button 
-                                className={`tab-button ${activeTab === 'weight-tracking' ? 'active' : ''}`}
-                                onClick={() => setActiveTab('weight-tracking')}
-                                data-tab="weight-tracking"
-                                aria-label="Weight Tracking"
-                                disabled={user?.isPrivate && !isOwnProfile}
-                                style={user?.isPrivate && !isOwnProfile ? { pointerEvents: 'none', opacity: 0.5, display: 'flex', alignItems: 'center' } : {}}
-                            >
-                                <span className="tab-icon"><FaWeight /></span>
-                                <span className="tab-text">WEIGHT TRACKING</span>
-                                {user?.isPrivate && !isOwnProfile && <span className="tab-lock" style={{marginLeft: 6}}>🔒</span>}
-                            </button>
-                            <button 
-                                className={`tab-button ${activeTab === 'friends' ? 'active' : ''}`}
-                                onClick={() => setActiveTab('friends')}
-                                data-tab="friends"
-                                aria-label="Friends"
-                                disabled={user?.isPrivate && !isOwnProfile}
-                                style={user?.isPrivate && !isOwnProfile ? { pointerEvents: 'none', opacity: 0.5, display: 'flex', alignItems: 'center' } : {}}
-                            >
-                                <span className="tab-icon"><FaUserFriends /></span>
-                                <span className="tab-text">FRIENDS</span>
-                                {user?.isPrivate && !isOwnProfile && <span className="tab-lock" style={{marginLeft: 6}}>🔒</span>}
-                            </button>
-                            <button 
-                                className={`tab-button ${activeTab === 'activity' ? 'active' : ''}`}
-                                onClick={() => setActiveTab('activity')}
-                                data-tab="activity"
-                                aria-label="Activity"
-                                disabled={user?.isPrivate && !isOwnProfile}
-                                style={user?.isPrivate && !isOwnProfile ? { pointerEvents: 'none', opacity: 0.5, display: 'flex', alignItems: 'center' } : {}}
-                            >
-                                <span className="tab-icon"><FaChartLine /></span>
-                                <span className="tab-text">ACTIVITY</span>
-                                {user?.isPrivate && !isOwnProfile && <span className="tab-lock" style={{marginLeft: 6}}>🔒</span>}
-                            </button>
-                        </div>
-                        {/* Tab labels for mobile */}
-                        <div className="profile-tab-labels">
-                            {activeTab === 'profile' && (
-                                <div className="profile-tab-label active">{isOwnProfile ? 'My Profile' : 'Profile'}</div>
-                            )}
-                            {activeTab === 'rankings' && (
-                                <div className="profile-tab-label active">{isOwnProfile ? 'My Rankings' : 'Rankings'}</div>
-                            )}
-                            {activeTab === 'achievements' && (
-                                <div className="profile-tab-label active">{isOwnProfile ? 'My Achievements' : 'Achievements'}</div>
-                            )}
-                            {activeTab === 'workout-tracking' && (
-                                <div className="profile-tab-label active">Workout Tracking</div>
-                            )}
-                            {activeTab === 'weight-tracking' && (
-                                <div className="profile-tab-label active">Weight Tracking</div>
-                            )}
-                            {activeTab === 'friends' && (
-                                <div className="profile-tab-label active">Friends</div>
-                            )}
-                            {activeTab === 'activity' && (
-                                <div className="profile-tab-label active">Activity</div>
-                            )}
-                        </div>
-                        {renderTabContent()}
-                    </div>
-                )}
+                            {/* Tab labels for mobile */}
+                            <div className="profile-tab-labels">
+                                {activeTab === 'profile' && (
+                                    <div className="profile-tab-label active">{isOwnProfile ? 'My Profile' : 'Profile'}</div>
+                                )}
+                                {activeTab === 'rankings' && (
+                                    <div className="profile-tab-label active">{isOwnProfile ? 'My Rankings' : 'Rankings'}</div>
+                                )}
+                                {activeTab === 'achievements' && (
+                                    <div className="profile-tab-label active">{isOwnProfile ? 'My Achievements' : 'Achievements'}</div>
+                                )}
+                                {activeTab === 'workout-tracking' && (
+                                    <div className="profile-tab-label active">Workout Tracking</div>
+                                )}
+                                {activeTab === 'weight-tracking' && (
+                                    <div className="profile-tab-label active">Weight Tracking</div>
+                                )}
+                                {activeTab === 'friends' && (
+                                    <div className="profile-tab-label active">Friends</div>
+                                )}
+                                {activeTab === 'activity' && (
+                                    <div className="profile-tab-label active">Activity</div>
+                                )}
+                            </div>
+                            {renderTabContent()}
+                        </>
+                    )}
+                </div>
 
                 {/* Remove duplicate achievement popup */}
                 {selectedAchievement && (
