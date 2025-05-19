@@ -384,12 +384,6 @@ function Header() {
               >
                 <div 
                   className="notification-icon"
-                  onClick={() => {
-                    setShowNotifications(!showNotifications);
-                    if (!showNotifications) {
-                      fetchNotifications();
-                    }
-                  }}
                 >
                   <FaBell />
                   {notificationCount > 0 && (
