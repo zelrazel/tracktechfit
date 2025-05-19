@@ -1,23 +1,23 @@
 .notifications-page-wrapper {
-  background: linear-gradient(to bottom, #1B4332, #081C15 85%);
-  min-height: 100vh;
-  width: 100%;
-  padding: 20px 0;
-  color: #ffffff;
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  overflow-x: hidden;
+    background: linear-gradient(to bottom, #1B4332, #081C15 85%);
+    min-height: 100vh;
+    width: 100%;
+    padding: 20px 0;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
 }
 
 /* Create additional styles for mobile */
 @media (max-width: 768px) {
-  .notifications-page-wrapper {
-      padding: 10px 0;
-  }
+    .notifications-page-wrapper {
+        padding: 10px 0;
+    }
 }
 
 @media (max-width: 480px) {
-  .notifications-page-wrapper {
-      padding: 5px 0;
-  }
+    .notifications-page-wrapper {
+        padding: 5px 0;
+    }
 } 
