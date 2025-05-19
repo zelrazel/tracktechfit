@@ -325,9 +325,9 @@ const Notifications = () => {
     if (loading) {
         return (
             <div className="notifications-loading-overlay" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '300px' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <span className="loading-spinner" style={{marginRight: 0, marginBottom: 16}}></span>
-                    <span style={{ color: '#222', fontSize: '1.1rem', textAlign: 'center' }}>Loading notifications...</span>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                    <span className="loading-spinner" style={{ margin: 0, display: 'block' }}></span>
+                    <span style={{ color: '#222', fontSize: '1.1rem', textAlign: 'center', marginTop: 12 }}>Loading notifications...</span>
                 </div>
             </div>
         );
