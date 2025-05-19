@@ -2595,7 +2595,7 @@ const Profile = () => {
                                     {userActivities.length === 0 && !hasTopThreeRank() ? (
                                         <div className="no-activities">
                                             <div className="activity-prompt">
-                                                <p>You haven't unlocked any achievements yet.</p>
+                                                <p>No achievements unlocked yet.</p>
                                                 <button 
                                                     className="refresh-activities-btn"
                                                     onClick={() => {
