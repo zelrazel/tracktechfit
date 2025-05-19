@@ -324,9 +324,11 @@ const Notifications = () => {
 
     if (loading) {
         return (
-            <div className="notifications-container loading">
-                <div className="loading-spinner"></div>
-                <p>Loading notifications...</p>
+            <div className="notifications-loading-overlay">
+                <div>
+                    <span className="loading-spinner" style={{marginRight: 12}}></span>
+                    Loading notifications...
+                </div>
             </div>
         );
     }

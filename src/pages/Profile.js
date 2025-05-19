@@ -3251,7 +3251,14 @@ const Profile = () => {
     };
 
     if (loading) {
-        return <div className="loading-container">Loading user profile...</div>;
+        return (
+            <div className="profile-loading-overlay">
+                <div>
+                    <span className="loading-spinner" style={{marginRight: 12}}></span>
+                    Loading user profile...
+                </div>
+            </div>
+        );
     }
 
     if (!user) {
