@@ -671,25 +671,32 @@
     position: relative;
     display: inline-block;
     z-index: 1001;
-    padding: 5px;
     cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
 }
 
-.bell-icon-container:hover {
-    background-color: rgba(0, 255, 132, 0.1);
-    border-radius: 50%;
+.bell-icon-container:active {
+    background-color: rgba(0, 255, 132, 0.2);
 }
 
 .notification-dropdown {
+    display: none;
     position: absolute;
     top: 100%;
     right: 0;
     z-index: 1002;
-    pointer-events: auto;
     min-width: 300px;
     background: linear-gradient(135deg, rgba(10, 31, 10, 0.95) 0%, rgba(20, 45, 20, 0.95) 100%);
     border: 1px solid rgba(0, 255, 132, 0.3);
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     margin-top: 5px;
+    pointer-events: auto;
+}
+
+.notification-dropdown.show {
+    display: block;
+    animation: fadeIn 0.2s ease;
 }
