@@ -3165,7 +3165,7 @@ const Profile = () => {
                 }
                 return (
                     <div className="profile-friends-tab">
-                        <Friends showOnlyFriendsList profileEmail={profileEmail} isOwnProfile={isOwnProfile} />
+                        <Friends showOnlyFriendsList profileEmail={profileEmail} />
                     </div>
                 );
             default:
@@ -3251,14 +3251,7 @@ const Profile = () => {
     };
 
     if (loading) {
-        return (
-            <div className="profile-loading-overlay">
-                <div>
-                    <span className="loading-spinner" style={{marginRight: 12}}></span>
-                    Loading user profile...
-                </div>
-            </div>
-        );
+        return <div className="loading-container">Loading user profile...</div>;
     }
 
     if (!user) {
