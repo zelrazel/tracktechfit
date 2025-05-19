@@ -375,15 +375,15 @@ function Header() {
               <div 
                 ref={notificationRef} 
                 className="notification-wrapper"
-                onMouseEnter={() => {
-                  setShowNotifications(true);
-                  // Force fetch notifications when dropdown is opened
-                  fetchNotifications();
-                }}
-                onMouseLeave={() => setShowNotifications(false)}
               >
                 <div 
                   className="notification-icon"
+                  onClick={() => {
+                    setShowNotifications(!showNotifications);
+                    if (!showNotifications) {
+                      fetchNotifications();
+                    }
+                  }}
                 >
                   <FaBell />
                   {notificationCount > 0 && (
