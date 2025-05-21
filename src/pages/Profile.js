@@ -3106,7 +3106,15 @@ const Profile = () => {
                                                         </div>
                                                         <div className="workout-details">
                                                             <div className="detail-box"><span>SETS :</span> {workout.sets}</div>
-                                                            <div className="detail-box"><span>WEIGHT :</span> {workout.weight} {workout.unit || 'kg'}</div>
+                                                            <div className="detail-box"><span>WEIGHT :</span> {
+                                                                workout.category === 'Bodyweight'
+                                                                    ? '—'
+                                                                    : (workout.weightLifted !== undefined
+                                                                        ? `${workout.weightLifted} kg`
+                                                                        : (workout.weight !== undefined
+                                                                            ? `${workout.weight} kg`
+                                                                            : 'N/A'))
+                                                            }</div>
                                                         </div>
                                                         {workout.description && (
                                                             <div className="description-box">
