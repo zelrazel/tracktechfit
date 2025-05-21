@@ -3093,23 +3093,25 @@ const Profile = () => {
                                         ) : (
                                             <div className="completed-workouts-cards">
                                                 {getProfileFilteredWorkouts().map((workout, idx) => (
-                                                    <div key={idx} className="completed-workout-card">
-                                                        <div className="completed-workout-header">
-                                                            <span className="completed-date">{new Date(workout.completedDate || workout.date).toLocaleDateString()}</span>
-                                                            <span className="completed-status">✓ COMPLETED</span>
+                                                    <div key={idx} className="workout-card completed">
+                                                        <div className="completed-badge">✓ COMPLETED</div>
+                                                        <div className="added-date" style={{ color: '#00ff84', fontSize: '0.95rem', marginTop: '6px', marginBottom: '8px' }}>
+                                                            {new Date(workout.completedDate || workout.date).toLocaleDateString()}
                                                         </div>
-                                                        <div className="completed-category">{workout.category}</div>
-                                                        <div className="completed-exercise">{workout.exerciseName || workout.name}</div>
-                                                        <div className="completed-details-row">
-                                                            <div className="completed-detail"><span className="label">Target</span> {workout.target}</div>
-                                                            <div className="completed-detail"><span className="label">Reps</span> {workout.reps}</div>
+                                                        <h3 className="workout-title">{workout.category}</h3>
+                                                        <div className="card-category">{workout.exerciseName || workout.name}</div>
+                                                        <div className="workout-details">
+                                                            <div className="detail-box"><span>TARGET :</span> {workout.target}</div>
+                                                            <div className="detail-box"><span>REPS :</span> {workout.reps}</div>
                                                         </div>
-                                                        <div className="completed-details-row">
-                                                            <div className="completed-detail"><span className="label">Sets</span> {workout.sets}</div>
-                                                            <div className="completed-detail"><span className="label">Weight</span> {workout.weight} {workout.unit || 'kg'}</div>
+                                                        <div className="workout-details">
+                                                            <div className="detail-box"><span>SETS :</span> {workout.sets}</div>
+                                                            <div className="detail-box"><span>WEIGHT :</span> {workout.weight} {workout.unit || 'kg'}</div>
                                                         </div>
                                                         {workout.description && (
-                                                            <div className="completed-description"><span className="label">Description</span> {workout.description}</div>
+                                                            <div className="description-box">
+                                                                <span>DESCRIPTION :</span> {workout.description}
+                                                            </div>
                                                         )}
                                                     </div>
                                                 ))}

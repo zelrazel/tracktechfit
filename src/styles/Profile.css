@@ -5830,6 +5830,44 @@ select.edit-info-input {
   margin: 18px 0 28px 0;
 }
 
+.workout-tracking-tab {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #00A951;
+  border-radius: 20px 20px 0 0;
+  padding: 10px 28px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  outline: none;
+  margin-right: 2px;
+}
+
+.workout-tracking-tab.active {
+  background: #00A951;
+  color: #fff;
+  border-bottom: 2px solid #1B4332;
+  z-index: 2;
+}
+
+.workout-tracking-tab:hover:not(.active) {
+  background: rgba(0, 255, 132, 0.15);
+  color: #00ff84;
+}
+
+@media (max-width: 600px) {
+  .workout-tracking-tabs {
+    gap: 6px;
+    margin: 12px 0 16px 0;
+  }
+  .workout-tracking-tab {
+    padding: 7px 12px;
+    font-size: 1rem;
+    border-radius: 14px 14px 0 0;
+  }
+}
+
 /* Completed Workouts Card - Match MyWorkout */
 .completed-workouts-cards {
   display: flex;
