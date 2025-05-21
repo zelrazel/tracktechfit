@@ -1409,10 +1409,23 @@ const MyWorkout = () => {
         return (
             <div className={`workout-card ${completed ? 'completed' : ''}`} key={workout._id}>
                 {completed && (
-                    <div className="completed-badge">
-                        <span className="complete-icon">✓</span>
-                        COMPLETED
-                    </div>
+                    <>
+                        <div className="completed-badge">
+                            <span className="complete-icon">✓</span>
+                            COMPLETED
+                        </div>
+                        {(workout.createdAt || workout.date) && (
+                            <div className="added-date" style={{ color: '#00ff84', fontSize: '0.95rem', marginTop: '6px', marginBottom: '8px' }}>
+                                Added: {(() => {
+                                    const dateObj = new Date(workout.createdAt || workout.date);
+                                    const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
+                                    const dd = String(dateObj.getDate()).padStart(2, '0');
+                                    const yyyy = dateObj.getFullYear();
+                                    return `${mm}/${dd}/${yyyy}`;
+                                })()}
+                            </div>
+                        )}
+                    </>
                 )}
                 
                 <div className={`workout-content ${completed ? 'completed-text' : ''}`}>
