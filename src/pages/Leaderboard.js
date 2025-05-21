@@ -121,9 +121,10 @@ function Leaderboard() {
       setSelectedWeek(null);
       return;
     }
-    // Use the user's best date field for grouping (weightLoss: weigh-in, others: no date, so skip months/weeks for now except weightLoss)
+    // Use the correct date field for each category
     let dateField = null;
     if (activeCategory === 'weightLoss') dateField = 'lastWeighInDate';
+    else dateField = 'lastWorkoutDate';
     if (!dateField) {
       setAvailableMonths([]);
       setAvailableWeeks([]);
@@ -131,7 +132,6 @@ function Leaderboard() {
       setSelectedWeek(null);
       return;
     }
-    // Only for weightLoss: extract months/weeks from lastWeighInDate
     const monthsMap = new Map();
     leaderboardData.forEach(entry => {
       const date = entry[dateField] ? new Date(entry[dateField]) : null;
@@ -171,7 +171,9 @@ function Leaderboard() {
     const weeks = [];
     let weekMap = {};
     entries.forEach(entry => {
-      const date = entry.lastWeighInDate ? new Date(entry.lastWeighInDate) : null;
+      let date = null;
+      if (activeCategory === 'weightLoss') date = entry.lastWeighInDate ? new Date(entry.lastWeighInDate) : null;
+      else date = entry.lastWorkoutDate ? new Date(entry.lastWorkoutDate) : null;
       if (!date) return;
       // Get week start (Sunday)
       const start = new Date(date);
@@ -488,28 +490,30 @@ const renderLeaderboardContent = (filteredData) => {
             ))}
           </div>
           
-          {/* Time filter dropdown below course tabs */}
-          <div className="time-filter-container" ref={timeFilterRef}>
-            <div className="time-filter-dropdown" onClick={() => setShowTimeFilter(!showTimeFilter)}>
-              <span className="time-filter-label">{getTimeFilterLabel()}</span>
-              <FaChevronDown className="dropdown-icon" />
-            </div>
-            {showTimeFilter && (
-              <div className="time-filter-options">
-                <div className={`time-option ${timePeriod === 'all' ? 'active' : ''}`} onClick={() => handleTimePeriodChange('all')}>All Time</div>
-                <div className={`time-option ${timePeriod === 'monthly' && !selectedMonth ? 'active' : ''}`} onClick={() => handleTimePeriodChange('monthly')}>Monthly</div>
-                {availableMonths.map((month, idx) => (
-                  <div key={`month-${idx}`} className={`time-option time-option-indent ${selectedMonth && selectedMonth.name === month.name ? 'active' : ''}`} onClick={() => handleMonthSelect(month)}>{month.name}</div>
-                ))}
-                <div className={`time-option ${timePeriod === 'weekly' ? 'active' : ''}`} onClick={() => handleTimePeriodChange('weekly')}>Weekly</div>
-                {selectedMonth && availableWeeks.length > 0 && (
-                  availableWeeks.map((week, idx) => (
-                    <div key={`week-${week.key}`} className={`time-option time-option-indent ${selectedWeek && selectedWeek.key === week.key ? 'active' : ''}`} onClick={() => handleWeekSelect(week)}>{week.name}</div>
-                  ))
-                )}
+          {/* Only show time filter dropdown for non-weightLoss categories */}
+          {activeCategory !== 'weightLoss' && (
+            <div className="time-filter-container" ref={timeFilterRef}>
+              <div className="time-filter-dropdown" onClick={() => setShowTimeFilter(!showTimeFilter)}>
+                <span className="time-filter-label">{getTimeFilterLabel()}</span>
+                <FaChevronDown className="dropdown-icon" />
               </div>
-            )}
-          </div>
+              {showTimeFilter && (
+                <div className="time-filter-options">
+                  <div className={`time-option ${timePeriod === 'all' ? 'active' : ''}`} onClick={() => handleTimePeriodChange('all')}>All Time</div>
+                  <div className={`time-option ${timePeriod === 'monthly' && !selectedMonth ? 'active' : ''}`} onClick={() => handleTimePeriodChange('monthly')}>Monthly</div>
+                  {availableMonths.map((month, idx) => (
+                    <div key={`month-${idx}`} className={`time-option time-option-indent ${selectedMonth && selectedMonth.name === month.name ? 'active' : ''}`} onClick={() => handleMonthSelect(month)}>{month.name}</div>
+                  ))}
+                  <div className={`time-option ${timePeriod === 'weekly' ? 'active' : ''}`} onClick={() => handleTimePeriodChange('weekly')}>Weekly</div>
+                  {selectedMonth && availableWeeks.length > 0 && (
+                    availableWeeks.map((week, idx) => (
+                      <div key={`week-${week.key}`} className={`time-option time-option-indent ${selectedWeek && selectedWeek.key === week.key ? 'active' : ''}`} onClick={() => handleWeekSelect(week)}>{week.name}</div>
+                    ))
+                  )}
+                </div>
+              )}
+            </div>
+          )}
           
           {/* Desktop category tabs */}
           <div className="category-tabs desktop-only">
