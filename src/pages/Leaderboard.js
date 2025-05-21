@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaWeight, FaDumbbell, FaCalendarCheck, FaSync, FaCrown, FaEnvelope, FaUser, FaGraduationCap, FaLaptopCode, FaServer, FaCaretDown } from 'react-icons/fa';
+import { FaWeight, FaDumbbell, FaCalendarCheck, FaSync, FaCrown, FaEnvelope, FaUser, FaGraduationCap, FaLaptopCode, FaServer, FaCaretDown, FaChevronDown } from 'react-icons/fa';
 import axios from 'axios';
 import '../styles/Leaderboard.css';
 
@@ -13,6 +13,14 @@ function Leaderboard() {
   const [selectedCourse, setSelectedCourse] = useState('BSCS');
   const [showMobileDropdown, setShowMobileDropdown] = useState(false);
   const user = JSON.parse(localStorage.getItem('user'));
+  // Time filter state
+  const [timePeriod, setTimePeriod] = useState('all');
+  const [selectedMonth, setSelectedMonth] = useState(null);
+  const [selectedWeek, setSelectedWeek] = useState(null);
+  const [availableMonths, setAvailableMonths] = useState([]);
+  const [availableWeeks, setAvailableWeeks] = useState([]);
+  const [showTimeFilter, setShowTimeFilter] = useState(false);
+  const timeFilterRef = React.useRef(null);
 
   const categories = [
     { id: 'weightLoss', name: 'Weight Loss', icon: <FaWeight /> },
@@ -77,6 +85,163 @@ function Leaderboard() {
       setLoading(false);
     }
   };
+
+  // Extract months and weeks from leaderboard data
+  useEffect(() => {
+    if (!leaderboardData || leaderboardData.length === 0) {
+      setAvailableMonths([]);
+      setAvailableWeeks([]);
+      setSelectedMonth(null);
+      setSelectedWeek(null);
+      return;
+    }
+    // Use the user's best date field for grouping (weightLoss: weigh-in, others: no date, so skip months/weeks for now except weightLoss)
+    let dateField = null;
+    if (activeCategory === 'weightLoss') dateField = 'lastWeighInDate';
+    if (!dateField) {
+      setAvailableMonths([]);
+      setAvailableWeeks([]);
+      setSelectedMonth(null);
+      setSelectedWeek(null);
+      return;
+    }
+    // Only for weightLoss: extract months/weeks from lastWeighInDate
+    const monthsMap = new Map();
+    leaderboardData.forEach(entry => {
+      const date = entry[dateField] ? new Date(entry[dateField]) : null;
+      if (!date) return;
+      const monthYear = date.toLocaleString('en-US', { month: 'long', year: 'numeric' });
+      if (!monthsMap.has(monthYear)) {
+        monthsMap.set(monthYear, {
+          name: monthYear,
+          entries: [],
+          month: date.getMonth(),
+          year: date.getFullYear(),
+        });
+      }
+      monthsMap.get(monthYear).entries.push(entry);
+    });
+    const monthsArr = Array.from(monthsMap.values()).sort((a, b) => {
+      const dateA = new Date(a.year, a.month);
+      const dateB = new Date(b.year, b.month);
+      return dateB - dateA;
+    });
+    setAvailableMonths(monthsArr);
+    if (selectedMonth) {
+      const monthData = monthsArr.find(m => m.name === selectedMonth.name);
+      if (monthData) generateWeeksForMonth(monthData);
+    }
+  }, [leaderboardData, activeCategory]);
+
+  // Generate weeks for a given month
+  const generateWeeksForMonth = (monthData) => {
+    if (!monthData) return;
+    const entries = monthData.entries;
+    if (!entries || entries.length === 0) {
+      setAvailableWeeks([]);
+      return;
+    }
+    // Group by week (Sunday-Saturday)
+    const weeks = [];
+    let weekMap = {};
+    entries.forEach(entry => {
+      const date = entry.lastWeighInDate ? new Date(entry.lastWeighInDate) : null;
+      if (!date) return;
+      // Get week start (Sunday)
+      const start = new Date(date);
+      start.setDate(date.getDate() - date.getDay());
+      start.setHours(0, 0, 0, 0);
+      const end = new Date(start);
+      end.setDate(start.getDate() + 6);
+      const key = `${start.toISOString().split('T')[0]}_${end.toISOString().split('T')[0]}`;
+      if (!weekMap[key]) {
+        weekMap[key] = {
+          name: `${start.toLocaleDateString()} - ${end.toLocaleDateString()}`,
+          startDate: new Date(start),
+          endDate: new Date(end),
+          key,
+          entries: [],
+        };
+      }
+      weekMap[key].entries.push(entry);
+    });
+    const weeksArr = Object.values(weekMap).sort((a, b) => b.startDate - a.startDate);
+    setAvailableWeeks(weeksArr);
+  };
+
+  // Handle time period change
+  const handleTimePeriodChange = (period) => {
+    setTimePeriod(period);
+    if (period === 'monthly') {
+      if (availableMonths.length > 0 && !selectedMonth) {
+        setSelectedMonth(availableMonths[0]);
+      }
+    } else if (period === 'weekly') {
+      const currentDate = new Date();
+      const currentMonthYear = currentDate.toLocaleString('en-US', { month: 'long', year: 'numeric' });
+      const currentMonthData = availableMonths.find(m => m.name === currentMonthYear);
+      if (currentMonthData) {
+        setSelectedMonth(currentMonthData);
+        setTimePeriod('weekly');
+        generateWeeksForMonth(currentMonthData);
+      } else if (availableMonths.length > 0) {
+        setSelectedMonth(availableMonths[0]);
+        setTimePeriod('weekly');
+        generateWeeksForMonth(availableMonths[0]);
+      }
+    } else {
+      setSelectedWeek(null);
+    }
+    setShowTimeFilter(false);
+  };
+  const handleMonthSelect = (month) => {
+    setSelectedMonth(month);
+    setTimePeriod('monthly');
+    generateWeeksForMonth(month);
+  };
+  const handleWeekSelect = (week) => {
+    setSelectedWeek(week);
+    setTimePeriod('weekly');
+    setShowTimeFilter(false);
+  };
+  const getTimeFilterLabel = () => {
+    if (timePeriod === 'all') return 'All Time';
+    if (timePeriod === 'monthly') return selectedMonth ? selectedMonth.name : 'Monthly';
+    if (timePeriod === 'weekly') return selectedWeek ? selectedWeek.name : 'Weekly';
+    return 'All Time';
+  };
+  // Filter leaderboard data based on time period (only for weightLoss)
+  const getFilteredLeaderboardData = () => {
+    if (activeCategory !== 'weightLoss') return leaderboardData;
+    if (timePeriod === 'all') return leaderboardData;
+    if (timePeriod === 'monthly' && selectedMonth) {
+      return leaderboardData.filter(entry => {
+        const date = entry.lastWeighInDate ? new Date(entry.lastWeighInDate) : null;
+        return date && date.getMonth() === selectedMonth.month && date.getFullYear() === selectedMonth.year;
+      });
+    }
+    if (timePeriod === 'weekly' && selectedWeek) {
+      return leaderboardData.filter(entry => {
+        const date = entry.lastWeighInDate ? new Date(entry.lastWeighInDate) : null;
+        if (!date) return false;
+        const day = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        const startDay = new Date(selectedWeek.startDate.getFullYear(), selectedWeek.startDate.getMonth(), selectedWeek.startDate.getDate());
+        const endDay = new Date(selectedWeek.endDate.getFullYear(), selectedWeek.endDate.getMonth(), selectedWeek.endDate.getDate());
+        return day >= startDay && day <= endDay;
+      });
+    }
+    return leaderboardData;
+  };
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (timeFilterRef.current && !timeFilterRef.current.contains(event.target)) {
+        setShowTimeFilter(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const renderRankInfo = (user, category) => {
     // Check if user profile is private, if so return a privacy notice
@@ -214,7 +379,7 @@ const renderMedal = (rank) => {
     }
 };
 
-const renderLeaderboardContent = () => {
+const renderLeaderboardContent = (filteredData) => {
     if (loading) {
         return <div className="loading">Loading...</div>;
     }
@@ -223,14 +388,14 @@ const renderLeaderboardContent = () => {
         return <div className="error-message">{error}</div>;
     }
 
-    if (!leaderboardData || leaderboardData.length === 0) {
+    if (!filteredData || filteredData.length === 0) {
         return <div className="no-data">No rankings available yet for {selectedCourse} students</div>;
     }
 
     return (
         <>
             <div className="top-performers mobile-performers">
-                {leaderboardData.slice(0, 3).map((user, index) => (
+                {filteredData.slice(0, 3).map((user, index) => (
                     <div key={user._id || index} className={`performer ${['first', 'second', 'third'][index]}`}>
                         {renderMedal(index)}
                         {renderProfilePicture(user)}
@@ -251,7 +416,7 @@ const renderLeaderboardContent = () => {
                 ))}
             </div>
             <div className="other-ranks">
-                {leaderboardData.slice(3).map((user, index) => (
+                {filteredData.slice(3).map((user, index) => (
                     <div key={user._id || index + 3} className="rank-item">
                         <div className="rank-number">{index + 4}</div>
                         {renderProfilePicture(user)}
@@ -295,6 +460,29 @@ const renderLeaderboardContent = () => {
                 <span>{course.name}</span>
               </button>
             ))}
+          </div>
+          
+          {/* Time filter dropdown below course tabs */}
+          <div className="time-filter-container" ref={timeFilterRef}>
+            <div className="time-filter-dropdown" onClick={() => setShowTimeFilter(!showTimeFilter)}>
+              <span className="time-filter-label">{getTimeFilterLabel()}</span>
+              <FaChevronDown className="dropdown-icon" />
+            </div>
+            {showTimeFilter && (
+              <div className="time-filter-options">
+                <div className={`time-option ${timePeriod === 'all' ? 'active' : ''}`} onClick={() => handleTimePeriodChange('all')}>All Time</div>
+                <div className={`time-option ${timePeriod === 'monthly' && !selectedMonth ? 'active' : ''}`} onClick={() => handleTimePeriodChange('monthly')}>Monthly</div>
+                {availableMonths.map((month, idx) => (
+                  <div key={`month-${idx}`} className={`time-option time-option-indent ${selectedMonth && selectedMonth.name === month.name ? 'active' : ''}`} onClick={() => handleMonthSelect(month)}>{month.name}</div>
+                ))}
+                <div className={`time-option ${timePeriod === 'weekly' ? 'active' : ''}`} onClick={() => handleTimePeriodChange('weekly')}>Weekly</div>
+                {selectedMonth && availableWeeks.length > 0 && (
+                  availableWeeks.map((week, idx) => (
+                    <div key={`week-${week.key}`} className={`time-option time-option-indent ${selectedWeek && selectedWeek.key === week.key ? 'active' : ''}`} onClick={() => handleWeekSelect(week)}>{week.name}</div>
+                  ))
+                )}
+              </div>
+            )}
           </div>
           
           {/* Desktop category tabs */}
@@ -348,7 +536,7 @@ const renderLeaderboardContent = () => {
           )}
 
           <div className="leaderboard-content">
-            {renderLeaderboardContent()}
+            {renderLeaderboardContent(getFilteredLeaderboardData())}
           </div>
         </div>
       </div>
