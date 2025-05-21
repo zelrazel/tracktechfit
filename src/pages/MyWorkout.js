@@ -1416,7 +1416,7 @@ const MyWorkout = () => {
                         </div>
                         {(workout.createdAt || workout.date) && (
                             <div className="added-date" style={{ color: '#00ff84', fontSize: '0.95rem', marginTop: '6px', marginBottom: '8px' }}>
-                                Added: {(() => {
+                                {(() => {
                                     const dateObj = new Date(workout.createdAt || workout.date);
                                     const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
                                     const dd = String(dateObj.getDate()).padStart(2, '0');
@@ -1650,21 +1650,6 @@ const MyWorkout = () => {
                 {/* Progress Tracking Tab Content */}
                 {activeTab === 'progress' && (
                     <div className="progress-tracking-container">
-                        <div className="progress-style-tabs">
-                            <button 
-                                className={`progress-style-tab ${trackingView === 'list' ? 'active' : ''}`}
-                                onClick={() => setTrackingView('list')}
-                            >
-                                List View
-                            </button>
-                            <button 
-                                className={`progress-style-tab ${trackingView === 'graph' ? 'active' : ''}`}
-                                onClick={() => setTrackingView('graph')}
-                            >
-                                Graph View
-                            </button>
-                        </div>
-                        
                         {/* Time filter for Progress tab */}
                         <div className="time-filter-container" ref={timeFilterRef}>
                             <div 
@@ -1674,7 +1659,6 @@ const MyWorkout = () => {
                                 <span className="time-filter-label">{getTimeFilterLabel()}</span>
                                 <FaChevronDown className="dropdown-icon" />
                             </div>
-                            
                             {showTimeFilter && (
                                 <div className="time-filter-options">
                                     <div
@@ -1683,14 +1667,12 @@ const MyWorkout = () => {
                                     >
                                         All Time
                                     </div>
-                                    
                                     <div 
                                         className={`time-option ${timePeriod === 'monthly' && !selectedMonth ? 'active' : ''}`}
                                         onClick={() => handleTimePeriodChange('monthly')}
                                     >
                                         Monthly
                                     </div>
-                                    
                                     {availableMonths.map((month, idx) => (
                                         <div 
                                             key={`month-${idx}`}
@@ -1700,14 +1682,12 @@ const MyWorkout = () => {
                                             {month.name}
                                         </div>
                                     ))}
-                                    
                                     <div 
                                         className={`time-option ${timePeriod === 'weekly' ? 'active' : ''}`}
                                         onClick={() => handleTimePeriodChange('weekly')}
                                     >
                                         Weekly
                                     </div>
-                                    
                                     {selectedMonth && availableWeeks.length > 0 && (
                                         availableWeeks.map((week, index) => (
                                             <div 
@@ -1722,44 +1702,28 @@ const MyWorkout = () => {
                                 </div>
                             )}
                         </div>
-                        
-                        {trackingView === 'list' ? (
-                            <div className="progress-list-view">
-                                {getFilteredWorkouts(completedWorkouts).length > 0 ? (
-                                    <div className="cards-container">
-                                        {getFilteredWorkouts(completedWorkouts).map(workout => renderWorkoutCard(workout))}
-                                    </div>
-                                ) : (
-                                    <div className="no-workouts-message">
-                                        <p>No completed workouts found for this time period.</p>
-                                    </div>
-                                )}
-                            </div>
-                        ) : (
-                            <div className="progress-graph-view">
-                                {completedWorkouts.length > 0 ? (
-                                    <>
-                                        <div className="chart-container workout-category-chart">
-                                            <h3 className="chart-title">Workouts By Category</h3>
-                                            <div className="chart-wrapper">
-                                                <Bar data={getCategoryChartData()} options={chartOptions} />
-                                            </div>
+                        <div className="progress-graph-view">
+                            {completedWorkouts.length > 0 ? (
+                                <>
+                                    <div className="chart-container workout-category-chart">
+                                        <h3 className="chart-title">Workouts By Category</h3>
+                                        <div className="chart-wrapper">
+                                            <Bar data={getCategoryChartData()} options={chartOptions} />
                                         </div>
-                                        
-                                        <div className="chart-container workout-target-chart">
-                                            <h3 className="chart-title">Workouts By Target Muscle</h3>
-                                            <div className="chart-wrapper">
-                                                <Bar data={getTargetChartData()} options={chartOptions} />
-                                            </div>
-                                        </div>
-                                    </>
-                                ) : (
-                                    <div className="no-workouts-message">
-                                        <p>No workout data available. Complete workouts to see your progress!</p>
                                     </div>
-                                )}
-                            </div>
-                        )}
+                                    <div className="chart-container workout-target-chart">
+                                        <h3 className="chart-title">Workouts By Target Muscle</h3>
+                                        <div className="chart-wrapper">
+                                            <Bar data={getTargetChartData()} options={chartOptions} />
+                                        </div>
+                                    </div>
+                                </>
+                            ) : (
+                                <div className="no-workouts-message">
+                                    <p>No workout data available. Complete workouts to see your progress!</p>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 )}
             </div>
