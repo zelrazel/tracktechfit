@@ -888,23 +888,28 @@ const MyWorkout = () => {
                 }
             });
 
-            await fetchWorkouts();
-            setShowModal(false);
-            setEditingWorkout(null);
-            setNewWorkout({
-                name: '',
-                description: '',
-                category: '',
-                target: '',
-                exerciseName: '',
-                sets: '',
-                reps: '',
-                weight: ''
-            });
-            showToast(
-                editingWorkout ? 'Workout updated successfully!' : 'Workout created successfully!',
-                'success'
-            );
+            // Only show success if fetchWorkouts also succeeds
+            try {
+                await fetchWorkouts();
+                setShowModal(false);
+                setEditingWorkout(null);
+                setNewWorkout({
+                    name: '',
+                    description: '',
+                    category: '',
+                    target: '',
+                    exerciseName: '',
+                    sets: '',
+                    reps: '',
+                    weight: ''
+                });
+                showToast(
+                    editingWorkout ? 'Workout updated successfully!' : 'Workout created successfully!',
+                    'success'
+                );
+            } catch (fetchError) {
+                showToast('Workout saved, but failed to refresh list.', 'error');
+            }
         } catch (error) {
             console.error("Error saving workout:", error);
             let errorMessage = "Error saving workout";
