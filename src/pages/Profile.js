@@ -156,6 +156,7 @@ const Profile = () => {
     const [profileWeightAvailableWeeks, setProfileWeightAvailableWeeks] = useState([]);
     const [profileWeightSelectedMonth, setProfileWeightSelectedMonth] = useState(null);
     const [profileWeightSelectedWeek, setProfileWeightSelectedWeek] = useState(null);
+    const [profileWorkoutTab, setProfileWorkoutTab] = useState('graph'); // 'graph' or 'completed'
 
     // Add these refs near the top of the Profile component, after other useRef declarations
     const profileWorkoutTimeFilterRef = useRef(null);
@@ -3059,16 +3060,63 @@ const Profile = () => {
                                         </div>
                                     )}
                                 </div>
-                                <div className="profile-graph-charts">
-                                    <div className="chart-container workout-category-chart">
-                                        <h3 className="chart-title">Workouts By Category</h3>
-                                        <div className="chart-wrapper"><Bar data={getProfileWorkoutCategoryChartData()} options={profileWorkoutChartOptions} /></div>
-                                    </div>
-                                    <div className="chart-container workout-target-chart">
-                                        <h3 className="chart-title">Workouts By Target Muscle</h3>
-                                        <div className="chart-wrapper"><Bar data={getProfileWorkoutTargetChartData()} options={profileWorkoutChartOptions} /></div>
-                                    </div>
+                                {/* Add tabs for Graph View and Completed Workouts */}
+                                <div className="workout-tracking-tabs">
+                                    <button
+                                        className={`workout-tracking-tab ${profileWorkoutTab === 'graph' ? 'active' : ''}`}
+                                        onClick={() => setProfileWorkoutTab('graph')}
+                                    >
+                                        Graph View
+                                    </button>
+                                    <button
+                                        className={`workout-tracking-tab ${profileWorkoutTab === 'completed' ? 'active' : ''}`}
+                                        onClick={() => setProfileWorkoutTab('completed')}
+                                    >
+                                        Completed Workouts
+                                    </button>
                                 </div>
+                                {profileWorkoutTab === 'graph' ? (
+                                    <div className="profile-graph-charts">
+                                        <div className="chart-container workout-category-chart">
+                                            <h3 className="chart-title">Workouts By Category</h3>
+                                            <div className="chart-wrapper"><Bar data={getProfileWorkoutCategoryChartData()} options={profileWorkoutChartOptions} /></div>
+                                        </div>
+                                        <div className="chart-container workout-target-chart">
+                                            <h3 className="chart-title">Workouts By Target Muscle</h3>
+                                            <div className="chart-wrapper"><Bar data={getProfileWorkoutTargetChartData()} options={profileWorkoutChartOptions} /></div>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="completed-workouts-list">
+                                        {getProfileFilteredWorkouts().length === 0 ? (
+                                            <div className="no-completed-workouts">No completed workouts for this period.</div>
+                                        ) : (
+                                            <div className="completed-workouts-cards">
+                                                {getProfileFilteredWorkouts().map((workout, idx) => (
+                                                    <div key={idx} className="completed-workout-card">
+                                                        <div className="completed-workout-header">
+                                                            <span className="completed-date">{new Date(workout.completedDate || workout.date).toLocaleDateString()}</span>
+                                                            <span className="completed-status">✔ COMPLETED</span>
+                                                        </div>
+                                                        <div className="completed-category">{workout.category}</div>
+                                                        <div className="completed-exercise">{workout.exerciseName || workout.name}</div>
+                                                        <div className="completed-details-row">
+                                                            <div className="completed-detail"><span className="label">Target:</span> <span>{workout.target}</span></div>
+                                                            <div className="completed-detail"><span className="label">Reps:</span> <span>{workout.reps}</span></div>
+                                                        </div>
+                                                        <div className="completed-details-row">
+                                                            <div className="completed-detail"><span className="label">Sets:</span> <span>{workout.sets}</span></div>
+                                                            <div className="completed-detail"><span className="label">Weight:</span> <span>{workout.weight} {workout.unit || 'kg'}</span></div>
+                                                        </div>
+                                                        {workout.description && (
+                                                            <div className="completed-description"><span className="label">Description:</span> {workout.description}</div>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
                             </>
                         )}
                     </div>
