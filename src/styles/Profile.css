@@ -5824,48 +5824,26 @@ select.edit-info-input {
 /* Workout Tracking Tabs */
 .workout-tracking-tabs {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   gap: 12px;
-  margin: 18px 0 24px 0;
-}
-.workout-tracking-tab {
-  background: rgba(27, 67, 50, 0.7);
-  color: #fff;
-  border: 2px solid #00A951;
-  border-radius: 20px 20px 0 0;
-  padding: 10px 28px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s, border 0.2s;
-  outline: none;
-  margin-right: 2px;
-}
-.workout-tracking-tab.active {
-  background: #00A951;
-  color: #fff;
-  border-bottom: 2px solid #1B4332;
-  z-index: 2;
-}
-.workout-tracking-tab:hover:not(.active) {
-  background: rgba(0, 255, 132, 0.15);
-  color: #00ff84;
+  margin: 18px 0 28px 0;
 }
 
-/* Completed Workouts Cards */
+/* Completed Workouts Card - Match MyWorkout */
 .completed-workouts-cards {
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
   margin-top: 18px;
+  justify-content: flex-start;
 }
 .completed-workout-card {
-  background: rgba(27, 67, 50, 0.95);
+  background: rgba(177, 167, 166, 0.25);
   border: 2px solid #00A951;
-  border-radius: 18px;
-  box-shadow: 0 4px 16px rgba(0, 169, 81, 0.15);
-  padding: 22px 28px 18px 28px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+  padding: 20px 24px 18px 24px;
   min-width: 320px;
   max-width: 350px;
   margin-bottom: 10px;
@@ -5875,6 +5853,12 @@ select.edit-info-input {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.completed-workout-card:hover {
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3),
+    inset 0 0 20px rgba(0, 255, 255, 0.2);
+  transform: translateY(-3px);
 }
 .completed-workout-header {
   display: flex;
@@ -5888,14 +5872,19 @@ select.edit-info-input {
   font-size: 1.05rem;
 }
 .completed-status {
-  background: #00A951;
+  background: #2ecc71;
   color: #fff;
   font-size: 0.95rem;
   font-weight: 700;
-  border-radius: 12px;
-  padding: 2px 14px;
+  border-radius: 20px;
+  padding: 4px 16px;
   margin-left: 10px;
   letter-spacing: 1px;
+  position: absolute;
+  top: -14px;
+  right: 18px;
+  box-shadow: 0 2px 10px rgba(46, 204, 113, 0.3);
+  z-index: 2;
 }
 .completed-category {
   font-size: 1.1rem;
@@ -5914,39 +5903,54 @@ select.edit-info-input {
   border-radius: 8px;
   padding: 4px 10px;
   letter-spacing: 0.5px;
+  width: fit-content;
 }
 .completed-details-row {
   display: flex;
-  gap: 18px;
+  gap: 10px;
   margin-bottom: 2px;
 }
 .completed-detail {
   flex: 1;
-  background: rgba(0, 255, 132, 0.05);
-  border-radius: 7px;
-  padding: 4px 10px;
+  background: #1B4332;
+  border: 2px solid #00A951;
+  border-radius: 10px;
+  padding: 8px 12px;
   font-size: 1rem;
   color: #fff;
   display: flex;
   gap: 4px;
+  font-weight: 600;
+  align-items: center;
+  min-width: 90px;
+  justify-content: flex-start;
 }
 .completed-detail .label {
-  color: #00ff84;
-  font-weight: 600;
-  margin-right: 2px;
+  color: #00A951;
+  font-weight: 700;
+  margin-right: 4px;
+  text-transform: uppercase;
+  font-size: 0.95rem;
 }
 .completed-description {
-  background: rgba(0, 255, 132, 0.04);
-  border-radius: 7px;
-  padding: 6px 10px;
+  background: #1B4332;
+  border: 2px solid #00A951;
+  border-radius: 10px;
+  padding: 8px 12px;
   color: #fff;
   font-size: 1rem;
   margin-top: 4px;
+  font-weight: 600;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
 }
 .completed-description .label {
-  color: #00ff84;
-  font-weight: 600;
-  margin-right: 4px;
+  color: #00A951;
+  font-weight: 700;
+  margin-right: 6px;
+  text-transform: uppercase;
+  font-size: 0.95rem;
 }
 .no-completed-workouts {
   color: #fff;
@@ -5976,16 +5980,17 @@ select.edit-info-input {
     gap: 6px;
     margin: 12px 0 16px 0;
   }
-  .workout-tracking-tab {
-    padding: 7px 12px;
-    font-size: 1rem;
-    border-radius: 14px 14px 0 0;
-  }
   .completed-workout-card {
     min-width: 98vw;
     max-width: 99vw;
     padding: 12px 4px 10px 4px;
     font-size: 0.98rem;
+  }
+  .completed-status {
+    right: 8px;
+    top: -10px;
+    padding: 3px 10px;
+    font-size: 0.85rem;
   }
 }
 

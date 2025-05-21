@@ -3096,20 +3096,20 @@ const Profile = () => {
                                                     <div key={idx} className="completed-workout-card">
                                                         <div className="completed-workout-header">
                                                             <span className="completed-date">{new Date(workout.completedDate || workout.date).toLocaleDateString()}</span>
-                                                            <span className="completed-status">✔ COMPLETED</span>
+                                                            <span className="completed-status">✓ COMPLETED</span>
                                                         </div>
                                                         <div className="completed-category">{workout.category}</div>
                                                         <div className="completed-exercise">{workout.exerciseName || workout.name}</div>
                                                         <div className="completed-details-row">
-                                                            <div className="completed-detail"><span className="label">Target:</span> <span>{workout.target}</span></div>
-                                                            <div className="completed-detail"><span className="label">Reps:</span> <span>{workout.reps}</span></div>
+                                                            <div className="completed-detail"><span className="label">Target</span> {workout.target}</div>
+                                                            <div className="completed-detail"><span className="label">Reps</span> {workout.reps}</div>
                                                         </div>
                                                         <div className="completed-details-row">
-                                                            <div className="completed-detail"><span className="label">Sets:</span> <span>{workout.sets}</span></div>
-                                                            <div className="completed-detail"><span className="label">Weight:</span> <span>{workout.weight} {workout.unit || 'kg'}</span></div>
+                                                            <div className="completed-detail"><span className="label">Sets</span> {workout.sets}</div>
+                                                            <div className="completed-detail"><span className="label">Weight</span> {workout.weight} {workout.unit || 'kg'}</div>
                                                         </div>
                                                         {workout.description && (
-                                                            <div className="completed-description"><span className="label">Description:</span> {workout.description}</div>
+                                                            <div className="completed-description"><span className="label">Description</span> {workout.description}</div>
                                                         )}
                                                     </div>
                                                 ))}
