@@ -1414,10 +1414,10 @@ const MyWorkout = () => {
                             <span className="complete-icon">✓</span>
                             COMPLETED
                         </div>
-                        {(workout.createdAt || workout.date) && (
+                        {(workout.addedDate || workout.createdAt || workout.date) && (
                             <div className="added-date" style={{ color: '#00ff84', fontSize: '0.95rem', marginTop: '6px', marginBottom: '8px' }}>
                                 {(() => {
-                                    const dateObj = new Date(workout.createdAt || workout.date);
+                                    const dateObj = new Date(workout.addedDate || workout.createdAt || workout.date);
                                     const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
                                     const dd = String(dateObj.getDate()).padStart(2, '0');
                                     const yyyy = dateObj.getFullYear();
@@ -1473,7 +1473,7 @@ const MyWorkout = () => {
                         )}
                         <button 
                             className="button-delete"
-                            onClick={() => handleDeleteWorkout(workout._id)}
+                            onClick={() => handleDeleteWorkout(workout.workoutId || workout._id)}
                         >
                             DELETE
                         </button>
