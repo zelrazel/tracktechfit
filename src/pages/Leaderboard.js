@@ -49,7 +49,24 @@ function Leaderboard() {
         activeCategory === 'hybrid') {
         fetchLeaderboardData();
     }
-  }, [activeCategory, selectedCourse]);
+  }, [activeCategory, selectedCourse, timePeriod, selectedMonth, selectedWeek]);
+
+  // Helper to get startDate and endDate for the current filter
+  const getTimePeriodRange = () => {
+    if (timePeriod === 'all') return { startDate: null, endDate: null };
+    if (timePeriod === 'monthly' && selectedMonth) {
+      const start = new Date(selectedMonth.year, selectedMonth.month, 1);
+      const end = new Date(selectedMonth.year, selectedMonth.month + 1, 0);
+      return { startDate: start.toISOString().split('T')[0], endDate: end.toISOString().split('T')[0] };
+    }
+    if (timePeriod === 'weekly' && selectedWeek) {
+      return {
+        startDate: selectedWeek.startDate.toISOString().split('T')[0],
+        endDate: selectedWeek.endDate.toISOString().split('T')[0]
+      };
+    }
+    return { startDate: null, endDate: null };
+  };
 
   const fetchLeaderboardData = async () => {
     try {
@@ -69,13 +86,22 @@ function Leaderboard() {
           return;
       }
 
-      const response = await axios.get(`${API_URL}api/leaderboard/${endpoint}?course=${selectedCourse}`, {
+      // Get date range for all categories
+      const { startDate, endDate } = getTimePeriodRange();
+      let url = `${API_URL}api/leaderboard/${endpoint}?course=${selectedCourse}`;
+      if (activeCategory !== 'weightLoss' && startDate && endDate) {
+        url += `&startDate=${startDate}&endDate=${endDate}`;
+      }
+      // For weightLoss, keep old behavior (client-side filtering)
+      if (activeCategory === 'weightLoss') {
+        // No date filtering in backend, keep as is
+      }
+      const response = await axios.get(url, {
         withCredentials: true,
         headers: {
           'Content-Type': 'application/json'
         }
       });
-      console.log(`Received ${response.data.length} entries for ${endpoint} leaderboard with course ${selectedCourse}`);
       setLeaderboardData(response.data);
       setError(null);
     } catch (err) {
